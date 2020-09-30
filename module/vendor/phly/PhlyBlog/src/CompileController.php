@@ -41,7 +41,6 @@ class CompileController extends Command
         $this->addOption('day', 'd', InputOption::VALUE_NONE, 'Only entries');
         $this->addOption('tag', 't', InputOption::VALUE_NONE, 'Only entries');
         $this->addOption('author', 'r', InputOption::VALUE_NONE, 'Only entries');
-
     }
 
     public function setConsole(Console $console)
