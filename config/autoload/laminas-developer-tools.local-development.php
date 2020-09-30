@@ -115,7 +115,7 @@ return [
              * Expects: bool
              * Default: false
              */
-            'enabled' => true,
+            'enabled' => IS_PRODUCTION ? false : true,
 
             /**
              * If enabled, every empty collector will be hidden.
@@ -123,7 +123,7 @@ return [
              * Expects: bool
              * Default: false
              */
-            'auto_hide' => true,
+            'auto_hide' => IS_PRODUCTION ? false : true,
 
             /**
              * The Toolbar position.
