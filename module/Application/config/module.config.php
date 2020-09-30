@@ -72,7 +72,7 @@ return [
                         'template' => 'application/pages/about',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => false,
+                        'do_not_cache' => true,
                     ],
                 ],
             ],
@@ -85,7 +85,7 @@ return [
                         'template' => 'application/pages/contact',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => false,
+                        'do_not_cache' => true,
                     ],
                 ],
             ],
@@ -98,7 +98,7 @@ return [
                         'template' => 'application/pages/projects',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => false,
+                        'do_not_cache' => true,
                     ],
                 ],
             ],
@@ -111,10 +111,24 @@ return [
                         'template' => 'application/pages/resume',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => false,
+                        'do_not_cache' => true,
+                    ],
+                ],
+            ],
+            'blog' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/blog',
+                    'defaults' => [
+                        'controller' => PageController::class,
+                        'template' => 'application/pages/blog',
+                        // optionally set a specific layout for this page
+//                        'layout'     => 'layout/some-layout',
+                        'do_not_cache' => true,
                     ],
                 ],
             ]
+
         ],
     ],
     'controllers' => [

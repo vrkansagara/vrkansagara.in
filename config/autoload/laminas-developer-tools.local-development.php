@@ -123,7 +123,7 @@ return [
              * Expects: bool
              * Default: false
              */
-            'auto_hide' => false,
+            'auto_hide' => true,
 
             /**
              * The Toolbar position.
