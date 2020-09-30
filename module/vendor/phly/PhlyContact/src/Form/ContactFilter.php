@@ -2,8 +2,8 @@
 
 namespace PhlyContact\Form;
 
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\Hostname as HostnameValidator;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Hostname as HostnameValidator;
 
 class ContactFilter extends InputFilter
 {

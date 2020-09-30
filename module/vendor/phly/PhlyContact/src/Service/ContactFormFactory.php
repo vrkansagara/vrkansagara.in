@@ -2,23 +2,23 @@
 
 namespace PhlyContact\Service;
 
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Traversable;
 use PhlyContact\Form\ContactFilter;
 use PhlyContact\Form\ContactForm;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 class ContactFormFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config  = $services->get('config');
+        $config  = $container->get('config');
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
         $name    = $config['phly_contact']['form']['name'];
-        $captcha = $services->get('PhlyContactCaptcha');
+        $captcha = $container->get('PhlyContactCaptcha');
         $filter  = new ContactFilter();
         $form    = new ContactForm($name, $captcha);
         $form->setInputFilter($filter);

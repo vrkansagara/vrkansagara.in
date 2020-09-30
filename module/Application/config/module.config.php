@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Application;
 
 use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\Mail\Transport\Smtp;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -29,6 +30,50 @@ return [
                     'cache_dir' => getcwd() . '/data/cache',
                     'dir_permission' => '0777',
                     'file_permission' => '0666',
+                ],
+            ],
+        ],
+    ],
+    'phly_contact' => [
+        // This is simply configuration to pass to Zend\Captcha\Factory
+        'captcha' => [
+            'class'   => 'recaptcha',
+            'options' => [
+                'pubkey'  => 'RECAPTCHA_PUBKEY_HERE',
+                'privkey' => 'RECAPTCHA_PRIVKEY_HERE',
+            ],
+        ],
+
+        // This sets the default "to" and "sender" headers for your message
+        'message' => [
+            /*
+            // These can be either a string, or an array of email => name pairs
+            'to'     => 'contact@your.tld',
+            'from'   => 'contact@your.tld',
+            // This should be an array with minimally an "address" element, and
+            // can also contain a "name" element
+            'sender' => array(
+                'address' => 'contact@your.tld'
+            ),
+             */
+        ],
+
+        // Transport consists of two keys:
+        // - "class", the mail tranport class to use, and
+        // - "options", any options to use to configure the
+        //   tranpsort. Usually these will be passed to the
+        //   transport-specific options class
+        // This example configures GMail as your SMTP server
+        'mail_transport' => [
+            'class'   => Smtp::class,
+            'options' => [
+                'host'             => 'smtp.gmail.com',
+                'port'             => 587,
+                'connectionClass'  => 'login',
+                'connectionConfig' => [
+                    'ssl'      => 'tls',
+                    'username' => 'contact@your.tld',
+                    'password' => 'password',
                 ],
             ],
         ],
@@ -76,19 +121,19 @@ return [
                     ],
                 ],
             ],
-            'contact' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/contact',
-                    'defaults' => [
-                        'controller' => PageController::class,
-                        'template' => 'application/pages/contact',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => true,
-                    ],
-                ],
-            ],
+//            'contact' => [
+//                'type' => Literal::class,
+//                'options' => [
+//                    'route' => '/contact',
+//                    'defaults' => [
+//                        'controller' => PageController::class,
+//                        'template' => 'application/pages/contact',
+//                        // optionally set a specific layout for this page
+////                        'layout'     => 'layout/some-layout',
+//                        'do_not_cache' => true,
+//                    ],
+//                ],
+//            ],
             'projects' => [
                 'type' => Literal::class,
                 'options' => [

@@ -2,37 +2,40 @@
 
 namespace PhlyContact\Service;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Laminas\ServiceManager\Exception\ServiceNotFoundException;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Traversable;
-use Zend\Mail\Transport;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Mail\Transport;
+use Laminas\Stdlib\ArrayUtils;
 
 class ContactMailTransportFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config  = $services->get('config');
+        $config = $container->get('config');
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
-        $config  = $config['phly_contact']['mail_transport'];
-        $class   = $config['class'];
+        $config = $config['phly_contact']['mail_transport'];
+        $class = $config['class'];
         $options = $config['options'];
 
         switch ($class) {
-            case 'Zend\Mail\Transport\Sendmail':
+            case 'Laminas\Mail\Transport\Sendmail':
             case 'Sendmail':
             case 'sendmail';
                 $transport = new Transport\Sendmail();
                 break;
-            case 'Zend\Mail\Transport\Smtp';
+            case 'Laminas\Mail\Transport\Smtp';
             case 'Smtp';
             case 'smtp';
                 $options = new Transport\SmtpOptions($options);
                 $transport = new Transport\Smtp($options);
                 break;
-            case 'Zend\Mail\Transport\File';
+            case 'Laminas\Mail\Transport\File';
             case 'File';
             case 'file';
                 $options = new Transport\FileOptions($options);
@@ -47,4 +50,6 @@ class ContactMailTransportFactory implements FactoryInterface
 
         return $transport;
     }
+
+
 }

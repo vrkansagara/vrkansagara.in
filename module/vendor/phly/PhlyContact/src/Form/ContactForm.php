@@ -2,9 +2,9 @@
 
 namespace PhlyContact\Form;
 
-use Zend\Captcha\AdapterInterface as CaptchaAdapter;
-use Zend\Form\Element;
-use Zend\Form\Form;
+use Laminas\Captcha\AdapterInterface as CaptchaAdapter;
+use Laminas\Form\Element;
+use Laminas\Form\Form;
 
 class ContactForm extends Form
 {
@@ -31,7 +31,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'from',
-            'type' => 'Zend\Form\Element\Text',
+            'type' => 'Laminas\Form\Element\Text',
             'options' => [
                 'label' => 'From:',
             ],
@@ -39,7 +39,7 @@ class ContactForm extends Form
 
         $this->add([
             'name'  => 'subject',
-            'type' => 'Zend\Form\Element\Text',
+            'type' => 'Laminas\Form\Element\Text',
             'options' => [
                 'label' => 'Subject:',
             ],
@@ -48,7 +48,7 @@ class ContactForm extends Form
 
         $this->add([
             'name'  => 'body',
-            'type'  => 'Zend\Form\Element\Textarea',
+            'type'  => 'Laminas\Form\Element\Textarea',
             'options' => [
                 'label' => 'Your message:',
             ],
@@ -63,7 +63,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'Send',
-            'type'  => 'Zend\Form\Element\Submit',
+            'type'  => 'Laminas\Form\Element\Submit',
             'attributes' => [
                 'value' => 'Send',
             ],

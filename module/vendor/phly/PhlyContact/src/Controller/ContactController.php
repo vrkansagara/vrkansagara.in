@@ -3,10 +3,10 @@
 namespace PhlyContact\Controller;
 
 use PhlyContact\Form\ContactForm;
-use Zend\Mail\Transport;
-use Zend\Mail\Message as Message;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mail\Transport;
+use Laminas\Mail\Message as Message;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 class ContactController extends AbstractActionController
 {

@@ -12,7 +12,7 @@
 
 return [
     'phly_contact' => [
-        // This is simply configuration to pass to Zend\Captcha\Factory
+        // This is simply configuration to pass to Laminas\Captcha\Factory
         'captcha' => [
             'class'   => 'recaptcha',
             'options' => [
@@ -42,7 +42,7 @@ return [
         //   transport-specific options class
         // This example configures GMail as your SMTP server
         'mail_transport' => [
-            'class'   => 'Zend\Mail\Transport\Smtp',
+            'class'   => 'Laminas\Mail\Transport\Smtp',
             'options' => [
                 'host'             => 'smtp.gmail.com',
                 'port'             => 587,

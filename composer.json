@@ -17,13 +17,20 @@
         "laminas/laminas-development-mode": "^3.2",
         "laminas/laminas-mvc": "^3.1.1",
         "laminas/laminas-cache": "^2.9",
-        "symfony/console": "^5.1"
+        "symfony/console": "^5.1",
+        "laminas/laminas-mail": "^2.12",
+        "laminas/laminas-captcha": "^2.9",
+        "laminas/laminas-recaptcha": "^3.2",
+        "laminas/laminas-form": "^2.15",
+        "laminas/laminas-session": "^2.9",
+        "laminas/laminas-i18n": "^2.10"
     },
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
             "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
-            "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/"
+            "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/",
+            "PhlyContact\\": "module/vendor/phly/PhlyContact/src/"
         }
     },
     "autoload-dev": {

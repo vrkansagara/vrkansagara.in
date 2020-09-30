@@ -1,5 +1,11 @@
 <?php
 
+use Laminas\Mail\Transport\Sendmail;
+use Laminas\Router\Http\Literal;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use PhlyContact\Controller\ContactController;
+use PhlyContact\Service\ContactControllerFactory;
+
 return [
     'phly_contact' => [
         'captcha' => [
@@ -9,7 +15,7 @@ return [
             'name' => 'contact',
         ],
         'mail_transport' => [
-            'class' => 'Zend\Mail\Transport\Sendmail',
+            'class' => Sendmail::class,
             'options' => [
             ]
         ],
@@ -30,25 +36,25 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            'PhlyContact\Controller\Contact' => 'PhlyContact\Service\ContactControllerFactory',
+            ContactController::class => ContactControllerFactory::class,
         ],
     ],
     'router' => [
         'routes' => [
             'contact' => [
-                'type' => 'Literal',
+                'type' => Literal::class,
                 'options' => [
                     'route' => '/contact',
                     'defaults' => [
-                        '__NAMESPACE__' => 'PhlyContact\Controller',
-                        'controller'    => 'Contact',
+//                        '__NAMESPACE__' => 'PhlyContact\Controller',
+                        'controller'    => ContactController::class,
                         'action'        => 'index',
                     ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'process' => [
-                        'type' => 'Literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/process',
                             'defaults' => [
