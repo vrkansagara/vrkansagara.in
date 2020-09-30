@@ -9,6 +9,8 @@
         "Kansagara",
         "Personal"
     ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "php": "^7.3",
         "laminas/laminas-component-installer": "^1.0 || ^2.1",
@@ -20,7 +22,8 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src"
+            "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
+            "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/"
         }
     },
     "autoload-dev": {
@@ -29,13 +32,16 @@
         }
     },
     "scripts": {
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
+        "cs-check": "./vendor/bin/phpcs",
+        "cs-fix": "./vendor/bin/phpcbf",
         "development-disable": [
             "@serve",
             "laminas-development-mode disable"
         ],
-        "development-enable": "laminas-development-mode enable",
+        "development-enable": [
+            "laminas-development-mode enable",
+            "@serve"
+        ],
         "development-status": "laminas-development-mode status",
         "post-create-project-cmd": [
             "@development-enable",
@@ -45,6 +51,8 @@
         ],
         "serve": [
             "sudo rm -rf data/cache/*",
+            "mkdir data/cache/static-page-data",
+            "touch data/cache/static-page-data/.gitkeep",
             "/usr/bin/php7.3 composer.phar install -vv",
             "/usr/bin/php7.3 composer.phar dump-autoload",
             "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
@@ -64,6 +72,9 @@
         "test": "Run unit tests."
     },
     "require-dev": {
-        "laminas/laminas-developer-tools": "^2.0"
+        "laminas/laminas-developer-tools": "^2.0",
+        "squizlabs/php_codesniffer": "^3.5",
+        "laminas/laminas-code": "^3.4",
+        "laminas/laminas-cli": "^0.1.4"
     }
 }

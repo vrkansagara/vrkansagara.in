@@ -15,7 +15,7 @@ use Laminas\Mvc\MvcEvent;
 
 class Module
 {
-    public function getConfig() : array
+    public function getConfig(): array
     {
         return include __DIR__ . '/../config/module.config.php';
     }
@@ -47,13 +47,12 @@ class Module
 //        $listener->setView($view);
 //        $application->getEventManager()->attachAggregate($listener);
 
-        $eventManager->attach(MvcEvent::EVENT_FINISH, function($e) {
+        $eventManager->attach(MvcEvent::EVENT_FINISH, function ($e) {
             $time = microtime(true) - REQUEST_MICROTIME;
 
             // formatting time to be more friendly
             if ($time <= 60) {
-                $timeF = number_format($time, 2, ',', '.').'s'; // conversion to seconds
-
+                $timeF = number_format($time, 2, ',', '.') . 's'; // conversion to seconds
             } else {
                 $resto  = fmod($time, 60);
                 $minuto = number_format($time / 60, 0);
@@ -63,10 +62,11 @@ class Module
             // Search static content and replace for execution time
             $response = $e->getResponse();
             $response->setContent(str_replace(
-                'Execution time:', 'Execution time: '.$timeF, $response->getContent()));
-
+                'Execution time:',
+                'Execution time: ' . $timeF,
+                $response->getContent()
+            ));
         }, 100000);
-
     }
 
 
@@ -86,5 +86,4 @@ class Module
 //            $viewModel->setTemplate('layout/layout2');
 //        }
     }
-
 }

@@ -13,6 +13,7 @@
  */
 return [
     'Laminas\Cache',
+    'PhlyBlog',
     'PhlySimplePage',
     'Laminas\Router',
     'Laminas\Validator',

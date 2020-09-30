@@ -10,13 +10,37 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Laminas\Cache\Storage\Adapter\Filesystem;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use PhlyBlog\CompileController;
+use PhlySimplePage\ClearCacheCommand;
 use PhlySimplePage\PageCacheFactory;
 use PhlySimplePage\PageController;
 
 return [
+    'phly-simple-page' => [
+        'cache' => [
+            'adapter' => [
+                'name' => Filesystem::class,
+                'options' => [
+                    'namespace' => 'pages',
+                    'cache_dir' => getcwd() . '/data/cache/static-page-data',
+                    'dir_permission' => '0777',
+                    'file_permission' => '0666',
+                ],
+            ],
+        ],
+    ],
+    'laminas-cli' => [
+        'commands' => [
+            'cache:clear' => ClearCacheCommand::class,
+            'blog:compile ' => CompileController::class
+
+        ],
+    ],
+
     'router' => [
         'routes' => [
             'home' => [

@@ -1,0 +1,39 @@
+# Project level GrumPHP configuration for Lamina Project
+grumphp:
+  hide_circumvention_tip: true
+  process_timeout: 60
+  parallel:
+    enabled: true
+    max_workers: 32
+  tasks:
+    composer:
+      file: ./composer.json
+      no_check_all: true
+      no_check_lock: false
+      no_check_publish: false
+      with_dependencies: false
+      strict: false
+    git_blacklist:
+      keywords:
+        - "<<<<<<< HEAD"
+        - ">>>>>>> origin/"
+        - "======="
+        - "dd()"
+        - "exit;"
+        - "die("
+        - "var_dump("
+        - "print_r("
+        - "exit;"
+        - "console.log"
+        - "dd($"
+        - "exit("
+        - "exit();"
+        - "debugger"
+    phpcs:
+      standard: ./phpcs.xml
+      ignore_patterns: []
+      severity: 10
+      error_severity: 10
+      warning_severity: ~
+      report: full
+      triggered_by: [php]

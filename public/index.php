@@ -40,6 +40,8 @@ if (php_sapi_name() === 'cli-server') {
     }
     unset($path);
 }
+// Do 301 rewrites
+include __DIR__ . '/../rewrites.php';
 
 // Composer autoloading
 include __DIR__ . '/../vendor/autoload.php';
