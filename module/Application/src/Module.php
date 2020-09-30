@@ -37,15 +37,6 @@ class Module
     {
         $application = $event->getApplication();
         $eventManager = $application->getEventManager();
-//        $config      = $application->getConfig();
-//        $view        = $application->getServiceManager()->get('ViewHelperManager');
-//        // You must have these keys in you application config
-//        $view->headTitle($config['view']['base_title']);
-//
-//        // This is your custom listener
-//        $listener   = new Listeners\ViewListener();
-//        $listener->setView($view);
-//        $application->getEventManager()->attachAggregate($listener);
 
         $eventManager->attach(MvcEvent::EVENT_FINISH, function ($e) {
             $time = microtime(true) - REQUEST_MICROTIME;
