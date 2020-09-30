@@ -57,8 +57,8 @@
                         <a class="nav-link" aria-current="page" href="<?=$this->url('about')?>">About</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <form method="get" action="<?=$this->url('s')?>" class="d-flex">
+                    <input id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything...">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
@@ -86,8 +86,9 @@
 </footer>
 
 <?= $this->inlineScript()
-//    ->prependFile($this->basePath('assets/js/bootstrap.min.js'))
-    ->prependFile($this->basePath('assets/js/bootstrap.bundle.min.js'))
+    ->prependFile($this->basePath('assets/js/app.js'))
+    ->prependFile($this->basePath('assets/js/bootstrap.min.js'))
+    ->prependFile($this->basePath('assets/js/jquery.min.js'))
 ?>
 </body>
 </html>

@@ -20,11 +20,13 @@ return [
     'Laminas\Filter',
     'Laminas\Mail',
     'Laminas\Cache',
-    'PhlyContact',
-    'PhlyBlog',
-    'PhlySimplePage',
     'Laminas\Router',
     'Laminas\Validator',
     'Laminas\DeveloperTools',
+
+
+    'PhlyContact',
+    'PhlyBlog',
+    'PhlySimplePage',
     'Application',
 ];

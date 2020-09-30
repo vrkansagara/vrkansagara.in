@@ -23,7 +23,7 @@ return [
              * Expects: bool
              * Default: true
              */
-            'enabled' => true,
+            'enabled' => IS_PRODUCTION ? false : true,
 
             /**
              * Enables or disables the strict mode. If the strict mode is enabled, any error will throw an exception,

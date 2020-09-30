@@ -8,20 +8,21 @@ use Laminas\Stdlib\ArrayUtils;
 define('REQUEST_MICROTIME', microtime(true));
 
 date_default_timezone_set('UTC');
-
+if (! defined('IS_PRODUCTION')) {
+    define('IS_PRODUCTION', 0);
+}
 /**
  * Display all errors when APPLICATION_ENV is development.
  */
-$_SERVER['APPLICATION_ENV'] = 'development';
-if (isset($_SERVER['APPLICATION_ENV']) && $_SERVER['APPLICATION_ENV'] === 'development') {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-    ini_set("display_startup_errors", '1');
-    ini_set("log_errors", '1');
-} else {
+if (IS_PRODUCTION) {
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
     ini_set('display_errors', '0');
     ini_set("display_startup_errors", '0');
+    ini_set("log_errors", '1');
+} else {
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+    ini_set("display_startup_errors", '1');
     ini_set("log_errors", '1');
 }
 

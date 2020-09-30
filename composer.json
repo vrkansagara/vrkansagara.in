@@ -42,8 +42,8 @@
         "cs-check": "./vendor/bin/phpcs",
         "cs-fix": "./vendor/bin/phpcbf",
         "development-disable": [
-            "@serve",
-            "laminas-development-mode disable"
+            "laminas-development-mode disable",
+            "@serve"
         ],
         "development-enable": [
             "laminas-development-mode enable",
