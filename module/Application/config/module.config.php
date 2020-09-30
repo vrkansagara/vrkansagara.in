@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace Application;
 
 use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\Captcha\Dumb;
+use Laminas\Mail\Transport\File;
 use Laminas\Mail\Transport\Smtp;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -37,7 +39,7 @@ return [
     'phly_contact' => [
         // This is simply configuration to pass to Zend\Captcha\Factory
         'captcha' => [
-            'class'   => 'recaptcha',
+            'class'   => Dumb::class,
             'options' => [
                 'pubkey'  => 'RECAPTCHA_PUBKEY_HERE',
                 'privkey' => 'RECAPTCHA_PRIVKEY_HERE',
@@ -65,16 +67,21 @@ return [
         //   transport-specific options class
         // This example configures GMail as your SMTP server
         'mail_transport' => [
-            'class'   => Smtp::class,
+//            'class'   => Smtp::class,
+//            'options' => [
+//                'host'             => 'smtp.gmail.com',
+//                'port'             => 587,
+//                'connectionClass'  => 'login',
+//                'connectionConfig' => [
+//                    'ssl'      => 'tls',
+//                    'username' => 'contact@your.tld',
+//                    'password' => 'password',
+//                ],
+//            ],
+
+            'class'   => File::class,
             'options' => [
-                'host'             => 'smtp.gmail.com',
-                'port'             => 587,
-                'connectionClass'  => 'login',
-                'connectionConfig' => [
-                    'ssl'      => 'tls',
-                    'username' => 'contact@your.tld',
-                    'password' => 'password',
-                ],
+                'path' => 'data/mail/',
             ],
         ],
     ],

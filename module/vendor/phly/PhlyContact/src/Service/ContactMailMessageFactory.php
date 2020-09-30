@@ -36,5 +36,4 @@ class ContactMailMessageFactory implements FactoryInterface
 
         return $message;
     }
-
 }

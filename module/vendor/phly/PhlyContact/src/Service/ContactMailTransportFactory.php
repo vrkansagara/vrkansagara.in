@@ -50,6 +50,4 @@ class ContactMailTransportFactory implements FactoryInterface
 
         return $transport;
     }
-
-
 }
