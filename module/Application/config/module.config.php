@@ -26,7 +26,7 @@ return [
                 'name' => Filesystem::class,
                 'options' => [
                     'namespace' => 'pages',
-                    'cache_dir' => getcwd() . '/data/cache/static-page-data',
+                    'cache_dir' => getcwd() . '/data/cache',
                     'dir_permission' => '0777',
                     'file_permission' => '0666',
                 ],
