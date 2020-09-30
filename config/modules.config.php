@@ -12,7 +12,10 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\Cache',
+    'PhlySimplePage',
     'Laminas\Router',
     'Laminas\Validator',
+    'Laminas\DeveloperTools',
     'Application',
 ];

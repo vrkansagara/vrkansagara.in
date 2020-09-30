@@ -13,11 +13,13 @@
         "php": "^7.3",
         "laminas/laminas-component-installer": "^1.0 || ^2.1",
         "laminas/laminas-development-mode": "^3.2",
-        "laminas/laminas-mvc": "^3.1.1"
+        "laminas/laminas-mvc": "^3.1.1",
+        "laminas/laminas-cache": "^2.9"
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src"
         }
     },
     "autoload-dev": {
@@ -37,7 +39,14 @@
             "php -r 'if (file_exists(\"bin/remove-package-artifacts.php\")) include \"bin/remove-package-artifacts.php\";'",
             "php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'"
         ],
-        "serve": "php -S 0.0.0.0:8080 -t public",
+        "serve": [
+            "/usr/bin/php7.3 composer.phar install -vv",
+            "/usr/bin/php7.3 composer.phar dump-autoload",
+            "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
+            "sudo chgrp -R www-data data",
+            "sudo chmod -R ug+rwx data",
+            "php -S 0.0.0.0:8080 -t public"
+        ],
         "test": "phpunit"
     },
     "scripts-descriptions": {
@@ -48,5 +57,8 @@
         "development-status": "Detail whether or not the application is in development mode.",
         "serve": "Start the built-in PHP web server and serve the application.",
         "test": "Run unit tests."
+    },
+    "require-dev": {
+        "laminas/laminas-developer-tools": "^2.0"
     }
 }
