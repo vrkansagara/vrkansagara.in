@@ -1,0 +1,33 @@
+<template>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-3">
+        <img class="bd-placeholder-img card-img-top"
+             src="/assets/images/vrkansagara.jpeg" alt="Vallabh Kansagara (VRKANSAGARA)">
+      </div>
+      <div class="col-md-9">
+        <h1 class="display-3">Hello, world!</h1>
+        <p>My name is Vallabh Kansagara (VRKANSAGARA). I am
+        <ul>
+          <li>A day by Software Engineering.</li>
+          <li>A PHP Programmer.</li>
+          <li>A LAMP Stack Web Developer.</li>
+          <li>An Open Source Contributor.</li>
+          <li>A day by the blog writer.</li>
+          <li>Also I do tweet known as <a href="https://twitter.com/vrkansagara">@vrkansagara</a></li>
+          <li>Open source contributor at @GitHub with various projects.</li>
+        </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        }
+    }
+</script>

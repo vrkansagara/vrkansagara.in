@@ -18,9 +18,8 @@
 
     <!-- Le styles -->
     <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('/assets/images/favicon.ico') ])
-        ->prependStylesheet($this->basePath('dist/css/app.css'))
-//        ->prependStylesheet($this->basePath('assets/css/app.css'))
-//        ->prependStylesheet($this->basePath('assets/css/bootstrap.min.css'))
+        ->prependStylesheet($this->basePath('assets/css/app.css'))
+        ->prependStylesheet($this->basePath('assets/css/bootstrap.min.css'))
     ?>
 
     <!-- Scripts -->
@@ -64,15 +63,16 @@
                     </li>
                 </ul>
                 <form method="get" action="<?=$this->url('search')?>" class="d-flex">
-                    <input  name="name" value="" id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything...">
+                    <input id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything...">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </nav>
 </header>
+
 <!-- Begin page content -->
-<main id="app" class="flex-shrink-0">
+<main class="flex-shrink-0 mt-5 text-primary">
     <?= $this->content ?>
 </main>
 
@@ -94,10 +94,9 @@
 </footer>
 
 <?= $this->inlineScript()
-    ->prependFile($this->basePath('dist/js/app.js'))
-//    ->prependFile($this->basePath('assets/js/app.js'))
+    ->prependFile($this->basePath('assets/js/app.js'))
 //    ->prependFile($this->basePath('assets/js/bootstrap.min.js'))
-//    ->prependFile($this->basePath('assets/js/jquery.min.js'))
+    ->prependFile($this->basePath('assets/js/jquery.min.js'))
 ?>
 </body>
 </html>

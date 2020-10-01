@@ -53,10 +53,10 @@ return [
                     ],
                 ],
             ],
-            's' => [
+            'search' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/?s=',
+                    'route' => '/s',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'search',
