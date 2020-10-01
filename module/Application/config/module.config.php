@@ -1,8 +1,20 @@
 <?php
+
+/**
+ * @see       https://github.com/laminas/laminas-mvc-skeleton for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mvc-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mvc-skeleton/blob/master/LICENSE.md New BSD License
+ */
+
 declare(strict_types=1);
 
 namespace Application;
 
+use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\Captcha\Dumb;
+use Laminas\DevelopmentMode\Command;
+use Laminas\Mail\Transport\File;
+use Laminas\Mail\Transport\Smtp;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
