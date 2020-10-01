@@ -8,3 +8,6 @@ phpunit.xml
 composer.lock
 .phpunit.result.cache
 .idea/
+/node_modules
+npm-debug.log
+yarn-error.log
