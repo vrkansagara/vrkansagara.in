@@ -1,4 +1,10 @@
-<!doctype html>
+<?php
+
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
 <html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
@@ -11,7 +17,7 @@
     ?>
 
     <!-- Le styles -->
-    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/images/favicon.ico'])
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('/assets/images/favicon.ico') ])
         ->prependStylesheet($this->basePath('assets/css/app.css'))
         ->prependStylesheet($this->basePath('assets/css/bootstrap.min.css'))
     ?>
@@ -19,7 +25,7 @@
     <!-- Scripts -->
     <?= $this->headScript() ?>
 
-    <link rel="canonical" href="<?=$this->url()?>">
+    <link rel="canonical" href="<?=$this->url('home')?>">
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -90,7 +96,7 @@
 
 <?= $this->inlineScript()
     ->prependFile($this->basePath('assets/js/app.js'))
-    ->prependFile($this->basePath('assets/js/bootstrap.min.js'))
+//    ->prependFile($this->basePath('assets/js/bootstrap.min.js'))
     ->prependFile($this->basePath('assets/js/jquery.min.js'))
 ?>
 </body>

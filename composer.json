@@ -23,7 +23,8 @@
         "laminas/laminas-recaptcha": "^3.2",
         "laminas/laminas-form": "^2.15",
         "laminas/laminas-session": "^2.9",
-        "laminas/laminas-i18n": "^2.10"
+        "laminas/laminas-i18n": "^2.10",
+        "laminas/laminas-test": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +36,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "module/Application/test/"
+            "ApplicationTest\\": "module/Application/test/",
+            "PhlySimplePageTest\\": "module/vendor/phly/PhlySimplePage/test/",
+            "PhlyBlogTest\\": "module/vendor/phly/PhlyBlog/test/",
+            "PhlyContactTest\\": "module/vendor/phly/PhlyContact/test/"
         }
     },
     "scripts": {
