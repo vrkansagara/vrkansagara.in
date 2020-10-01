@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Crawl-Delay: 20
+
 
 Sitemap: https://vrkansagara.in/sitemap.xml
