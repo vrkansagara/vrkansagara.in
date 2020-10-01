@@ -1,20 +1,8 @@
 <?php
-
-/**
- * @see       https://github.com/laminas/laminas-mvc-skeleton for the canonical source repository
- * @copyright https://github.com/laminas/laminas-mvc-skeleton/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-mvc-skeleton/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Application;
 
-use Laminas\Cache\Storage\Adapter\Filesystem;
-use Laminas\Captcha\Dumb;
-use Laminas\DevelopmentMode\Command;
-use Laminas\Mail\Transport\File;
-use Laminas\Mail\Transport\Smtp;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -24,68 +12,6 @@ use PhlySimplePage\PageCacheFactory;
 use PhlySimplePage\PageController;
 
 return [
-    'phly-simple-page' => [
-        'cache' => [
-            'adapter' => [
-                'name' => Filesystem::class,
-                'options' => [
-                    'namespace' => 'pages',
-                    'cache_dir' => getcwd() . '/data/cache',
-                    'dir_permission' => '0777',
-                    'file_permission' => '0666',
-                ],
-            ],
-        ],
-    ],
-    'phly_contact' => [
-        // This is simply configuration to pass to Zend\Captcha\Factory
-        'captcha' => [
-            'class'   => Dumb::class,
-            'options' => [
-                'pubkey'  => 'RECAPTCHA_PUBKEY_HERE',
-                'privkey' => 'RECAPTCHA_PRIVKEY_HERE',
-            ],
-        ],
-
-        // This sets the default "to" and "sender" headers for your message
-        'message' => [
-            /*
-            // These can be either a string, or an array of email => name pairs
-            'to'     => 'contact@your.tld',
-            'from'   => 'contact@your.tld',
-            // This should be an array with minimally an "address" element, and
-            // can also contain a "name" element
-            'sender' => array(
-                'address' => 'contact@your.tld'
-            ),
-             */
-        ],
-
-        // Transport consists of two keys:
-        // - "class", the mail tranport class to use, and
-        // - "options", any options to use to configure the
-        //   tranpsort. Usually these will be passed to the
-        //   transport-specific options class
-        // This example configures GMail as your SMTP server
-        'mail_transport' => [
-//            'class'   => Smtp::class,
-//            'options' => [
-//                'host'             => 'smtp.gmail.com',
-//                'port'             => 587,
-//                'connectionClass'  => 'login',
-//                'connectionConfig' => [
-//                    'ssl'      => 'tls',
-//                    'username' => 'contact@your.tld',
-//                    'password' => 'password',
-//                ],
-//            ],
-
-            'class'   => File::class,
-            'options' => [
-                'path' => 'data/mail/',
-            ],
-        ],
-    ],
     'laminas-cli' => [
         'commands' => [
             'cache:clear' => ClearCacheCommand::class,
@@ -93,7 +19,6 @@ return [
 
         ],
     ],
-
     'router' => [
         'routes' => [
             'home' => [

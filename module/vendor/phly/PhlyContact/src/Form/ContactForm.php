@@ -30,42 +30,81 @@ class ContactForm extends Form
         }
 
         $this->add([
-            'name' => 'from',
-            'type' => 'Laminas\Form\Element\Text',
+            'name' => 'email',
+            'type' => Element\Text::class,
             'options' => [
-                'label' => 'From:',
+                'label' => 'Email:',
+                'label_attributes' => array(
+                    'class' => 'form-label',
+                )
             ],
+            'attributes' => array(
+                'type' => 'email',
+                'id' => 'email',
+                'class' => 'form-control',
+                'required' => 'required',
+            ),
         ]);
 
         $this->add([
-            'name'  => 'subject',
-            'type' => 'Laminas\Form\Element\Text',
+            'name' => 'subject',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Subject:',
+                'label_attributes' => array(
+                    'class' => 'form-label',
+                ),
             ],
+            'attributes' => array(
+                'type' => 'subject',
+                'id' => 'subject',
+                'class' => 'form-control',
+                'required' => 'required',
+            ),
         ]);
 
 
         $this->add([
-            'name'  => 'body',
-            'type'  => 'Laminas\Form\Element\Textarea',
+            'name' => 'body',
+            'type' => Element\Textarea::class,
             'options' => [
                 'label' => 'Your message:',
+                'label_attributes' => array(
+                    'class' => 'form-label',
+                ),
             ],
+            'attributes' => array(
+                'type' => 'textarea',
+                'id' => 'body',
+                'class' => 'form-control',
+                'required' => 'required',
+            ),
         ]);
 
         $captcha = new Element\Captcha('captcha');
         $captcha->setCaptcha($this->captchaAdapter);
-        $captcha->setOptions(['label' => 'Please verify you are human.']);
+        $captcha->setOptions([
+            'label' => 'Please verify you are human.',
+            'label_attributes' => array(
+                'class' => 'form-label',
+            ),
+        ]);
+        $captcha->setAttributes([
+            'type' => 'text',
+            'id' => 'captcha',
+            'class' => 'form-control',
+            'required' => 'required',
+        ]);
         $this->add($captcha);
 
         $this->add(new Element\Csrf('csrf'));
 
         $this->add([
             'name' => 'Send',
-            'type'  => 'Laminas\Form\Element\Submit',
+            'type' => Element\Submit::class,
             'attributes' => [
                 'value' => 'Send',
+                'class' => 'btn btn-primary',
             ],
         ]);
     }
