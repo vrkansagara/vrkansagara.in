@@ -49,16 +49,14 @@ return [
 
         // This sets the default "to" and "sender" headers for your message
         'message' => [
-            /*
             // These can be either a string, or an array of email => name pairs
-            'to'     => 'contact@your.tld',
-            'from'   => 'contact@your.tld',
+//            'to'     => 'vallabh@vrkansagara.in',
+//            'from'   => 'vallabh@vrkansagara.in',
             // This should be an array with minimally an "address" element, and
             // can also contain a "name" element
-            'sender' => array(
-                'address' => 'contact@your.tld'
-            ),
-             */
+//            'sender' => array(
+//                'Vallabh Kansagara' => 'vallabh@vrkansagara.in'
+//            ),
         ],
 
         // Transport consists of two keys:
@@ -68,22 +66,22 @@ return [
         //   transport-specific options class
         // This example configures GMail as your SMTP server
         'mail_transport' => [
-//            'class'   => Smtp::class,
-//            'options' => [
-//                'host'             => 'smtp.gmail.com',
-//                'port'             => 587,
-//                'connectionClass'  => 'login',
-//                'connectionConfig' => [
-//                    'ssl'      => 'tls',
-//                    'username' => 'contact@your.tld',
-//                    'password' => 'password',
-//                ],
-//            ],
-
-            'class'   => File::class,
+            'class'   => Smtp::class,
             'options' => [
-                'path' => 'data/mail/',
+                'host'             => 'smtp.sendgrid.net',
+                'port'             => 587,
+                'connectionClass'  => 'login',
+                'connectionConfig' => [
+//                    'ssl'      => 'tls',
+                    'username' => 'apikey',
+                    'password' => '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',
+                ],
             ],
+
+//            'class'   => File::class,
+//            'options' => [
+//                'path' => 'data/mail/',
+//            ],
         ],
     ],
     'laminas-cli' => [

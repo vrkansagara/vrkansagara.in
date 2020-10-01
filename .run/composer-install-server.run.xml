@@ -3,8 +3,6 @@
     <option name="commandLineParameters" value="--timeout 0" />
     <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
     <option name="script" value="serve" />
-    <method v="2">
-      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_composer install" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>
