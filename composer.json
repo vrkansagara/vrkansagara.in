@@ -24,8 +24,7 @@
         "laminas/laminas-form": "^2.15",
         "laminas/laminas-session": "^2.9",
         "laminas/laminas-i18n": "^2.10",
-        "laminas/laminas-test": "^3.4"
-        "laminas/laminas-i18n": "^2.10",
+        "laminas/laminas-test": "^3.4",
         "laminas/laminas-crypt": "^3.3"
     },
     "autoload": {
@@ -63,7 +62,7 @@
             "php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'"
         ],
         "serve": [
-            "sudo rm -rf data/cache/static-page-data/*",
+            "sudo rm -rf data/cache/static-page-data/* composer.lock",
             "/usr/bin/php7.3 composer.phar install -vv",
             "/usr/bin/php7.3 composer.phar dump-autoload",
             "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
