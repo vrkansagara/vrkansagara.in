@@ -1,31 +1,8 @@
 <?php
-
 declare(strict_types=1);
 
 use Laminas\Mvc\Application;
 use Laminas\Stdlib\ArrayUtils;
-
-define('REQUEST_MICROTIME', microtime(true));
-
-date_default_timezone_set('UTC');
-if (! defined('IS_PRODUCTION')) {
-    define('IS_PRODUCTION', 0);
-}
-/**
- * Display all errors when APPLICATION_ENV is development.
- */
-if (IS_PRODUCTION) {
-    error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
-    ini_set('display_errors', '0');
-    ini_set("display_startup_errors", '0');
-    ini_set("log_errors", '1');
-} else {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-    ini_set("display_startup_errors", '1');
-    ini_set("log_errors", '1');
-}
-
 
 /**
  * This makes our life easier when dealing with paths. Everything is relative
@@ -56,11 +33,41 @@ if (! class_exists(Application::class)) {
     );
 }
 
-// Retrieve configuration
-$appConfig = require __DIR__ . '/../config/application.config.php';
-if (file_exists(__DIR__ . '/../config/development.config.php')) {
-    $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
-}
+
+/**
+ * Self-called anonymous function that creates its own scope and keep the global namespace clean.
+ */
+(function () {
+    define('REQUEST_MICROTIME', microtime(true));
+
+    date_default_timezone_set('UTC');
+    if (! defined('IS_PRODUCTION')) {
+        define('IS_PRODUCTION', 0);
+    }
+    /**
+     * Display all errors when APPLICATION_ENV is development.
+     */
+    if (IS_PRODUCTION) {
+        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+        ini_set('display_errors', '0');
+        ini_set("display_startup_errors", '0');
+        ini_set("log_errors", '1');
+    } else {
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
+        ini_set("display_startup_errors", '1');
+        ini_set("log_errors", '1');
+    }
+
+
+    // Retrieve configuration
+    $appConfig = require __DIR__ . '/../config/application.config.php';
+    if (file_exists(__DIR__ . '/../config/development.config.php')) {
+        $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
+    }
 
 // Run the application!
-Application::init($appConfig)->run();
+    Application::init($appConfig)->run();
+})();
+
+

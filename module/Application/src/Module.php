@@ -22,14 +22,14 @@ class Module
 
     // The "init" method is called on application start-up and
     // allows to register an event listener.
-    public function init(ModuleManager $manager)
-    {
-        // Get event manager.
-        $eventManager = $manager->getEventManager();
-
-//        $sharedEventManager = $eventManager->getSharedManager();
-//        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', [$this, 'onDispatch'], 100);
-    }
+//    public function init(ModuleManager $manager)
+//    {
+//        // Get event manager.
+////        $eventManager = $manager->getEventManager();
+//
+////        $sharedEventManager = $eventManager->getSharedManager();
+////        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', [$this, 'onDispatch'], 100);
+//    }
 
     public function onBootstrap(MvcEvent $event)
     {
@@ -51,6 +51,7 @@ class Module
             // Search static content and replace for execution time
             $response = $e->getResponse();
             $content = $this->compressJscript($response->getContent());
+//            $content = self::compress($content);
             $response->setContent(str_replace(
                 'Execution time:',
                 'Execution time: ' . $timeF,
