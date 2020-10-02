@@ -26,7 +26,7 @@ mix.js('resources/js/app.js', 'public/dist/js')
         'vue',
         'axios',
         'jquery',
-        'lodash'
+        'lodash',
     ])
     .options({
         processCssUrls: false,
@@ -44,7 +44,7 @@ if (mix.inProduction()) {
     // mix.version();
 } else {
     if (process.env.LAMINAS_USE_ESLINT === 'true') {
-        mix.eslint();
+        // mix.eslint();
     }
     // Development settings
     mix
