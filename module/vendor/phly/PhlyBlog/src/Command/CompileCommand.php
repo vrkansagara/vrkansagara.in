@@ -14,6 +14,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CompileCommand extends Command
 {
@@ -59,10 +60,12 @@ class CompileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         // outputs multiple lines to the console (adding "\n" at the end of each line)
 //        $output->writeln([
 //            'Crawling information',
-//            '============',
+//            '====',
 //            '',
 //        ]);
         // this method must return an integer number with the "exit status code"
@@ -76,11 +79,11 @@ class CompileCommand extends Command
         $tags = $this->attachTags();
         $listeners = $this->attachListeners($flags, $tags);
 
+        $io->title('Copying asset symlinks');
+        $io->success('Compiling and sorting entries');
+
         // Compile
-        $width = $this->console->getWidth();
-        $this->console->write("Compiling and sorting entries", Color::BLUE);
         $compiler->compile();
-        $this->reportDone($width, 29);
 
         // Create tag cloud
         if ($this->config['cloud_callback']
@@ -137,33 +140,32 @@ class CompileCommand extends Command
         }, 100);
     }
 
-    public function getFlags(InputInterface $input)
+    public function getFlags()
     {
-        $options = $this->params()->fromRoute();
-        $test = array(
-            array('long' => 'all', 'short' => 'a'),
-            array('long' => 'entries', 'short' => 'e'),
-            array('long' => 'archive', 'short' => 'c'),
-            array('long' => 'year', 'short' => 'y'),
-            array('long' => 'month', 'short' => 'm'),
-            array('long' => 'day', 'short' => 'd'),
-            array('long' => 'tag', 'short' => 't'),
-            array('long' => 'author', 'short' => 'r'),
-        );
-        foreach ($test as $spec) {
-            $long = $spec['long'];
-            $short = $spec['short'];
-            if ((!isset($options[$long]) || !$options[$long])
-                && (isset($options[$short]) && $options[$short])
-            ) {
-                $options[$long] = true;
-                unset($options[$short]);
-            }
-        }
+//        $options = $this->params()->fromRoute();
+//        $test = array(
+//            array('long' => 'all', 'short' => 'a'),
+//            array('long' => 'entries', 'short' => 'e'),
+//            array('long' => 'archive', 'short' => 'c'),
+//            array('long' => 'year', 'short' => 'y'),
+//            array('long' => 'month', 'short' => 'm'),
+//            array('long' => 'day', 'short' => 'd'),
+//            array('long' => 'tag', 'short' => 't'),
+//            array('long' => 'author', 'short' => 'r'),
+//        );
+//        foreach ($test as $spec) {
+//            $long = $spec['long'];
+//            $short = $spec['short'];
+//            if ((!isset($options[$long]) || !$options[$long])
+//                && (isset($options[$short]) && $options[$short])
+//            ) {
+//                $options[$long] = true;
+//                unset($options[$short]);
+//            }
+//        }
 
-        $options = array_merge($this->defaultOptions, $options);
-        var_dump($options);
-        exit;
+        $options = array_merge($this->defaultOptions, $options = []);
+
         if ($options['entries']
             || $options['archive']
             || $options['year']
@@ -284,16 +286,5 @@ class CompileCommand extends Command
         }
 
         return $listeners;
-    }
-
-
-    protected function reportDone($width, $used)
-    {
-        if (($used + 8) > $width) {
-            $this->console->writeLine('');
-            $used = 0;
-        }
-        $spaces = $width - $used - 8;
-        $this->console->writeLine(str_repeat('.', $spaces) . '[ DONE ]', Color::GREEN);
     }
 }
