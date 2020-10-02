@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -47,7 +46,7 @@ class ArchivesTest extends TestCase
 
         $feedFilenameTemplate = $this->options->getFeedFilename();
         $title                = $this->options->getFeedTitle();
-        foreach (['atom', 'rss'] as $type) {
+        foreach (array('atom', 'rss') as $type) {
             $filename = sprintf($feedFilenameTemplate, $type);
             $this->assertArrayHasKey($filename, $this->writer->files);
             $this->assertContains($title, $this->writer->files[$filename]);

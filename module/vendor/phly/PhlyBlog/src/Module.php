@@ -18,11 +18,11 @@ class Module implements ConsoleUsageProviderInterface
 
     public function getAutoloaderConfig()
     {
-        return [
-            'Laminas\Loader\ClassMapAutoloader' => [
+        return array(
+            'Laminas\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php'
-            ],
-        ];
+            ),
+        );
     }
 
     public function getConfig()
@@ -32,8 +32,7 @@ class Module implements ConsoleUsageProviderInterface
 
     public function getServiceConfig()
     {
-        return [
-            'factories' => [
+        return array('factories' => array(
             'blogrequest' => function ($services) {
                 return new Request();
             },
@@ -64,16 +63,16 @@ class Module implements ConsoleUsageProviderInterface
 
                 return $renderer;
             },
-        ]];
+        ));
     }
 
     public function getControllerConfig()
     {
-        return ['factories' => [
+        return array('factories' => array(
             'PhlyBlog\CompileController' => function ($controllers) {
                 $services   = $controllers->getServiceLocator();
                 $config     = $services->get('Config');
-                $config     = isset($config['blog']) ? $config['blog'] : [];
+                $config     = isset($config['blog']) ? $config['blog'] : array();
 
                 $request    = $services->get('BlogRequest');
                 $response   = $services->get('BlogResponse');
@@ -87,7 +86,7 @@ class Module implements ConsoleUsageProviderInterface
                 $controller->setView($view);
                 return $controller;
             },
-        ]];
+        ));
     }
 
     public function getConsoleBanner(Console $console)
@@ -97,17 +96,17 @@ class Module implements ConsoleUsageProviderInterface
 
     public function getConsoleUsage(Console $console)
     {
-        return [
+        return array(
             'blog compile [--all|-a] [--entries|-e] [--archive|-c] [--year|-y] [--month|-m] [--day|-d] [--tag|-t] [--author|-r]' => 'Compile blog',
-            ['--all|-a'     ,  'Execute all actions (default)'],
-            ['--entries|-e' ,  'Compile entries'],
-            ['--archive|-c' ,  'Compile paginated archive (and feed)'],
-            ['--year|-y'    ,  'Compile paginated entries by year'],
-            ['--month|-m'   ,  'Compile paginated entries by month'],
-            ['--day|-d'     ,  'Compile paginated entries by day'],
-            ['--tag|-t'     ,  'Compile paginated entries by tag (and feeds)'],
-            ['--author|-r'  ,  'Compile paginated entries by author (and feeds)'],
-        ];
+            array('--all|-a'     ,  'Execute all actions (default)'),
+            array('--entries|-e' ,  'Compile entries'),
+            array('--archive|-c' ,  'Compile paginated archive (and feed)'),
+            array('--year|-y'    ,  'Compile paginated entries by year'),
+            array('--month|-m'   ,  'Compile paginated entries by month'),
+            array('--day|-d'     ,  'Compile paginated entries by day'),
+            array('--tag|-t'     ,  'Compile paginated entries by tag (and feeds)'),
+            array('--author|-r'  ,  'Compile paginated entries by author (and feeds)'),
+        );
     }
 
     public function onBootstrap($e)
@@ -120,7 +119,7 @@ class Module implements ConsoleUsageProviderInterface
     public static function prepareCompilerView($view, $config, $services)
     {
         $renderer = $services->get('BlogRenderer');
-        $view->addRenderingStrategy(function ($e) use ($renderer) {
+        $view->addRenderingStrategy(function($e) use ($renderer) {
             return $renderer;
         }, 100);
     }

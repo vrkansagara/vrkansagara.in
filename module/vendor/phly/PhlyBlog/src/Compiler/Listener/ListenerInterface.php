@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 interface ListenerInterface

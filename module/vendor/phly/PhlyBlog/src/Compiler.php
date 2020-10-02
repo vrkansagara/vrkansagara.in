@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog;
 
 use DateTime;
@@ -20,17 +19,17 @@ class Compiler implements EventManagerAwareInterface
 
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers([
+        $events->setIdentifiers(array(
             __CLASS__,
             get_called_class(),
-        ]);
+        ));
         $this->events = $events;
         return $this;
     }
 
     public function getEventManager()
     {
-        if (! $this->events) {
+        if (!$this->events) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;
@@ -38,7 +37,7 @@ class Compiler implements EventManagerAwareInterface
 
     /**
      * Prepare the list of entries
-     *
+     * 
      * Loops through the filesystem tree, looking for PHP files
      * that return EntryEntity objects. For each returned, adds it
      * to:
@@ -59,11 +58,11 @@ class Compiler implements EventManagerAwareInterface
 
         foreach ($this->files as $file) {
             $entry = include $file->getRealPath();
-            if (! $entry instanceof EntryEntity) {
+            if (!$entry instanceof EntryEntity) {
                 continue;
             }
 
-            if (! $entry->isValid()) {
+            if (!$entry->isValid()) {
                 // if we have an invalid entry, we should not continue
                 continue;
             }

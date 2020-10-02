@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler;
 
 use SplPriorityQueue;
@@ -9,9 +8,9 @@ class SortedEntries extends SplPriorityQueue
 {
     /**
      * Sorting on timestamps
-     *
-     * @param  int $priority1
-     * @param  int $priority2
+     * 
+     * @param  int $priority1 
+     * @param  int $priority2 
      * @return int
      */
     public function compare($priority1, $priority2)
@@ -28,7 +27,7 @@ class SortedEntries extends SplPriorityQueue
 
     public function insert($data, $priority)
     {
-        if (! $data instanceof EntryEntity) {
+        if (!$data instanceof EntryEntity) {
             throw new InvalidArgumentException(sprintf(
                 '%s expects an EntryEntity; received %s',
                 __METHOD__,

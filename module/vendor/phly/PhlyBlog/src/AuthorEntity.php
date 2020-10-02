@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog;
 
 use PhlyCommon\Entity as EntityDefinition;
@@ -27,7 +26,7 @@ class AuthorEntity implements EntityDefinition
         $this->id = (string) $id;
         return $this;
     }
-
+    
     /**
      * Get value for id
      *
@@ -51,7 +50,7 @@ class AuthorEntity implements EntityDefinition
         $this->name = (string) $name;
         return $this;
     }
-
+    
     /**
      * Get name
      *
@@ -73,7 +72,7 @@ class AuthorEntity implements EntityDefinition
         $this->email = (string) $email;
         return $this;
     }
-
+    
     /**
      * Get email
      *
@@ -95,7 +94,7 @@ class AuthorEntity implements EntityDefinition
         $this->url = (string) $url;
         return $this;
     }
-
+    
     /**
      * Get author url
      *
@@ -138,23 +137,23 @@ class AuthorEntity implements EntityDefinition
 
     /**
      * Cast object to array
-     *
+     * 
      * @return array
      */
     public function toArray()
     {
-        return [
+        return array(
             'id'    => $this->getId(),
             'name'  => $this->getName(),
             'email' => $this->getEmail(),
             'url'   => $this->getUrl(),
-        ];
+        );
     }
 
     /**
      * Populate object from array
-     *
-     * @param  array $array
+     * 
+     * @param  array $array 
      * @return AuthorEntity
      */
     public function fromArray(array $array)

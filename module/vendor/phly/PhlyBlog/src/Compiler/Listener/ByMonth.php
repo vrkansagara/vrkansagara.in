@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 use DomainException;
@@ -8,19 +7,19 @@ use PhlyBlog\Compiler\SortedEntries;
 
 class ByMonth extends AbstractList
 {
-    protected $months = [];
+    protected $months = array();
 
     public function onCompile(Event $e)
     {
         $entry = $e->getEntry();
-        if (! $entry->isPublic()) {
+        if (!$entry->isPublic()) {
             return;
         }
 
         $date  = $e->getDate();
         $month = $date->format('Y/m');
 
-        if (! isset($this->months[$month])) {
+        if (!isset($this->months[$month])) {
             $this->months[$month] = new SortedEntries();
         }
         $this->months[$month]->insert($entry, $entry->getCreated());
@@ -58,7 +57,7 @@ class ByMonth extends AbstractList
             $this->iterateAndRenderList(
                 $list,
                 $filenameTemplate,
-                [$month],
+                array($month),
                 sprintf($titleTemplate, date('F', strtotime($year . '-' . $monthDigit . '-01')) . ' ' . $year),
                 $urlTemplate,
                 $month,

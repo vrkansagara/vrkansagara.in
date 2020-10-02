@@ -1,8 +1,6 @@
 <?php
-
 namespace PhlyBlog;
 
-use Laminas\Cache\Storage\Adapter\AbstractAdapter;
 use RuntimeException;
 use Laminas\Console\Adapter\AdapterInterface as Console;
 use Laminas\Console\ColorInterface as Color;
@@ -10,12 +8,10 @@ use Laminas\Console\Request as ConsoleRequest;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\View;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 
-class CompileController extends Command
+class CompileController extends AbstractActionController
 {
-    public $config = [];
+    public $config = array();
     public $view;
 
     protected $compiler;
@@ -24,23 +20,29 @@ class CompileController extends Command
     protected $responseFile;
     protected $writer;
 
+    protected $defaultOptions = array(
+        'all'     => true,
+        'entries' => false,
+        'archive' => false,
+        'year'    => false,
+        'month'   => false,
+        'day'     => false,
+        'tag'     => false,
+        'author'  => false,
+    );
 
-    public function __construct()
+    public function setConfig($config)
     {
-        parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        $this->setName('blog:compile ');
-        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Compile everything');
-        $this->addOption('entries', 'e', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('archive', 'c', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('year', 'y', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('month', 'm', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('day', 'd', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('tag', 't', InputOption::VALUE_NONE, 'Only entries');
-        $this->addOption('author', 'r', InputOption::VALUE_NONE, 'Only entries');
+        if ($config instanceof Traversable) {
+            $config = ArrayUtils::iteratorToArray($config);
+        }
+        if (!is_array($config)) {
+            throw new RuntimeException(sprintf(
+                'Expected array or Traversable PhlyBlog configuration; received %s',
+                (is_object($config) ? get_class($config) : gettype($config))
+            ));
+        }
+        $this->config = $config;
     }
 
     public function setConsole(Console $console)
@@ -66,21 +68,20 @@ class CompileController extends Command
     public function getFlags()
     {
         $options = $this->params()->fromRoute();
-        $test = [
-            ['long' => 'all',     'short' => 'a'],
-            ['long' => 'entries', 'short' => 'e'],
-            ['long' => 'archive', 'short' => 'c'],
-            ['long' => 'year',    'short' => 'y'],
-            ['long' => 'month',   'short' => 'm'],
-            ['long' => 'day',     'short' => 'd'],
-            ['long' => 'tag',     'short' => 't'],
-            ['long' => 'author',  'short' => 'r'],
-        ];
+        $test = array(
+            array('long' => 'all',     'short' => 'a'),
+            array('long' => 'entries', 'short' => 'e'),
+            array('long' => 'archive', 'short' => 'c'),
+            array('long' => 'year',    'short' => 'y'),
+            array('long' => 'month',   'short' => 'm'),
+            array('long' => 'day',     'short' => 'd'),
+            array('long' => 'tag',     'short' => 't'),
+            array('long' => 'author',  'short' => 'r'),
+        );
         foreach ($test as $spec) {
             $long  = $spec['long'];
             $short = $spec['short'];
-            if (
-                (! isset($options[$long]) || ! $options[$long])
+            if ((!isset($options[$long]) || !$options[$long]) 
                 && (isset($options[$short]) && $options[$short])
             ) {
                 $options[$long] = true;
@@ -89,8 +90,7 @@ class CompileController extends Command
         }
 
         $options = array_merge($this->defaultOptions, $options);
-        if (
-            $options['entries']
+        if ($options['entries']
             || $options['archive']
             || $options['year']
             || $options['month']
@@ -162,7 +162,7 @@ class CompileController extends Command
 
     public function attachListeners(array $flags, $tags)
     {
-        $listeners    = [];
+        $listeners    = array();
         $view         = $this->view;
         $compiler     = $this->getCompiler();
         $writer       = $this->getWriter();
@@ -215,7 +215,7 @@ class CompileController extends Command
     public function compileAction()
     {
         $request = $this->getRequest();
-        if (! $request instanceof ConsoleRequest) {
+        if (!$request instanceof ConsoleRequest) {
             throw new RuntimeException(sprintf(
                 '%s may only be called from the console',
                 __METHOD__
@@ -234,8 +234,7 @@ class CompileController extends Command
         $this->reportDone($width, 29);
 
         // Create tag cloud
-        if (
-            $this->config['cloud_callback']
+        if ($this->config['cloud_callback'] 
             && is_callable($this->config['cloud_callback'])
         ) {
             $callable = $this->config['cloud_callback'];

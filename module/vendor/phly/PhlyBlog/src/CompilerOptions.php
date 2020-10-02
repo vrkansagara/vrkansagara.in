@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog;
 
 use Laminas\Stdlib\AbstractOptions;
@@ -569,7 +568,7 @@ class CompilerOptions extends AbstractOptions
         return $this->tagCloudUrlTemplate;
     }
 
-    protected $tagCloudOptions = [];
+    protected $tagCloudOptions = array();
 
     public function setTagCloudOptions(array $tagCloudOptions)
     {
@@ -649,7 +648,7 @@ class CompilerOptions extends AbstractOptions
     public function setFeedAuthorUri($feedAuthorUri)
     {
         $uri = UriFactory::factory($feedAuthorUri);
-        if (! $uri->isValid()) {
+        if (!$uri->isValid()) {
             throw new \InvalidArgumentException('Author URI for feed is invalid');
         }
         $this->feedAuthorUri = $feedAuthorUri;

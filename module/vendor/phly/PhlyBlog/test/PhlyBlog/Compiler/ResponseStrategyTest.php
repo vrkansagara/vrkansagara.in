@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -24,7 +23,7 @@ class ResponseStrategyTest extends TestCase
         $found = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
-            if ([$this->strategy, 'onResponse'] == $callback) {
+            if (array($this->strategy, 'onResponse') == $callback) {
                 $found = true;
                 break;
             }

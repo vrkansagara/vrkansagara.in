@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 use DomainException;
@@ -14,7 +13,7 @@ use Laminas\View\Model\ViewModel;
 class Entries implements ListenerAggregateInterface
 {
     protected $entries;
-    protected $listeners = [];
+    protected $listeners = array();
     protected $options;
     protected $responseFile;
     protected $view;
@@ -28,7 +27,7 @@ class Entries implements ListenerAggregateInterface
 
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('compile', [$this, 'onCompile']);
+        $this->listeners[] = $events->attach('compile', array($this, 'onCompile'));
     }
 
     public function detach(Events $events)
@@ -53,7 +52,7 @@ class Entries implements ListenerAggregateInterface
 
     public function createEntries($template = null)
     {
-        if (! $this->entries) {
+        if (!$this->entries) {
             return;
         }
 
@@ -69,9 +68,9 @@ class Entries implements ListenerAggregateInterface
             $filename = sprintf($filenameTemplate, $entry->getId());
             $this->responseFile->setFilename($filename);
 
-            $model = new ViewModel([
+            $model = new ViewModel(array(
                 'entry' => $entry,
-            ]);
+            ));
             $model->setTemplate($template);
 
             $this->view->render($model);

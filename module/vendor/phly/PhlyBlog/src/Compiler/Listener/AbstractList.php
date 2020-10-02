@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 use PhlyBlog\AuthorEntity;
@@ -17,7 +16,7 @@ use Laminas\View\View;
 
 abstract class AbstractList implements ListenerAggregateInterface, ListenerInterface
 {
-    protected $listeners = [];
+    protected $listeners = array();
     protected $options;
     protected $responseFile;
     protected $view;
@@ -33,8 +32,8 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
 
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('compile', [$this, 'onCompile']);
-        $this->listeners[] = $events->attach('compile.end', [$this, 'onCompileEnd']);
+        $this->listeners[] = $events->attach('compile', array($this, 'onCompile'));
+        $this->listeners[] = $events->attach('compile.end', array($this, 'onCompileEnd'));
     }
 
     public function detach(Events $events)
@@ -57,8 +56,8 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
      * - How many pages to show in the paginator
      * - Template for view script
      * - Partial for paginator control
-     *
-     * @param  Iterator|array $it
+     * 
+     * @param  Iterator|array $it 
      * @return Paginator
      * @throws DomainException
      */
@@ -71,15 +70,15 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
     }
 
     protected function iterateAndRenderList(
-        $list,
-        $filenameTemplate,
-        array $filenameSubs,
-        $title,
+        $list, 
+        $filenameTemplate, 
+        array $filenameSubs, 
+        $title, 
         $urlTemplate,
-        $substitution,
+        $substitution, 
         $template
     ) {
-        if (! is_array($list) || empty($list)) {
+        if (!is_array($list) || empty($list)) {
             return;
         }
 
@@ -96,17 +95,17 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
             $filename = vsprintf($filenameTemplate, $substitutions);
 
             // Generate this page
-            $model = new ViewModel([
+            $model = new ViewModel(array(
                 'title'         => $title,
                 'entries'       => $paginator,
                 'paginator_url' => $urlTemplate,
                 'substitution'  => $substitution,
-            ]);
+            ));
             $model->setTemplate($template);
 
             $this->responseFile->setFilename($filename);
             $this->view->render($model);
-
+            
             // This hack ensures that the paginator is reset for each page
             if ($i <= $pageCount) {
                 $paginator = $this->getPaginator($list);
@@ -122,7 +121,7 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
         $feedLinkTemplate,
         $filenameTemplate
     ) {
-        if (! is_array($list) || empty($list)) {
+        if (!is_array($list) || empty($list)) {
             return;
         }
 
@@ -147,26 +146,26 @@ abstract class AbstractList implements ListenerAggregateInterface, ListenerInter
         if (empty($authorUri)) {
             $authorUri = $blogLink;
         }
-        $defaultAuthor = [
+        $defaultAuthor = array(
             'name'  => $this->options->getFeedAuthorName(),
             'email' => $this->options->getFeedAuthorEmail(),
             'uri'   => $authorUri,
-        ];
+        );
 
         $latest = false;
         foreach ($paginator as $post) {
-            if (! $latest) {
+            if (!$latest) {
                 $latest = $post;
             }
 
             $authorDetails = $defaultAuthor;
             $author        = $post->getAuthor();
             if ($author instanceof AuthorEntity && $author->isValid()) {
-                $authorDetails = [
+                $authorDetails = array(
                     'name'  => $author->getName(),
                     'email' => $author->getEmail(),
                     'uri'   => $author->getUrl(),
-                ];
+                );
             }
 
             $entry = $feed->createEntry();

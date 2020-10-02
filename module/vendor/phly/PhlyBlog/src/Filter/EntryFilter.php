@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Filter;
 
 use PhlyCommon\Filter\Timezone as TimezoneValidator;
@@ -9,138 +8,138 @@ class EntryFilter extends InputFilter
 {
     public function __construct()
     {
-        $this->add([
+        $this->add(array(
             'name' => 'id',
-            'filters' => [
-                ['name' => 'string_trim']
-            ],
+            'filters' => array(
+                array('name' => 'string_trim')
+            ),
             'required' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'title',
-            'filters' => [
-                ['name' => 'string_trim'],
-                ['name' => 'strip_tags'],
-            ],
-            'validators' => [
-                [
+            'filters' => array(
+                array('name' => 'string_trim'),
+                array('name' => 'strip_tags'),
+            ),
+            'validators' => array(
+                array(
                     'name' => 'string_length',
-                    'options' => [
+                    'options' => array(
                         'min' => 3,
-                    ],
-                ]
-            ],
+                    ),
+                )
+            ),
             'required' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'body',
-            'filters' => [
-                ['name' => 'string_trim'],
-            ],
+            'filters' => array(
+                array('name' => 'string_trim'),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'extended',
-            'filters' => [
-                ['name' => 'string_trim'],
-            ],
+            'filters' => array(
+                array('name' => 'string_trim'),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'author',
-            'filters' => [
-                function ($value) {
+            'filters' => array(
+                function($value) {
                     if (is_array($value) || is_object($value)) {
                         return $value;
                     }
                     return trim($value);
                 },
-            ],
-            'validators' => [
+            ),
+            'validators' => array(
                 new AuthorIsValid(),
-            ],
+            ),
             'required'    => true,
             'allow_empty' => false,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'created',
-            'validators' => [
-                ['name' => 'int'],
-            ],
+            'validators' => array(
+                array('name' => 'int'),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'updated',
-            'validators' => [
-                ['name' => 'int'],
-            ],
+            'validators' => array(
+                array('name' => 'int'),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'is_draft',
-            'filters' => [
-                ['name' => 'boolean'],
-            ],
-            'validators' => [
-                [
+            'filters' => array(
+                array('name' => 'boolean'),
+            ),
+            'validators' => array(
+                array(
                     'name' => 'InArray',
-                    'options' => [
-                        'haystack' => [true, false],
+                    'options' => array(
+                        'haystack' => array(true, false),
                         'strict'   => true,
-                    ],
-                ],
-            ],
+                    ),
+                ),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'is_public',
-            'filters' => [
-                ['name' => 'boolean'],
-            ],
-            'validators' => [
-                [
+            'filters' => array(
+                array('name' => 'boolean'),
+            ),
+            'validators' => array(
+                array(
                     'name' => 'InArray',
-                    'options' => [
-                        'haystack' => [true, false],
+                    'options' => array(
+                        'haystack' => array(true, false),
                         'strict'   => true,
-                    ],
-                ],
-            ],
+                    ),
+                ),
+            ),
             'required'    => false,
             'allow_empty' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'timezone',
-            'filters' => [
-                ['name' => 'string_trim'],
-            ],
-            'validators' => [
+            'filters' => array(
+                array('name' => 'string_trim'),
+            ),
+            'validators' => array(
                 new TimezoneValidator(),
-            ],
+            ),
             'required' => true,
-        ]);
+        ));
 
-        $this->add([
+        $this->add(array(
             'name' => 'tags',
-            'validators' => [
+            'validators' => array(
                 new Tags(),
-            ],
+            ),
             'required' => false,
             'allow_empty' => true,
-        ]);
+        ));
     }
 }

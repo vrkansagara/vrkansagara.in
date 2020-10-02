@@ -1,5 +1,4 @@
 <?php
-
 namespace PhlyBlog\Compiler\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -25,14 +24,14 @@ class TestHelper
         $renderer->setResolver($resolver);
         $renderer->plugin('url')->setRouter($router);
 
-        $testCase->view = new View();
-        $testCase->view->addRenderingStrategy(function ($e) use ($renderer) {
+        $testCase->view = new View;
+        $testCase->view->addRenderingStrategy(function($e) use ($renderer) {
             return $renderer;
         });
 
         $testCase->options  = new CompilerOptions($options['blog']['options']);
         $testCase->file     = new Compiler\ResponseFile();
-        $testCase->writer   = new TestAsset\MockWriter();
+        $testCase->writer   = new TestAsset\MockWriter;
         $testCase->strategy = new Compiler\ResponseStrategy($testCase->writer, $testCase->file, $testCase->view);
         $testCase->compiler = new Compiler(new Compiler\PhpFileFilter(__DIR__ . '/../../_posts'));
         $json               = file_get_contents(__DIR__ . '/../../_posts/metadata.json');
