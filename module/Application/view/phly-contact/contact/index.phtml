@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row ">
+        <div class="col-md-8">
+
+            <?php $this->headTitle()->prepend('Contact'); ?>
+            <section class="contact">
+                <h2>Contact Me</h2>
+                <p>Feel free to contact me. Please note, however, that I likely will not respond to recruiters, nor to questions
+                    that could be asked in public forums.</p>
+
+                <?php if ($this->error) : ?>
+                    <p class="error">
+                        There were one or more isues with your submission. Please correct them as
+                        indicated below.
+                    </p>
+                <?php endif ?>
+
+                <?php
+                $form = $this->form;
+                $form->prepare();
+                $form->setAttribute('action', $this->url('contact/process'));
+                $form->setAttribute('method', 'post');
+
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="mb-3">
+                    <?php
+                    echo $this->formLabel($form->get('email'));
+                    echo $this->formInput($form->get('email'));
+                    echo $this->formElementErrors($form->get('email'));
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <?php
+                    echo $this->formLabel($form->get('subject'));
+                    echo $this->formInput($form->get('subject'));
+                    echo $this->formElementErrors($form->get('subject'));
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <?php
+                    echo $this->formLabel($form->get('body'));
+                    echo $this->formTextArea($form->get('body'));
+                    echo $this->formElementErrors($form->get('body'));
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <?php
+                    echo $this->formLabel($form->get('captcha'));
+                    echo $this->formCaptcha($form->get('captcha'));
+                    echo $this->formElementErrors($form->get('captcha'));
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <?php
+                    echo $this->formElement($form->get('csrf'));
+                    echo $this->formInput($form->get('Send'));
+                    echo $this->formElementErrors($form->get('Send'));
+                    ?>
+                </div>
+                <?php echo $this->form()->closeTag() ?>
+            </section>
+        </div>
+        <div class="col-md-4">
+          <about-component></about-component>
+        </div>
+    </div>
+</div>
