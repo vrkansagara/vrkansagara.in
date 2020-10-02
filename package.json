@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.0.0-alpha2",
+        "bootstrap-icons": "^1.0.0",
         "eslint": "^7.10.0",
         "eslint-loader": "^4.0.2",
         "eslint-plugin-vue": "^7.0.0",

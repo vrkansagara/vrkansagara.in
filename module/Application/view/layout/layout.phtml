@@ -32,7 +32,10 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<?=$this->url('home')?>">Vallabh Kansagara (VRKANSAGARA)</a>
+      <a class="navbar-brand" href="<?=$this->url('home')?>">
+        <img class='nav-logo' src="<?=$this->basePath('assets/images/favicon.ico')?>" alt="">
+        Vallabh Kansagara (VRKANSAGARA)
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -96,7 +99,12 @@
         <span class="text-muted">
             <div class="row">
                 <div class="col-md-2">
-                    <span><a target="_blank" href="https://imjo.in/3aZSG9">Buy me a coffee.</a></span>
+                    <span>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cup-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1h.5A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-.55a2.5 2.5 0 0 1-2.45 2h-8A2.5 2.5 0 0 1 1 12.5V2zm13 10h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H14v8z"/>
+</svg>
+                      <a target="_blank" href="https://imjo.in/3aZSG9">Buy me a coffee.</a>
+                    </span>
                 </div>
                 <div class="col-md-8">
                     <p>Unless otherwise noted © 2015 - <?= date('Y') ?>, Vallabh Kansagara ( 56 52 4B 41 4E 53 41 47 41 52 41  )</p>

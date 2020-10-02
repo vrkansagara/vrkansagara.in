@@ -17,7 +17,7 @@ try {
      * CSRF token as a header based on the value of the "XSRF" token cookie.
      */
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    // require('bootstrap');
+    require('bootstrap');
 } catch (e) {}
 
 
