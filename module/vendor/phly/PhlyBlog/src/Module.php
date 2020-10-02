@@ -66,6 +66,42 @@ class Module implements ConsoleUsageProviderInterface
         ));
     }
 
+    public static function prepareCompilerViewOther($view, $config, $services)
+    {
+        $renderer  = $services->get('BlogRenderer');
+        $view->addRenderingStrategy(function($e) use ($renderer) {
+            return $renderer;
+        }, 100);
+
+        self::$layout = $layout   = new ViewModel();
+        $layout->setTemplate('layout');
+        $view->addResponseStrategy(function($e) use ($layout, $renderer) {
+            $result = $e->getResult();
+            $layout->setVariable('content', $result);
+            $page   = $renderer->render($layout);
+            $e->setResult($page);
+
+            // Cleanup
+            $headTitle = $renderer->plugin('headtitle');
+            $headTitle->getContainer()->exchangeArray(array());
+            $headTitle->setAutoEscape(false)
+                ->setSeparator(' :: ')
+                ->append('phly, boy, phly');
+
+            $headLink = $renderer->plugin('headLink');
+            $headLink->getContainer()->exchangeArray(array());
+            $headLink(array(
+                'rel' => 'shortcut icon',
+                'type' => 'image/vnd.microsoft.icon',
+                'href' => '/images/Application/favicon.ico',
+            ));
+
+            $headScript = $renderer->plugin('headScript');
+            $headScript->getContainer()->exchangeArray(array());
+        }, 100);
+    }
+
+
     public function getControllerConfig()
     {
         return array('factories' => array(
