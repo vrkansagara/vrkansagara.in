@@ -38,8 +38,16 @@ return [
                 'options' => [
                     'route' => '/',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action' => 'index',
+//                        'controller' => Controller\IndexController::class,
+//                        'action' => 'index',
+
+                        'controller' => PageController::class,
+                        'template' => 'application/index/index',
+                        // optionally set a specific layout for this page
+//                        'layout'     => 'layout/some-layout',
+                        'do_not_cache' => !is_production_mode(),
+
+
                     ],
                 ],
             ],
@@ -72,7 +80,7 @@ return [
                         'template' => 'application/pages/about',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => true,
+                        'do_not_cache' => !is_production_mode(),
                     ],
                 ],
             ],
@@ -98,7 +106,7 @@ return [
                         'template' => 'application/pages/projects',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => true,
+                        'do_not_cache' => !is_production_mode(),
                     ],
                 ],
             ],
@@ -111,7 +119,7 @@ return [
                         'template' => 'application/pages/resume',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => true,
+                        'do_not_cache' => !is_production_mode(),
                     ],
                 ],
             ],
@@ -124,7 +132,7 @@ return [
                         'template' => 'application/pages/blog',
                         // optionally set a specific layout for this page
 //                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => true,
+                        'do_not_cache' => !is_production_mode(),
                     ],
                 ],
             ]

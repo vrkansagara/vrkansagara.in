@@ -32,7 +32,8 @@ class Module implements ConsoleUsageProviderInterface
 
     public function getServiceConfig()
     {
-        return ['factories' => [
+        return [
+            'factories' => [
             'blogrequest' => function ($services) {
                 return new Request();
             },

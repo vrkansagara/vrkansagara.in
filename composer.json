@@ -25,7 +25,8 @@
         "laminas/laminas-session": "^2.9",
         "laminas/laminas-i18n": "^2.10",
         "laminas/laminas-test": "^3.4",
-        "laminas/laminas-crypt": "^3.3"
+        "laminas/laminas-crypt": "^3.3",
+        "symfony/dotenv": "^5.1"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +34,10 @@
             "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
             "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/",
             "PhlyContact\\": "module/vendor/phly/PhlyContact/src/"
-        }
+        },
+        "files": [
+            "module/Application/src/Helpers/app.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
