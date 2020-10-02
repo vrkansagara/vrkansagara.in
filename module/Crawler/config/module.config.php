@@ -11,10 +11,10 @@ return [
         // Module specific configuration
     ],
     'laminas-cli' => [
-        'commands' => array(
-            'crawler:info' => InfoCommand::class,
-            'crawler:start' => StartCommand::class,
-        ),
+//        'commands' => array(
+//            'crawler:info' => InfoCommand::class,
+//            'crawler:start' => StartCommand::class,
+//        ),
     ],
     'service_manager' => [
         'factories' => [

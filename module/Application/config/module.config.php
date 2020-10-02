@@ -18,6 +18,7 @@ use Laminas\Mail\Transport\Smtp;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use PhlyBlog\Command\CompileCommand;
 use PhlyBlog\CompileController;
 use PhlySimplePage\ClearCacheCommand;
 use PhlySimplePage\PageCacheFactory;
@@ -27,8 +28,7 @@ return [
     'laminas-cli' => [
         'commands' => [
             'cache:clear' => ClearCacheCommand::class,
-            'blog:compile ' => CompileController::class,
-
+            'blog:compile ' => CompileCommand::class,
         ],
     ],
     'router' => [

@@ -1,4 +1,8 @@
 <?php
+
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use PhlyBlog\Command\CompileCommand;
+
 return array(
     'blog' => array(
         'options' => array(
@@ -41,25 +45,29 @@ return array(
 //        'view_callback'  => 'Application\Module::prepareCompilerView',
 //        'cloud_callback' => array('Application\Module', 'handleTagCloud'),
     ),
-        'view_manager' => array(
+    'view_manager' => array(
         'template_map' => array(
-            'phly-blog/entry-short'  => __DIR__ . '/../view/phly-blog/entry-short.phtml',
-            'phly-blog/entry'        => __DIR__ . '/../view/phly-blog/entry.phtml',
-            'phly-blog/list'         => __DIR__ . '/../view/phly-blog/list.phtml',
-            'phly-blog/paginator'    => __DIR__ . '/../view/phly-blog/paginator.phtml',
-            'phly-blog/tags'         => __DIR__ . '/../view/phly-blog/tags.phtml',
+            'phly-blog/entry-short' => __DIR__ . '/../view/phly-blog/entry-short.phtml',
+            'phly-blog/entry' => __DIR__ . '/../view/phly-blog/entry.phtml',
+            'phly-blog/list' => __DIR__ . '/../view/phly-blog/list.phtml',
+            'phly-blog/paginator' => __DIR__ . '/../view/phly-blog/paginator.phtml',
+            'phly-blog/tags' => __DIR__ . '/../view/phly-blog/tags.phtml',
 
 
-            'blog/entry-short'  => __DIR__ . '/../view/phly-blog/entry-short.phtml',
-            'blog/entry'        => __DIR__ . '/../view/phly-blog/entry.phtml',
-            'blog/list'         => __DIR__ . '/../view/phly-blog/list.phtml',
+            'blog/entry-short' => __DIR__ . '/../view/phly-blog/entry-short.phtml',
+            'blog/entry' => __DIR__ . '/../view/phly-blog/entry.phtml',
+            'blog/list' => __DIR__ . '/../view/phly-blog/list.phtml',
 
         ),
         'template_path_stack' => array(
             'phly-blog' => __DIR__ . '/../view',
         ),
     ),
-
+    'service_manager' => [
+        'factories' => [
+            CompileCommand::class => InvokableFactory::class,
+        ],
+    ],
     'router' => array(
         'routes' => array(
             'phly-blog' => array(
@@ -88,18 +96,18 @@ return array(
                         ),
                     ),
                     'entry' => array(
-                        'type'    => 'Regex',
+                        'type' => 'Regex',
                         'options' => array(
                             'regex' => '/(?<id>[^/]+)\.html',
                             'spec' => '/%id%.html',
                         ),
                     ),
                     'author' => array(
-                        'type'    => 'Regex',
+                        'type' => 'Regex',
                         'options' => array(
                             'regex' => '/author/(?<author>[^/]+)',
                             'defaults' => array(
-                                'action'     => 'author',
+                                'action' => 'author',
                             ),
                             'spec' => '/author/%author%',
                         ),
@@ -112,13 +120,13 @@ return array(
                                 ),
                             ),
                             'feed-atom' => array(
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => array(
                                     'route' => '-atom.xml',
                                 ),
                             ),
                             'feed-rss' => array(
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => array(
                                     'route' => '-rss.xml',
                                 ),
@@ -126,11 +134,11 @@ return array(
                         ),
                     ),
                     'tag' => array(
-                        'type'    => 'Regex',
+                        'type' => 'Regex',
                         'options' => array(
                             'regex' => '/tag/(?<tag>[^/.-]+)',
                             'defaults' => array(
-                                'action'     => 'tag',
+                                'action' => 'tag',
                             ),
                             'spec' => '/tag/%tag%',
                         ),
@@ -143,13 +151,13 @@ return array(
                                 ),
                             ),
                             'feed-atom' => array(
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => array(
                                     'route' => '-atom.xml',
                                 ),
                             ),
                             'feed-rss' => array(
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => array(
                                     'route' => '-rss.xml',
                                 ),
@@ -157,41 +165,41 @@ return array(
                         ),
                     ),
                     'year' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
                             'route' => '/year/:year.html',
                             'constraints' => array(
                                 'year' => '\d{4}',
                             ),
                             'defaults' => array(
-                                'action'     => 'year',
+                                'action' => 'year',
                             ),
                         ),
                     ),
                     'month' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
                             'route' => '/month/:year/:month.html',
                             'constraints' => array(
-                                'year'  => '\d{4}',
+                                'year' => '\d{4}',
                                 'month' => '\d{2}',
                             ),
                             'defaults' => array(
-                                'action'     => 'month',
+                                'action' => 'month',
                             ),
                         ),
                     ),
                     'day' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
                             'route' => '/day/:year/:month/:day.html',
                             'constraints' => array(
-                                'year'  => '\d{4}',
+                                'year' => '\d{4}',
                                 'month' => '\d{2}',
-                                'day'   => '\d{2}',
+                                'day' => '\d{2}',
                             ),
                             'defaults' => array(
-                                'action'     => 'day',
+                                'action' => 'day',
                             ),
                         ),
                     ),
@@ -200,18 +208,19 @@ return array(
         ),
     ),
 
-    'console' => array(
-        'router' => array('routes' => array(
-            'phly-blog-compile' => array(
-                'type'    => 'Simple',
-                'options' => array(
-                    'route' => 'blog compile [--all|-a] [--entries|-e] [--archive|-c] [--year|-y] [--month|-m] [--day|-d] [--tag|-t] [--author|-r]',
-                    'defaults' => array(
-                        'controller' => 'PhlyBlog\CompileController',
-                        'action'     => 'compile',
-                    ),
-                ),
-            ),
-        )),
-    ),
+//    'console' => array(
+//        'router' => array(
+//            'routes' => array(
+//                'phly-blog-compile' => array(
+//                    'type' => 'Simple',
+//                    'options' => array(
+//                        'route' => 'blog compile [--all|-a] [--entries|-e] [--archive|-c] [--year|-y] [--month|-m] [--day|-d] [--tag|-t] [--author|-r]',
+//                        'defaults' => array(
+//                            'controller' => 'PhlyBlog\CompileController',
+//                            'action' => 'compile',
+//                        ),
+//                    ),
+//                ),
+//            )),
+//    ),
 );

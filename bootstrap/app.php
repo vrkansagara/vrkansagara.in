@@ -36,4 +36,4 @@ $dotenv->load(__DIR__.'/../.env');
 
 date_default_timezone_set(env('APP_TIMEZONE'));
 
-return ;
+

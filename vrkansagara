@@ -1,16 +1,62 @@
 #!/usr/bin/env php
 <?php
-declare(strict_types=1);
 
-use Laminas\Cli\ApplicationFactory;
-use Laminas\Cli\ContainerResolver;#!/usr/bin/env php
+/**
+ * @ref:- https://discourse.laminas.dev/t/how-to-launch-a-basic-php-cli/1473/8
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
+ */
 
+use Crawler\Command\InfoCommand;
+use Laminas\Mvc\Application;
+use Laminas\Stdlib\ArrayUtils;
+use PhlyBlog\Command\CompileCommand;
+use PhlySimplePage\ClearCacheCommand;
+use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use Symfony\Component\Console\Application as ConsoleApplication;
+chdir(dirname(__DIR__));
 
 // Composer autoloading
 include __DIR__ . '/vendor/autoload.php';
-
 $app = require_once __DIR__ . '/bootstrap/app.php';
 
+/**
+ * Self-called anonymous function that creates its own scope and keep the global namespace clean.
+ */
+(function () {
 
-$applicationFactory = new ApplicationFactory();
-exit($applicationFactory(ContainerResolver::resolve())->run());
+// Retrieve configuration
+    $appConfig = require __DIR__ . '/config/application.config.php';
+    if (file_exists(__DIR__ . '/config/development.config.php')) {
+        $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/config/development.config.php');
+    }
+
+// Run the application!
+    /** @var Application $application */
+    $application = Application::init($appConfig);
+    $container   = $application->getServiceManager();
+
+
+    $commandLoader = new ContainerCommandLoader($container, [
+        // Map command:name => service name here.
+//    'cache:clear' => ClearCacheCommand::class,
+//    'blog:compile ' => CompileCommand::class,
+    'crawler:info ' => InfoCommand::class,
+    'phly:blog:compile' => CompileCommand::class,
+    ]);
+
+    $consoleApplication = new ConsoleApplication();
+    $consoleApplication->setCommandLoader($commandLoader);
+    $consoleApplication->setDefaultCommand('list');
+    $consoleApplication->run();
+
+//Laminas\ServiceManager\Exception\ServiceNotCreatedException: Service with name "PhlySimplePage\PageCache" could not be created. Reason: Cache directory '/home/vallabh/git/vrkansagara/data/cache' not found or not a directory in /home/vallabh/git/vrkansagara/vrkansagara.in/vendor/laminas/laminas-servicemanager/src/ServiceManager.php on line 772
+
+
+// Grab a service, and do something with it:
+// $container->get(\My\ServiceName::class)->doSomething();
+
+//use Laminas\Cli\ApplicationFactory;
+//$applicationFactory = new ApplicationFactory();
+//exit($applicationFactory(ContainerResolver::resolve())->run());
+})();

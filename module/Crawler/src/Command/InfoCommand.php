@@ -7,20 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class InfoCommand extends Command
 {
-
-    // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:create-user';
-
     protected function configure()
     {
-        $this
-            // the short description shown while running "php bin/console list"
-            ->setDescription('Module information')
-
-            // the full command description shown when running the command with
-            // the "--help" option
-            ->setHelp('This command will provide more details about how this command is working.')
-        ;
+        $this->setName('crawler:info ');
+        $this->setDescription('Module information');
+        $this->setHelp('This command will provide more details about how this command is working.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
