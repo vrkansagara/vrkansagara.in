@@ -25,6 +25,7 @@ return [
     'Laminas\DeveloperTools',
 
 
+    'Crawler',
     'PhlyContact',
     'PhlyBlog',
     'PhlySimplePage',

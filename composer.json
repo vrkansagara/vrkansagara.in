@@ -26,14 +26,16 @@
         "laminas/laminas-i18n": "^2.10",
         "laminas/laminas-test": "^3.4",
         "laminas/laminas-crypt": "^3.3",
-        "symfony/dotenv": "^5.1"
+        "symfony/dotenv": "^5.1",
+        "symfony/dom-crawler": "^5.1"
     },
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
             "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
             "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/",
-            "PhlyContact\\": "module/vendor/phly/PhlyContact/src/"
+            "PhlyContact\\": "module/vendor/phly/PhlyContact/src/",
+            "Crawler\\": "module/Crawler/src"
         },
         "files": [
             "module/Application/src/Helpers/app.php"
