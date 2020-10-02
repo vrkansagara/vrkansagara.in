@@ -39,7 +39,7 @@ $app = require_once __DIR__ . '/bootstrap/app.php';
 
     $commandLoader = new ContainerCommandLoader($container, [
         // Map command:name => service name here.
-//    'cache:clear' => ClearCacheCommand::class,
+    'cache:clear' => ClearCacheCommand::class,
 //    'blog:compile ' => CompileCommand::class,
     'crawler:info ' => InfoCommand::class,
     'phly:blog:compile' => CompileCommand::class,
