@@ -16,6 +16,10 @@ class CompileCommandFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new CompileCommand();
+        $controller = new CompileCommand();
+
+        $config = $container->get('config')['blog'];
+        $controller->setConfig($config);
+        return $controller;
     }
 }

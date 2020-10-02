@@ -42,25 +42,40 @@
             <a class="nav-link" aria-current="page" href="<?=$this->url('home')?>">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('blog')?>">Blog</a>
+            <a class="nav-link" href="<?=$this->url('page/blog')?>">Blog</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="projectsLink" data-toggle="dropdown" aria-expanded="false">Projects</a>
+            <ul class="dropdown-menu" aria-labelledby="projectsLink">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="<?=$this->url('page/projects')?>">See all projects</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('projects')?>">Projects</a>
+            <a class="nav-link" href="<?=$this->url('page/resume')?>">Resume</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('resume')?>">Resume</a>
+            <a class="nav-link" href="<?=$this->url('page/contact')?>">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('contact')?>">Contact</a>
+            <a class="nav-link" href="<?=$this->url('page/about')?>">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('about')?>">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('contact')?>">Login</a>
+            <a class="nav-link" href="<?=$this->url('page/contact')?>">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="projectsLink" data-toggle="dropdown" aria-expanded="false">Utility</a>
+            <ul class="dropdown-menu" aria-labelledby="projectsLink">
+              <li><a class="dropdown-item" href="<?=$this->url('page/projects')?>">MochiKit</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="<?=$this->url('page/projects')?>">See all projects</a></li>
+            </ul>
           </li>
         </ul>
         <form  method="get" action="<?=$this->url('search')?>"  class="d-flex">

@@ -2,6 +2,9 @@
 
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use PhlyBlog\Command\CompileCommand;
+use PhlyBlog\Compiler\ResponseStrategy;
+use PhlyBlog\Factory\CompileCommandFactory;
+use PhlyBlog\Factory\ResponseStrategyFactory;
 
 return array(
     'blog' => array(
@@ -65,7 +68,7 @@ return array(
     ),
     'service_manager' => [
         'factories' => [
-            CompileCommand::class => InvokableFactory::class,
+            CompileCommand::class => CompileCommandFactory::class,
         ],
     ],
     'router' => array(

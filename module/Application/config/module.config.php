@@ -40,11 +40,8 @@ return [
                     'defaults' => [
 //                        'controller' => Controller\IndexController::class,
 //                        'action' => 'index',
-
                         'controller' => PageController::class,
                         'template' => 'application/index/index',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
                         'do_not_cache' => !is_production_mode(),
 
 
@@ -71,71 +68,7 @@ return [
                     ],
                 ],
             ],
-            'about' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/about',
-                    'defaults' => [
-                        'controller' => PageController::class,
-                        'template' => 'application/pages/about',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => !is_production_mode(),
-                    ],
-                ],
-            ],
-//            'contact' => [
-//                'type' => Literal::class,
-//                'options' => [
-//                    'route' => '/contact',
-//                    'defaults' => [
-//                        'controller' => PageController::class,
-//                        'template' => 'application/pages/contact',
-//                        // optionally set a specific layout for this page
-////                        'layout'     => 'layout/some-layout',
-//                        'do_not_cache' => true,
-//                    ],
-//                ],
-//            ],
-            'projects' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/projects',
-                    'defaults' => [
-                        'controller' => PageController::class,
-                        'template' => 'application/pages/projects',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => !is_production_mode(),
-                    ],
-                ],
-            ],
-            'resume' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/resume',
-                    'defaults' => [
-                        'controller' => PageController::class,
-                        'template' => 'application/pages/resume',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => !is_production_mode(),
-                    ],
-                ],
-            ],
-            'blog' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/blog',
-                    'defaults' => [
-                        'controller' => PageController::class,
-                        'template' => 'application/pages/blog',
-                        // optionally set a specific layout for this page
-//                        'layout'     => 'layout/some-layout',
-                        'do_not_cache' => !is_production_mode(),
-                    ],
-                ],
-            ]
+//////
 
         ],
     ],
@@ -160,7 +93,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404' => __DIR__ . '/../view/error/404.phtml',
             'error/index' => __DIR__ . '/../view/error/index.phtml',
-            'phly-contact/contact/index'     => __DIR__ . '/../view/phly-contact/contact/index.phtml',
+            'phly-contact/contact/index' => __DIR__ . '/../view/phly-contact/contact/index.phtml',
             'phly-contact/contact/thank-you' => __DIR__ . '/../view/phly-contact/contact/thank-you.phtml',
         ],
         'template_path_stack' => [

@@ -8,11 +8,11 @@ class ResponseStrategy
     protected $file;
     protected $writer;
 
-    public function __construct(WriterInterface $writer, ResponseFile $file, View $view)
+    public function __construct(WriterInterface $writer, ResponseFile $file)
     {
         $this->writer = $writer;
         $this->file   = $file;
-
+        $view = new View();
         $view->addResponseStrategy(array($this, 'onResponse'));
     }
 
