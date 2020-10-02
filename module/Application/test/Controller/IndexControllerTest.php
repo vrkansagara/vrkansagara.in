@@ -45,7 +45,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     public function testIndexActionViewModelTemplateRenderedWithinLayout()
     {
         $this->dispatch('/', 'GET');
-        $this->assertQuery('/html/body/main/div/div/div[2]/h1');
+        $this->assertQuery('/html/body/header/nav/div/a');
         $this->assertResponseStatusCode(200);
     }
 

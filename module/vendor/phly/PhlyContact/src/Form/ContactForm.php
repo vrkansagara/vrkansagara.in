@@ -34,16 +34,16 @@ class ContactForm extends Form
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Email:',
-                'label_attributes' => array(
+                'label_attributes' => [
                     'class' => 'form-label',
-                )
+                ]
             ],
-            'attributes' => array(
+            'attributes' => [
                 'type' => 'email',
                 'id' => 'email',
                 'class' => 'form-control',
                 'required' => 'required',
-            ),
+            ],
         ]);
 
         $this->add([
@@ -51,16 +51,16 @@ class ContactForm extends Form
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Subject:',
-                'label_attributes' => array(
+                'label_attributes' => [
                     'class' => 'form-label',
-                ),
+                ],
             ],
-            'attributes' => array(
+            'attributes' => [
                 'type' => 'subject',
                 'id' => 'subject',
                 'class' => 'form-control',
                 'required' => 'required',
-            ),
+            ],
         ]);
 
 
@@ -69,25 +69,25 @@ class ContactForm extends Form
             'type' => Element\Textarea::class,
             'options' => [
                 'label' => 'Your message:',
-                'label_attributes' => array(
+                'label_attributes' => [
                     'class' => 'form-label',
-                ),
+                ],
             ],
-            'attributes' => array(
+            'attributes' => [
                 'type' => 'textarea',
                 'id' => 'body',
                 'class' => 'form-control',
                 'required' => 'required',
-            ),
+            ],
         ]);
 
         $captcha = new Element\Captcha('captcha');
         $captcha->setCaptcha($this->captchaAdapter);
         $captcha->setOptions([
             'label' => 'Please verify you are human.',
-            'label_attributes' => array(
+            'label_attributes' => [
                 'class' => 'form-label',
-            ),
+            ],
         ]);
         $captcha->setAttributes([
             'type' => 'text',

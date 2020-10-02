@@ -65,7 +65,7 @@ class Module
     public function onDispatch(MvcEvent $event)
     {
 
-        $whiteSpaceRules = array(
+        $whiteSpaceRules = [
             '/(\s)+/s' => '\\1',// shorten multiple whitespace sequences
             "#>\s+<#" => ">\n<",  // Strip excess whitespace using new line
             "#\n\s+<#" => "\n<",// strip excess whitespace using new line
@@ -81,14 +81,14 @@ class Module
              * /x',
              */
             //            '/\s+(?![^<>]*>)/x' => '', //Remove all whitespaces except content between html tags. //MOST DANGEROUS
-        );
-        $commentRules = array(
+        ];
+        $commentRules = [
             "/<!--.*?-->/ms" => '',// Remove all html comment.,
-        );
-        $replaceWords = array(
+        ];
+        $replaceWords = [
             //OldWord will be replaced by the NewWord
             //              '/\bOldWord\b/i' =>'NewWord' // OldWord <-> NewWord DO NOT REMOVE THIS LINE. {REFERENCE LINE}
-        );
+        ];
         $allRules = array_merge(
             $replaceWords,
             $commentRules,
@@ -96,7 +96,9 @@ class Module
         );
         $buffer = $this->compressJscript($buffer);
         $buffer = preg_replace(
-            array_keys($allRules), array_values($allRules), $buffer
+            array_keys($allRules),
+            array_values($allRules),
+            $buffer
         );
 
         // Get controller to which the HTTP request was dispatched.
@@ -165,7 +167,7 @@ class Module
     public function formatSizeUnits($size)
     {
         $base = log($size) / log(1024);
-        $suffix = array('', 'KB', 'MB', 'GB', 'TB');
+        $suffix = ['', 'KB', 'MB', 'GB', 'TB'];
         $f_base = floor($base);
 
         return round(pow(1024, $base - floor($base)), 2) . $suffix[$f_base];
@@ -174,7 +176,7 @@ class Module
     public function compressJscript($buffer)
     {
         // JavaScript compressor by John Elliot <jj5@jj5.net>
-        $replace = array(
+        $replace = [
             '#\'([^\n\']*?)/\*([^\n\']*)\'#' => "'\1/'+\'\'+'*\2'",
             // remove comments from ' strings
             '#\"([^\n\"]*?)/\*([^\n\"]*)\"#' => '"\1/"+\'\'+"*\2"',
@@ -194,9 +196,9 @@ class Module
             // (important given later replacements)
             '#/([\'"])\+\'\'\+([\'"])\*#' => "/*"
             // restore comments in strings
-        );
+        ];
         $script = preg_replace(array_keys($replace), $replace, $buffer);
-        $replace = array(
+        $replace = [
             "&&\n" => "&&",
             "||\n" => "||",
             "(\n" => "(",
@@ -214,10 +216,9 @@ class Module
             "\n)" => ")",
             "\n}" => "}",
             "\n\n" => "\n",
-        );
+        ];
         $script = str_replace(array_keys($replace), $replace, $script);
 
         return trim($script);
-
     }
 }

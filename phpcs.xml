@@ -2,6 +2,12 @@
 <ruleset name="Laminas Coding Standard">
     <description>Laminas Coding Standard</description>
 
+    <arg name="basepath" value="." />
+    <arg name="cache" value=".phpcs-cache" />
+    <arg name="colors" />
+    <arg name="extensions" value="php" />
+    <arg name="parallel" value="80" />
+
     <!-- display progress -->
     <arg value="p"/>
     <arg name="colors"/>
