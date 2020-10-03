@@ -69,7 +69,7 @@
             "php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'"
         ],
         "serve": [
-            "sudo rm -rf data/cache/static-page-data/* composer.lock",
+            "sudo rm -rf data/cache/static-page-data/*",
             "/usr/bin/php7.3 composer.phar install -vv",
             "/usr/bin/php7.3 composer.phar dump-autoload",
             "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",

@@ -34,6 +34,10 @@ if (php_sapi_name() === 'cli-server') {
 $dotenv = new Symfony\Component\Dotenv\Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
+Sentry\init([
+    'dsn' => env('SENTRY_API_KEY'),
+    'traces_sample_rate' => 1.0 # be sure to lower this in production to prevent quota issues
+]);
 date_default_timezone_set(env('APP_TIMEZONE'));
 
 
