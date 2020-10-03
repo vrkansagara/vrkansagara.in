@@ -1,6 +1,5 @@
 <?php
 
-
 use Crawler\Command\Factory\InfoCommandFactory;
 use Crawler\Command\InfoCommand;
 use Crawler\Command\StartCommand;

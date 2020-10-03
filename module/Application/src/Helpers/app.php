@@ -1,13 +1,13 @@
 <?php
 
-if (!function_exists('env')) {
+if (! function_exists('env')) {
     function env($key, $default = null)
     {
         return ($_SERVER[$key]) ? $_SERVER[$key] : $default;
     }
 }
 
-if (!function_exists('is_production_mode')) {
+if (! function_exists('is_production_mode')) {
 
     /**
      *Display all errors when APPLICATION_ENV is development.
@@ -30,4 +30,3 @@ if (!function_exists('is_production_mode')) {
         return $isProductionModeEnable;
     }
 }
-

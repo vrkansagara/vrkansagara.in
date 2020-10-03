@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler\Listener;
 
 use InvalidArgumentException;
@@ -13,7 +14,7 @@ class Archives extends AbstractList
     public function onCompile(Event $e)
     {
         $entry = $e->getEntry();
-        if (!$entry->isPublic()) {
+        if (! $entry->isPublic()) {
             return;
         }
 
@@ -50,7 +51,7 @@ class Archives extends AbstractList
         $this->iterateAndRenderList(
             $this->archives,
             $filenameTemplate,
-            array(),
+            [],
             $title,
             $urlTemplate,
             false,
@@ -61,7 +62,7 @@ class Archives extends AbstractList
     public function createArchiveFeed($type, $title = '')
     {
         $type = strtolower($type);
-        if (!in_array($type, array('atom', 'rss'))) {
+        if (! in_array($type, ['atom', 'rss'])) {
             throw new InvalidArgumentException('Feed type must be "atom" or "rss"');
         }
 

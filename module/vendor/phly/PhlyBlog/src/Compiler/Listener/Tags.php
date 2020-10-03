@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler\Listener;
 
 use InvalidArgumentException;
@@ -10,17 +11,17 @@ use Laminas\Tag\Cloud as TagCloud;
 class Tags extends AbstractList
 {
     protected $tagCloud;
-    protected $tags      = array();
+    protected $tags      = [];
 
     public function onCompile(Event $e)
     {
         $entry = $e->getEntry();
-        if (!$entry->isPublic()) {
+        if (! $entry->isPublic()) {
             return;
         }
 
         foreach ($entry->getTags() as $tag) {
-            if (!isset($this->tags[$tag])) {
+            if (! isset($this->tags[$tag])) {
                 $this->tags[$tag] = new SortedEntries();
             }
             $this->tags[$tag]->insert($entry, $entry->getCreated());
@@ -50,15 +51,15 @@ class Tags extends AbstractList
         $tagUrlTemplate = $this->options->getTagCloudUrlTemplate();
         $cloudOptions   = $this->options->getTagCloudOptions();
 
-        $tags = array();
+        $tags = [];
         foreach ($this->tags as $tag => $list) {
-            $tags[$tag] = array(
+            $tags[$tag] = [
                 'title'   => $tag,
                 'weight'  => count($list),
-                'params'  => array(
+                'params'  => [
                     'url' => sprintf($tagUrlTemplate, str_replace(' ', '+', $tag)),
-                ),
-            );
+                ],
+            ];
         }
         $options['tags'] = $tags;
 
@@ -83,7 +84,7 @@ class Tags extends AbstractList
             $this->iterateAndRenderList(
                 $list,
                 $filenameTemplate,
-                array($tag),
+                [$tag],
                 sprintf($titleTemplate, $tag),
                 $urlTemplate,
                 $tag,
@@ -95,7 +96,7 @@ class Tags extends AbstractList
     public function createTagFeeds($type)
     {
         $type = strtolower($type);
-        if (!in_array($type, array('atom', 'rss'))) {
+        if (! in_array($type, ['atom', 'rss'])) {
             throw new InvalidArgumentException('Feed type must be "atom" or "rss"');
         }
 

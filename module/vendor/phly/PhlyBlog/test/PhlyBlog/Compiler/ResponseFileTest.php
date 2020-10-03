@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler;
 
 use PHPUnit_Framework_TestCase as TestCase;

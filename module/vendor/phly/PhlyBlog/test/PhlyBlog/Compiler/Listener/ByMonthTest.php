@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler\Listener;
 
 use DateTime;
@@ -13,11 +14,11 @@ class ByMonthTest extends TestCase
         $this->byMonth = new ByMonth($this->view, $this->writer, $this->file, $this->options);
         $this->compiler->getEventManager()->attach($this->byMonth);
 
-        $this->months = array();
+        $this->months = [];
         $self = $this;
-        $this->compiler->getEventManager()->attach('compile', function($e) use ($self) {
+        $this->compiler->getEventManager()->attach('compile', function ($e) use ($self) {
             $entry = $e->getEntry();
-            if ($entry->isDraft() || !$entry->isPublic()) {
+            if ($entry->isDraft() || ! $entry->isPublic()) {
                 return;
             }
 

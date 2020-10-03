@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PhlyBlog\Factory;
-
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;

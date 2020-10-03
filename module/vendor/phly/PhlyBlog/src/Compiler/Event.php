@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler;
 
 use DateTime;

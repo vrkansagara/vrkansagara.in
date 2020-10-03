@@ -1,4 +1,5 @@
 <?php
+
 use PhlyBlog\EntryEntity;
 
 $entry  = new EntryEntity();
@@ -11,7 +12,7 @@ $entry->setPublic(true);
 $entry->setCreated(new DateTime('2008:02:14 07:03:03'));
 $entry->setUpdated(new DateTime('2008:02:14 07:03:03'));
 $entry->setTimezone('America/Chicago');
-$entry->setTags(array (
+$entry->setTags([
   0 => 'holiday',
   1 => 'personal',
   2 => 'programming',
@@ -21,17 +22,16 @@ $entry->setTags(array (
   6 => 'draft',
   7 => 'conferences',
   8 => 'php',
-));
+]);
 
-$body =<<<'EOT'
+$body = <<<'EOT'
 This is it!
 EOT;
 $entry->setBody($body);
 
-$extended =<<<'EOT'
+$extended = <<<'EOT'
 This is the extended portion of the entry.
 EOT;
 $entry->setExtended($extended);
 
 return $entry;
-

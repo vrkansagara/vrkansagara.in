@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -45,7 +46,7 @@ class AuthorsTest extends TestCase
 
         $filenameTemplate    = $this->options->getAuthorFeedFilenameTemplate();
         $authorTitleTemplate = $this->options->getAuthorFeedTitleTemplate();
-        foreach (array('atom', 'rss') as $type) {
+        foreach (['atom', 'rss'] as $type) {
             foreach ($this->expected['authors'] as $author) {
                 $filename = sprintf($filenameTemplate, $author['id'], $type);
                 $this->assertArrayHasKey($filename, $this->writer->files);

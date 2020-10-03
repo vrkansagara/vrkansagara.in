@@ -3,6 +3,7 @@
 namespace PhlyBlog;
 
 use PHPUnit_Framework_TestCase as TestCase,
+
     DateTime;
 
 class EntryEntityTest extends TestCase
@@ -83,35 +84,35 @@ class EntryEntityTest extends TestCase
 
     public function testNoTagsByDefault()
     {
-        $this->assertEquals(array(), $this->entry->getTags());
+        $this->assertEquals([], $this->entry->getTags());
     }
 
     public function testCanAddManyTagsAtOnce()
     {
-        $this->entry->setTags(array('foo', 'bar', 'baz'));
-        $this->assertEquals(array('foo', 'bar', 'baz'), $this->entry->getTags());
+        $this->entry->setTags(['foo', 'bar', 'baz']);
+        $this->assertEquals(['foo', 'bar', 'baz'], $this->entry->getTags());
     }
 
     public function testCallingSetTagsMultipleTimesOverwrites()
     {
-        $this->entry->setTags(array('foo', 'bar', 'baz'));
-        $this->entry->setTags(array('oof', 'rab', 'zab'));
-        $this->assertEquals(array('oof', 'rab', 'zab'), $this->entry->getTags());
+        $this->entry->setTags(['foo', 'bar', 'baz']);
+        $this->entry->setTags(['oof', 'rab', 'zab']);
+        $this->assertEquals(['oof', 'rab', 'zab'], $this->entry->getTags());
     }
 
     public function testCanAddTagsOneAtATime()
     {
-        $this->entry->setTags(array('foo'))
+        $this->entry->setTags(['foo'])
                     ->addTag('baz')
                     ->addTag('bar');
-        $this->assertEquals(array('foo', 'baz', 'bar'), $this->entry->getTags());
+        $this->assertEquals(['foo', 'baz', 'bar'], $this->entry->getTags());
     }
 
     public function testCanRemoveSingleTags()
     {
-        $this->entry->setTags(array('foo', 'bar', 'baz'));
+        $this->entry->setTags(['foo', 'bar', 'baz']);
         $this->entry->removeTag('bar');
-        $this->assertEquals(array('foo', 'baz'), array_values($this->entry->getTags()));
+        $this->assertEquals(['foo', 'baz'], array_values($this->entry->getTags()));
     }
 
     public function testCanPopulateFromArray()
@@ -126,14 +127,14 @@ class EntryEntityTest extends TestCase
         $this->assertEquals(strtotime('today'), $this->entry->getCreated());
         $this->assertEquals(strtotime('today'), $this->entry->getUpdated());
         $this->assertEquals('America/Chicago', $this->entry->getTimezone());
-        $this->assertEquals(array('foo', 'bar'), $this->entry->getTags());
+        $this->assertEquals(['foo', 'bar'], $this->entry->getTags());
     }
 
     public function testCanSerializeToArray()
     {
         $this->loadFromArray();
         $values = $this->entry->toArray();
-        $expected = array(
+        $expected = [
             'id'        => 'foo-bar',
             'title'     => 'Foo Bar',
             'body'      => 'Foo bar. Baz. Bat bedat.',
@@ -143,8 +144,8 @@ class EntryEntityTest extends TestCase
             'created'   => strtotime('today'),
             'updated'   => strtotime('today'),
             'timezone'  => 'America/Chicago',
-            'tags'      => array('foo', 'bar'),
-        );
+            'tags'      => ['foo', 'bar'],
+        ];
         foreach ($expected as $key => $value) {
             $this->assertEquals($value, $values[$key]);
         }
@@ -172,7 +173,7 @@ class EntryEntityTest extends TestCase
         $this->assertEquals(strtotime('today'), $this->entry->created);
         $this->assertEquals(strtotime('today'), $this->entry->updated);
         $this->assertEquals('America/Chicago', $this->entry->timezone);
-        $this->assertEquals(array('foo', 'bar'), $this->entry->tags);
+        $this->assertEquals(['foo', 'bar'], $this->entry->tags);
     }
 
     public function testValidationFailsInitially()
@@ -224,7 +225,7 @@ class EntryEntityTest extends TestCase
 
     public function loadFromArray()
     {
-        $this->entry->fromArray(array(
+        $this->entry->fromArray([
             'id'        => 'foo-bar',
             'title'     => 'Foo Bar',
             'body'      => 'Foo bar. Baz. Bat bedat.',
@@ -234,23 +235,23 @@ class EntryEntityTest extends TestCase
             'created'   => strtotime('today'),
             'updated'   => strtotime('today'),
             'timezone'  => 'America/Chicago',
-            'tags'      => array('foo', 'bar'),
-            'comments'  => array(
-                array(
+            'tags'      => ['foo', 'bar'],
+            'comments'  => [
+                [
                     'created'  => strtotime('today'),
                     'timezone' => 'America/Chicago',
                     'title'    => 'comment',
                     'author'   => 'somebody',
                     'type'     => 'comment',
-                ),
-                array(
+                ],
+                [
                     'created'  => strtotime('today'),
                     'timezone' => 'America/Chicago',
                     'title'    => 'trackback',
                     'type'     => 'trackback',
                     'url'      => 'http://example.com/foo',
-                ),
-            )
-        ));
+                ],
+            ]
+        ]);
     }
 }

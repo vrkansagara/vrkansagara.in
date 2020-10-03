@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -19,14 +20,14 @@ class FileWriterTest extends TestCase
 
     public function cleanup()
     {
-        if (!is_dir($this->basePath)) {
+        if (! is_dir($this->basePath)) {
             return;
         }
-        
+
         $this->rrmdir($this->basePath);
     }
 
-    public function rrmdir($dir) 
+    public function rrmdir($dir)
     {
         foreach (glob($dir . '/*') as $file) {
             if (is_dir($file)) {

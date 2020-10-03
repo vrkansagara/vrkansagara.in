@@ -14,7 +14,7 @@ return [
                     'defaults' => [
                         'controller' => PageController::class,
 //                        'template' => 'page/resume',
-                        'do_not_cache' => !is_production_mode(),
+                        'do_not_cache' => ! is_production_mode(),
                     ]
                 ],
                 'may_terminate' => true,
@@ -26,7 +26,7 @@ return [
                             'defaults' => [
                                 'controller' => PageController::class,
                                 'template' => 'page/blog',
-                                'do_not_cache' => !is_production_mode(),
+                                'do_not_cache' => ! is_production_mode(),
                             ],
                         ],
                     ],
@@ -37,7 +37,7 @@ return [
                             'defaults' => [
                                 'controller' => PageController::class,
                                 'template' => 'page/mochikit',
-                                'do_not_cache' => !is_production_mode(),
+                                'do_not_cache' => ! is_production_mode(),
                             ],
                         ],
                     ],
@@ -48,7 +48,7 @@ return [
                             'defaults' => [
                                 'controller' => PageController::class,
                                 'template' => 'page/about',
-                                'do_not_cache' => !is_production_mode(),
+                                'do_not_cache' => ! is_production_mode(),
                             ],
                         ],
                     ],
@@ -59,7 +59,7 @@ return [
                             'defaults' => [
                                 'controller' => PageController::class,
                                 'template' => 'page/projects',
-                                'do_not_cache' => !is_production_mode(),
+                                'do_not_cache' => ! is_production_mode(),
                             ],
                         ],
                     ],
@@ -70,7 +70,7 @@ return [
                             'defaults' => [
                                 'controller' => PageController::class,
                                 'template' => 'page/resume',
-                                'do_not_cache' => !is_production_mode(),
+                                'do_not_cache' => ! is_production_mode(),
                             ],
                         ],
                     ],

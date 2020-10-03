@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CompileCommand extends Command
 {
-    public $config = array();
+    public $config = [];
     public $view;
 
     protected $compiler;
@@ -26,7 +26,7 @@ class CompileCommand extends Command
     protected $responseFile;
     protected $writer;
 
-    protected $defaultOptions = array(
+    protected $defaultOptions = [
         'all' => true,
         'entries' => false,
         'archive' => false,
@@ -35,7 +35,7 @@ class CompileCommand extends Command
         'day' => false,
         'tag' => false,
         'author' => false,
-    );
+    ];
 
     protected function configure()
     {
@@ -86,7 +86,8 @@ class CompileCommand extends Command
         $compiler->compile();
 
         // Create tag cloud
-        if ($this->config['cloud_callback']
+        if (
+            $this->config['cloud_callback']
             && is_callable($this->config['cloud_callback'])
         ) {
             $callable = $this->config['cloud_callback'];
@@ -111,7 +112,7 @@ class CompileCommand extends Command
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
-        if (!is_array($config)) {
+        if (! is_array($config)) {
             throw new RuntimeException(sprintf(
                 'Expected array or Traversable PhlyBlog configuration; received %s',
                 (is_object($config) ? get_class($config) : gettype($config))
@@ -166,7 +167,8 @@ class CompileCommand extends Command
 
         $options = array_merge($this->defaultOptions, $options = []);
 
-        if ($options['entries']
+        if (
+            $options['entries']
             || $options['archive']
             || $options['year']
             || $options['month']
@@ -238,7 +240,7 @@ class CompileCommand extends Command
 
     public function attachListeners(array $flags, $tags)
     {
-        $listeners = array();
+        $listeners = [];
         $view = $this->view;
         $compiler = $this->getCompiler();
         $writer = $this->getWriter();

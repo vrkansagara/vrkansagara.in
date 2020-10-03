@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -46,7 +47,7 @@ class TagsTest extends TestCase
 
         $filenameTemplate = $this->options->getTagFeedFilenameTemplate();
         $tagTitleTemplate = $this->options->getTagFeedTitleTemplate();
-        foreach (array('atom', 'rss') as $type) {
+        foreach (['atom', 'rss'] as $type) {
             foreach ($this->expected['tags'] as $tag) {
                 $filename = sprintf($filenameTemplate, $tag, $type);
                 $this->assertArrayHasKey($filename, $this->writer->files);
@@ -67,4 +68,3 @@ class TagsTest extends TestCase
         }
     }
 }
-

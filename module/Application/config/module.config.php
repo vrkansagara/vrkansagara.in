@@ -42,7 +42,7 @@ return [
 //                        'action' => 'index',
                         'controller' => PageController::class,
                         'template' => 'application/index/index',
-                        'do_not_cache' => !is_production_mode(),
+                        'do_not_cache' => ! is_production_mode(),
 
 
                     ],

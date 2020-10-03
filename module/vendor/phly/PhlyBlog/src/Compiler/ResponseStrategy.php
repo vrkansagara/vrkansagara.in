@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog\Compiler;
 
 use Laminas\View\View;
@@ -13,7 +14,7 @@ class ResponseStrategy
         $this->writer = $writer;
         $this->file   = $file;
         $view = new View();
-        $view->addResponseStrategy(array($this, 'onResponse'));
+        $view->addResponseStrategy([$this, 'onResponse']);
     }
 
     public function onResponse($e)

@@ -1,15 +1,16 @@
 <?php
+
 use PhlyBlog\AuthorEntity;
 use PhlyBlog\EntryEntity;
 
 $entry  = new EntryEntity();
 $author = new AuthorEntity();
-$author->fromArray(array (
+$author->fromArray([
   'id' => 'crazyhorse',
   'name' => 'Crazy Horse',
   'email' => 'crazyhorse@siouxnation.org',
   'url' => 'http://crazyhorse.siouxnation.org',
-));
+]);
 
 $entry->setId('4f8706cf6233e-post-name');
 $entry->setTitle('4f8706cf6233e Post');
@@ -19,7 +20,7 @@ $entry->setPublic(true);
 $entry->setCreated(new DateTime('2006:07:03 17:05:05'));
 $entry->setUpdated(new DateTime('2006:07:03 17:05:05'));
 $entry->setTimezone('America/Chicago');
-$entry->setTags(array (
+$entry->setTags([
   0 => 'holiday',
   1 => 'programming',
   2 => 'thoughts',
@@ -29,14 +30,14 @@ $entry->setTags(array (
   6 => 'draft',
   7 => 'conferences',
   8 => 'php',
-));
+]);
 
-$body =<<<'EOT'
+$body = <<<'EOT'
 This is it!
 EOT;
 $entry->setBody($body);
 
-$extended =<<<'EOT'
+$extended = <<<'EOT'
 This is the extended portion of the entry.
 EOT;
 $entry->setExtended($extended);

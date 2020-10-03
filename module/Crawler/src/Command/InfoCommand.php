@@ -1,4 +1,5 @@
 <?php
+
 namespace  Crawler\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -19,7 +20,7 @@ class InfoCommand extends Command
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
             'Crawling information',
-            '============',
+            '=====',
             '',
         ]);
         // this method must return an integer number with the "exit status code"

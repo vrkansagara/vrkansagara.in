@@ -1,4 +1,5 @@
 <?php
+
 namespace PhlyBlog;
 
 use RuntimeException;
@@ -11,7 +12,7 @@ use Laminas\View\View;
 
 class CompileController extends AbstractActionController
 {
-    public $config = array();
+    public $config = [];
     public $view;
 
     protected $compiler;
@@ -20,7 +21,7 @@ class CompileController extends AbstractActionController
     protected $responseFile;
     protected $writer;
 
-    protected $defaultOptions = array(
+    protected $defaultOptions = [
         'all'     => true,
         'entries' => false,
         'archive' => false,
@@ -29,14 +30,14 @@ class CompileController extends AbstractActionController
         'day'     => false,
         'tag'     => false,
         'author'  => false,
-    );
+    ];
 
     public function setConfig($config)
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
-        if (!is_array($config)) {
+        if (! is_array($config)) {
             throw new RuntimeException(sprintf(
                 'Expected array or Traversable PhlyBlog configuration; received %s',
                 (is_object($config) ? get_class($config) : gettype($config))
@@ -68,20 +69,21 @@ class CompileController extends AbstractActionController
     public function getFlags()
     {
         $options = $this->params()->fromRoute();
-        $test = array(
-            array('long' => 'all',     'short' => 'a'),
-            array('long' => 'entries', 'short' => 'e'),
-            array('long' => 'archive', 'short' => 'c'),
-            array('long' => 'year',    'short' => 'y'),
-            array('long' => 'month',   'short' => 'm'),
-            array('long' => 'day',     'short' => 'd'),
-            array('long' => 'tag',     'short' => 't'),
-            array('long' => 'author',  'short' => 'r'),
-        );
+        $test = [
+            ['long' => 'all',     'short' => 'a'],
+            ['long' => 'entries', 'short' => 'e'],
+            ['long' => 'archive', 'short' => 'c'],
+            ['long' => 'year',    'short' => 'y'],
+            ['long' => 'month',   'short' => 'm'],
+            ['long' => 'day',     'short' => 'd'],
+            ['long' => 'tag',     'short' => 't'],
+            ['long' => 'author',  'short' => 'r'],
+        ];
         foreach ($test as $spec) {
             $long  = $spec['long'];
             $short = $spec['short'];
-            if ((!isset($options[$long]) || !$options[$long]) 
+            if (
+                (! isset($options[$long]) || ! $options[$long])
                 && (isset($options[$short]) && $options[$short])
             ) {
                 $options[$long] = true;
@@ -90,7 +92,8 @@ class CompileController extends AbstractActionController
         }
 
         $options = array_merge($this->defaultOptions, $options);
-        if ($options['entries']
+        if (
+            $options['entries']
             || $options['archive']
             || $options['year']
             || $options['month']
@@ -162,7 +165,7 @@ class CompileController extends AbstractActionController
 
     public function attachListeners(array $flags, $tags)
     {
-        $listeners    = array();
+        $listeners    = [];
         $view         = $this->view;
         $compiler     = $this->getCompiler();
         $writer       = $this->getWriter();
@@ -215,7 +218,7 @@ class CompileController extends AbstractActionController
     public function compileAction()
     {
         $request = $this->getRequest();
-        if (!$request instanceof ConsoleRequest) {
+        if (! $request instanceof ConsoleRequest) {
             throw new RuntimeException(sprintf(
                 '%s may only be called from the console',
                 __METHOD__
@@ -234,7 +237,8 @@ class CompileController extends AbstractActionController
         $this->reportDone($width, 29);
 
         // Create tag cloud
-        if ($this->config['cloud_callback'] 
+        if (
+            $this->config['cloud_callback']
             && is_callable($this->config['cloud_callback'])
         ) {
             $callable = $this->config['cloud_callback'];
