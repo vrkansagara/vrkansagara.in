@@ -9,6 +9,7 @@ use PhlyBlog\Compiler\FileWriter;
 use PhlyBlog\Compiler\PhpFileFilter;
 use PhlyBlog\Compiler\ResponseFile;
 use PhlyBlog\Compiler\ResponseStrategy;
+use PhlyBlog\CompilerOptions;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -112,7 +113,7 @@ class CompileCommand extends Command
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
-        if (! is_array($config)) {
+        if (!is_array($config)) {
             throw new RuntimeException(sprintf(
                 'Expected array or Traversable PhlyBlog configuration; received %s',
                 (is_object($config) ? get_class($config) : gettype($config))
@@ -128,9 +129,9 @@ class CompileCommand extends Command
 
     public function setEventManager(EventManagerInterface $events)
     {
-        parent::setEventManager($events);
-        $events->attach('dispatch', function ($e) {
-            $controller = $e->getTarget();
+//        parent::setEventManager($events);
+        $events->attach('dispatch', function ($events) {
+            $controller = $events->getTarget();
             $config = $controller->config;
             if ($config['view_callback'] && is_callable($config['view_callback'])) {
                 $callable = $config['view_callback'];
@@ -212,6 +213,7 @@ class CompileCommand extends Command
         }
 
         $this->compilerOptions = new CompilerOptions($this->config['options']);
+
         return $this->compilerOptions;
     }
 
@@ -233,8 +235,13 @@ class CompileCommand extends Command
 
     public function attachTags()
     {
-        $tags = new Compiler\Listener\Tags($this->view, $this->getWriter(), $this->getResponseFile(), $this->getCompilerOptions());
-        $this->getCompiler()->getEventManager()->attach($tags);
+        $tags = new Compiler\Listener\Tags(
+            $this->view,
+            $this->getWriter(),
+            $this->getResponseFile(),
+            $this->getCompilerOptions()
+        );
+        $this->getCompiler()->getEventManager()->attach($tags,$this);
         return $tags;
     }
 

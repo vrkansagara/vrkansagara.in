@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Controller\Factory\IndexControllerFactory;
 use Laminas\Cache\Storage\Adapter\Filesystem;
 use Laminas\Captcha\Dumb;
 use Laminas\DevelopmentMode\Command;
@@ -38,10 +39,10 @@ return [
                 'options' => [
                     'route' => '/',
                     'defaults' => [
-//                        'controller' => Controller\IndexController::class,
-//                        'action' => 'index',
-                        'controller' => PageController::class,
-                        'template' => 'application/index/index',
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'index',
+//                        'controller' => PageController::class,
+//                        'template' => 'application/index/index',
                         'do_not_cache' => ! is_production_mode(),
 
 
@@ -72,7 +73,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => IndexControllerFactory::class,
         ],
     ],
     'service_manager' => [

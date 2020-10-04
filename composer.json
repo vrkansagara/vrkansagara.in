@@ -36,7 +36,8 @@
             "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
             "PhlyBlog\\": "module/vendor/phly/PhlyBlog/src/",
             "PhlyContact\\": "module/vendor/phly/PhlyContact/src/",
-            "Crawler\\": "module/Crawler/src"
+            "Crawler\\": "module/Crawler/src",
+            "ZfcUser\\": "module/vendor/ZF-Commons/ZfcUser/src"
         },
         "files": [
             "module/Application/src/Helpers/app.php"
@@ -47,7 +48,8 @@
             "ApplicationTest\\": "module/Application/test/",
             "PhlySimplePageTest\\": "module/vendor/phly/PhlySimplePage/test/",
             "PhlyBlogTest\\": "module/vendor/phly/PhlyBlog/test/",
-            "PhlyContactTest\\": "module/vendor/phly/PhlyContact/test/"
+            "PhlyContactTest\\": "module/vendor/phly/PhlyContact/test/",
+            "ZfcUser\\": "module/vendor/ZF-Commons/ZfcUser/tests"
         }
     },
     "scripts": {
@@ -92,6 +94,7 @@
         "laminas/laminas-developer-tools": "^2.0",
         "squizlabs/php_codesniffer": "^3.5",
         "laminas/laminas-code": "^3.4",
-        "laminas/laminas-cli": "^0.1.4"
+        "laminas/laminas-cli": "^0.1.4",
+        "roave/security-advisories": "dev-latest"
     }
 }

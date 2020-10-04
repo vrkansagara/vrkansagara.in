@@ -119,6 +119,11 @@ return [
             CompileCommand::class => CompileCommandFactory::class,
         ],
     ],
+    'controllers' => [
+        'factories' => [
+            CompileCommand::class => CompileCommandFactory::class,
+        ],
+    ],
     'router' => [
         'routes' => [
             'phly-blog' => [
