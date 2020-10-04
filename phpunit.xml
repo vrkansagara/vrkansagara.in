@@ -13,17 +13,21 @@
     </php>
     <testsuites>
         <testsuite name="Laminas MVC Skeleton Test Suite">
-<!--            <directory>./module/Application/test</directory>-->
+            <directory>./module/Application/test</directory>
 <!--            <directory>./module/vendor/phly/PhlyBlog/test</directory>-->
 <!--            <directory>./module/vendor/phly/PhlySimplePage/test</directory>-->
 <!--            <directory>./module/vendor/ZF-Commons/ZfcBase/test</directory>-->
-            <directory>./module/vendor/ZF-Commons/ZfcUser/tests</directory>
+<!--            <directory>./module/vendor/ZF-Commons/ZfcUser/tests</directory>-->
         </testsuite>
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./module/*/src</directory>
-            <directory suffix=".php">./module/vendor/*/src</directory>
+<!--            <directory suffix=".php">./module/vendor/*/src</directory>-->
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-text" target="php://stdout"/>
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
+    </logging>
 </phpunit>
