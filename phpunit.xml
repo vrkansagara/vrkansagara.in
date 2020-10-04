@@ -13,11 +13,11 @@
     </php>
     <testsuites>
         <testsuite name="Laminas MVC Skeleton Test Suite">
-            <directory>./module/Application/test</directory>
+<!--            <directory>./module/Application/test</directory>-->
 <!--            <directory>./module/vendor/phly/PhlyBlog/test</directory>-->
 <!--            <directory>./module/vendor/phly/PhlySimplePage/test</directory>-->
 <!--            <directory>./module/vendor/ZF-Commons/ZfcBase/test</directory>-->
-            <directory>./module/vendor/ZF-Commons/ZfcUser/test</directory>
+            <directory>./module/vendor/ZF-Commons/ZfcUser/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
