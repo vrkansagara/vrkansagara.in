@@ -2,9 +2,9 @@
 
 namespace ZfcBase\Db\Adapter;
 
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Platform;
-use Zend\Db\ResultSet;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Platform;
+use Laminas\Db\ResultSet;
 
 class MasterSlaveAdapter extends Adapter implements MasterSlaveAdapterInterface
 {

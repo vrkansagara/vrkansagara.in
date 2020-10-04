@@ -4,7 +4,6 @@ config/development.config.php
 data/cache/*
 data/mail/*
 !data/cache/.gitkeep
-phpunit.xml
 composer.lock
 .phpunit.result.cache
 .idea/

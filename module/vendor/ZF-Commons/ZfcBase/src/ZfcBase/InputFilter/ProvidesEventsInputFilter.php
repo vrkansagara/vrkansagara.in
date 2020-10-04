@@ -2,9 +2,9 @@
 
 namespace ZfcBase\InputFilter;
 
-use Zend\InputFilter\InputFilter;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventManager;
+use Laminas\InputFilter\InputFilter;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManager;
 
 class ProvidesEventsInputFilter extends InputFilter
 {

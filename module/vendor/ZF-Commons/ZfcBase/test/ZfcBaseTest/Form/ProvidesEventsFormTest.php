@@ -3,7 +3,7 @@ namespace ZfcBaseTest\Form;
 
 use PHPUnit_Framework_TestCase;
 use ZfcBase\Form\ProvidesEventsForm;
-use Zend\EventManager\EventManager;
+use Laminas\EventManager\EventManager;
 
 class ProvidesEventsFormTest extends PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class ProvidesEventsFormTest extends PHPUnit_Framework_TestCase
     public function testGetEventManagerSetsDefaultIdentifiers()
     {
         $em = $this->form->getEventManager();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $em);
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $em);
         $this->assertContains('ZfcBase\Form\ProvidesEventsForm', $em->getIdentifiers());
     }
 

@@ -12,6 +12,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\ZendFrameworkBridge',
     'Laminas\I18n',
     'Laminas\Session',
     'Laminas\Form',

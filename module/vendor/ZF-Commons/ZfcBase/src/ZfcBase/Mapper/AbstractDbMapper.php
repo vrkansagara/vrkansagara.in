@@ -2,14 +2,14 @@
 
 namespace ZfcBase\Mapper;
 
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Driver\ResultInterface;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\TableIdentifier;
-use Zend\Stdlib\Hydrator\HydratorInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\TableIdentifier;
+use Laminas\Stdlib\Hydrator\HydratorInterface;
+use Laminas\Stdlib\Hydrator\ClassMethods;
 use ZfcBase\EventManager\EventProvider;
 use ZfcBase\Db\Adapter\MasterSlaveAdapterInterface;
 

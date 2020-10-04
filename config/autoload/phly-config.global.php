@@ -29,7 +29,7 @@ return [
         ],
     ],
     'phly_contact' => [
-        // This is simply configuration to pass to Zend\Captcha\Factory
+        // This is simply configuration to pass to Laminas\Captcha\Factory
         'captcha' => [
             'class' => Dumb::class,
             'options' => [

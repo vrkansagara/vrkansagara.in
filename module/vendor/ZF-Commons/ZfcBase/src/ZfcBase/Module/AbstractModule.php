@@ -3,13 +3,13 @@
 namespace ZfcBase\Module;
 
 use InvalidArgumentException;
-use Zend\Config\Config;
-use Zend\EventManager\EventInterface as Event;
-use Zend\EventManager\StaticEventManager;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
-use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\ApplicationInterface;
+use Laminas\Config\Config;
+use Laminas\EventManager\EventInterface as Event;
+use Laminas\EventManager\StaticEventManager;
+use Laminas\ModuleManager\Feature\AutoloaderProviderInterface;
+use Laminas\ModuleManager\Feature\LocatorRegisteredInterface;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\ApplicationInterface;
 
 abstract class AbstractModule implements
     AutoloaderProviderInterface,
@@ -24,7 +24,7 @@ abstract class AbstractModule implements
     {
         $sharedManager = $moduleManager->getEventManager()->getSharedManager();
         $instance = $this;//TODO this will no be needed in PHP 5.4
-        $sharedManager->attach('Zend\Mvc\Application', 'bootstrap', function($e) use ($instance, $moduleManager) {
+        $sharedManager->attach('Laminas\Mvc\Application', 'bootstrap', function($e) use ($instance, $moduleManager) {
             $app = $e->getParam('application');
             $instance->setMergedConfig($app->getConfig());
             $instance->bootstrap($moduleManager, $app);
@@ -38,10 +38,10 @@ abstract class AbstractModule implements
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            'Laminas\Loader\ClassMapAutoloader' => array(
                 $this->getDir() . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     $this->getNamespace() => $this->getDir() . '/src/' . $this->getNamespace(),
                 ),
@@ -119,7 +119,7 @@ abstract class AbstractModule implements
     private function getOptionFromArray($options, array $option, $default, $origOption)
     {
         $currOption = array_shift($option);
-        //we need this fix to accept both array/ZendConfig -- there is know problem with offsetExists() in PHP
+        //we need this fix to accept both array/LaminasConfig -- there is know problem with offsetExists() in PHP
         //if(array_key_exists($currOption, $options)) {
         if(array_key_exists($currOption, $options) || ($options instanceof Config && $options->offsetExists($currOption))) {
             if(count($option) >= 1) {

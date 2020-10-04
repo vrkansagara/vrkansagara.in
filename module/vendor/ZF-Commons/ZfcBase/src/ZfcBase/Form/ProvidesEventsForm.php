@@ -3,9 +3,9 @@
 namespace ZfcBase\Form;
 
 use Traversable;
-use Zend\Form\Form;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventManager;
+use Laminas\Form\Form;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManager;
 
 class ProvidesEventsForm extends Form
 {

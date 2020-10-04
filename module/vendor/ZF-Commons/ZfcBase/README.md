@@ -23,9 +23,9 @@ Simply clone this project into your `./vendor/` directory and enable it in your
 Provided Classes
 ----------------
 
-* `ZfcBase\Mapper\AbstractDbMapper` - An abstract mapper for Zend\Db that makes
+* `ZfcBase\Mapper\AbstractDbMapper` - An abstract mapper for Laminas\Db that makes
   using hydrators and custom entities very simple.
-* `ZfcBase\Form\ProvidesEventsForm` - Extends Zend\Form and provides the
+* `ZfcBase\Form\ProvidesEventsForm` - Extends Laminas\Form and provides the
   functionality of `ZfcBase\EventManager\EventProvider` (basically it's a
   crutch since we can't use traits yet).
 * `ZfcBase\EventManager\EventProvider` - Abstract class that gives extending

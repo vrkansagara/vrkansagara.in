@@ -13,6 +13,7 @@ namespace ApplicationTest\Controller;
 use Application\Controller\IndexController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Symfony\Component\Dotenv\Dotenv;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
@@ -28,7 +29,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             include __DIR__ . '/../../../../config/application.config.php',
             $configOverrides
         ));
-
         parent::setUp();
     }
 

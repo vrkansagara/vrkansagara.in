@@ -2,7 +2,7 @@
 namespace ZfcBaseTest\Mapper;
 
 use PHPUnit_Framework_TestCase;
-use Zend\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Adapter;
 use ZfcBase\Db\Adapter\MasterSlaveAdapter;
 use ZfcBaseTest\Mapper\TestAsset\TestMapper;
 
@@ -10,12 +10,12 @@ class AbstractDbMapperTest extends PHPUnit_Framework_TestCase
 {
     public function setup()
     {
-        $this->mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $this->mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+        $this->mockDriver = $this->getMock('Laminas\Db\Adapter\Driver\DriverInterface');
+        $this->mockConnection = $this->getMock('Laminas\Db\Adapter\Driver\ConnectionInterface');
         $this->mockDriver->expects($this->any())->method('checkEnvironment')->will($this->returnValue(true));
         $this->mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($this->mockConnection));
-        $this->mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
-        $this->mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $this->mockPlatform = $this->getMock('Laminas\Db\Adapter\Platform\PlatformInterface');
+        $this->mockStatement = $this->getMock('Laminas\Db\Adapter\Driver\StatementInterface');
         $this->mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($this->mockStatement));
 
         $this->adapter = new Adapter($this->mockDriver, $this->mockPlatform);
