@@ -10,7 +10,7 @@ before_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   -
 script:
-  - ./vendor/bin/phpunit --bootstrap=tests/bootstrap.php
+  - ./vendor/bin/phpunit
 
 after_script:
   - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
