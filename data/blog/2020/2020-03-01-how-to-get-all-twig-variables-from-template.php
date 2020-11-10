@@ -20,7 +20,7 @@ $entry->setPublic(true);
 $entry->setCreated(new DateTime('2020:03:11 23:59:00'));
 $entry->setUpdated(new DateTime('2020:03:11 23:59:00'));
 $entry->setTimezone('Asia/Kolkata');
-$entry->setTags(['google', 'smtp']);
+$entry->setTags(['symfony', 'php']);
 
 $body = <<<'EOT'
 This is how I use to debug any twig template and it's variables.
