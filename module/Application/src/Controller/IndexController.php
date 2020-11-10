@@ -25,8 +25,7 @@ class IndexController extends AbstractActionController
     public function __construct(
         $applicationConfig,
         SearchTable $searchTable
-    )
-    {
+    ) {
         $this->config = $applicationConfig;
         $this->searchTable = $searchTable;
     }
