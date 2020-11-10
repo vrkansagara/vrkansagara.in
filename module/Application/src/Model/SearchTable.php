@@ -52,7 +52,7 @@ class SearchTable
         $id = (int)$id;
         $rowset = $this->tableGateway->select(['id' => $id]);
         $row = $rowset->current();
-        if (!$row) {
+        if (! $row) {
             throw new RuntimeException(sprintf(
                 'Could not find row with identifier %d',
                 $id
@@ -88,9 +88,10 @@ class SearchTable
         }
     }
 
-    public function insertSearchData($content, $tags, $url, $type)
+    public function insertSearchData($title, $content, $tags, $url, $type)
     {
         $data = [
+            'name' => $title,
             'content' => strip_tags($content),
             'tags' => implode(',', $tags),
             'url' => $url,

@@ -5,9 +5,10 @@ create table search
 	id integer
 		constraint search_pk
 			primary key autoincrement,
+	name TEXT not null,
 	content TEXT not null,
+	url TEXT not null,
 	tags TEXT not null,
-	url TEXT,
 	type TEXT
 );
 

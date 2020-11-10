@@ -17,15 +17,17 @@ class Search implements InputFilterAwareInterface
     public $content;
     public $tags;
     public $url;
+    public $name;
 
     public $inputFilter;
 
     public function exchangeArray(array $data)
     {
-        $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->content = !empty($data['content']) ? $data['content'] : null;
-        $this->tags = !empty($data['tags']) ? $data['tags'] : null;
-        $this->url = !empty($data['url']) ? $data['url'] : null;
+        $this->id = ! empty($data['id']) ? $data['id'] : null;
+        $this->content = ! empty($data['content']) ? $data['content'] : null;
+        $this->tags = ! empty($data['tags']) ? $data['tags'] : null;
+        $this->url = ! empty($data['url']) ? $data['url'] : null;
+        $this->name = ! empty($data['name']) ? $data['name'] : null;
     }
 
     public function getArrayCopy()
@@ -35,6 +37,7 @@ class Search implements InputFilterAwareInterface
             'content' => $this->content,
             'tags' => $this->tags,
             'url' => $this->url,
+            'name' => $this->name,
         ];
     }
     public function setInputFilter(InputFilterInterface $inputFilter)
