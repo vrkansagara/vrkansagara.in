@@ -20,7 +20,7 @@ $entry->setPublic(true);
 $entry->setCreated(new DateTime('2020:02:28 23:59:00'));
 $entry->setUpdated(new DateTime('2020:02:28 23:59:00'));
 $entry->setTimezone('Asia/Kolkata');
-$entry->setTags(['google', 'smtp']);
+$entry->setTags(['principles', 'php']);
 
 $body = <<<'EOT'
 While I have started my journey to the `Programming world`, I come accross many principles which I am list down here 

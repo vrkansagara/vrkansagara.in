@@ -39,9 +39,9 @@ I selected Others (custom name) and clicked generate
 
 Went to my env file in laravel and edited this
 
-MAIL_USERNAME=talentscoutphil@gmail.com
+MAIL_USERNAME=vrkansagara@gmail.com
 
-MAIL_PASSWORD=thepasswordgenerated
+MAIL_PASSWORD=THE_GENERATED_PASSWORD
 
 Restarted my apache server and boom! It works again. This was my solution. I created this to at least make 
 other people not go wasting their time researching for a possible answer.
