@@ -12,7 +12,6 @@ namespace Application;
 
 use Application\Controller\Factory\IndexControllerFactory;
 use Application\Controller\IndexController;
-use Application\Delegators\IndexControllerDelegatorFactory;
 use Application\Model\Factory\SearchTableFactory;
 use Application\Model\SearchTable;
 use Laminas\Router\Http\Literal;
@@ -85,9 +84,9 @@ return [
             IndexController::class => IndexControllerFactory::class,
         ],
         'delegators' => [
-            IndexController::class => [
-                IndexControllerDelegatorFactory::class,
-            ],
+//            IndexController::class => [
+//                IndexControllerDelegatorFactory::class,
+//            ],
         ],
     ],
     'service_manager' => [

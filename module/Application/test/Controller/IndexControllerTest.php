@@ -10,11 +10,8 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Controller;
 
-use Application\Controller\IndexController;
-use Application\Delegators\IndexControllerDelegator;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use Symfony\Component\Dotenv\Dotenv;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
@@ -39,7 +36,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
         $this->assertControllerName('Application\Controller\IndexController'); // as specified in router's controller name alias
-        $this->assertControllerClass('IndexControllerDelegator');
+//        $this->assertControllerClass('IndexControllerDelegator');
+        $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('home');
     }
 

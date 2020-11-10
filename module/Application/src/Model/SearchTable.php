@@ -86,7 +86,6 @@ class SearchTable
             // Remove all records.
             $this->tableGateway->delete(['type' => (string)$type]);
         }
-
     }
 
     public function insertSearchData($content, $tags, $url, $type)
@@ -99,6 +98,4 @@ class SearchTable
         ];
         $this->tableGateway->insert($data);
     }
-
-
 }
