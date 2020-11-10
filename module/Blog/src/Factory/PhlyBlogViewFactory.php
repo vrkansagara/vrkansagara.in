@@ -2,6 +2,7 @@
 
 namespace Blog\Factory;
 
+use Application\Module;
 use Application\View\Helper\Disqus;
 use Laminas\Config\Config;
 use Laminas\Mvc\Application;
@@ -54,9 +55,12 @@ class PhlyBlogViewFactory
         $layout->setTemplate($config['view_manager']['layout'] ?? 'layout/layout');
 
         // Render content within the layout
-        $view->addResponseStrategy(function (ViewEvent $event) use ($renderer, $layout) {
-            $layout->setVariable('content', $event->getResult());
-            $event->setResult($renderer->render($layout));
+        $view->addResponseStrategy(function (ViewEvent $viewEvent) use ($renderer, $layout) {
+            $layout->setVariable('content', $viewEvent->getResult());
+            $response = str_replace('Execution time:', '', $renderer->render($layout));
+            // Compress code.
+            $response = Module::compress($response);
+            $viewEvent->setResult($response);
         }, 100);
 
         return $view;

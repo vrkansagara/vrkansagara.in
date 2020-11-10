@@ -20,7 +20,7 @@ $entry->setPublic(true);
 $entry->setCreated(new DateTime('2019:12:08 16:33:48'));
 $entry->setUpdated(new DateTime('2019:12:08 16:35:03'));
 $entry->setTimezone('Asia/Kolkata');
-$entry->setTags(['google', 'smtp']);
+$entry->setTags(['laravel', 'php']);
 
 $body = <<<'EOT'
 ## For Nested Set pattern , I would suggest to follow this links
