@@ -2,7 +2,7 @@
 
 git stash
 git checkout .
-git reset clean -fd
+git clean -fd
 git reset --hard HEAD
 git pull --rebase
 
