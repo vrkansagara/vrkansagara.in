@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AlbumTest\Model;
 
-use Album\Model\AlbumTable;
-use Album\Model\Album;
+use Album\Model\Search;
+use Album\Model\SearchTable;
+use Laminas\Db\ResultSet\ResultSetInterface;
+use Laminas\Db\TableGateway\TableGatewayInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use RuntimeException;
-use Laminas\Db\ResultSet\ResultSetInterface;
-use Laminas\Db\TableGateway\TableGatewayInterface;
 
 class AlbumTableTest extends TestCase
 {
@@ -19,7 +19,7 @@ class AlbumTableTest extends TestCase
     protected function setUp(): void
     {
         $this->tableGateway = $this->prophesize(TableGatewayInterface::class);
-        $this->albumTable = new AlbumTable($this->tableGateway->reveal());
+        $this->albumTable = new SearchTable($this->tableGateway->reveal());
     }
 
     public function testFetchAllReturnsAllAlbums()
@@ -40,9 +40,9 @@ class AlbumTableTest extends TestCase
     {
         $albumData = [
             'artist' => 'The Military Wives',
-            'title'  => 'In My Dreams'
+            'title' => 'In My Dreams'
         ];
-        $album = new Album();
+        $album = new Search();
         $album->exchangeArray($albumData);
 
         $this->tableGateway->insert($albumData)->shouldBeCalled();
@@ -52,11 +52,11 @@ class AlbumTableTest extends TestCase
     public function testSaveAlbumWillUpdateExistingAlbumsIfTheyAlreadyHaveAnId()
     {
         $albumData = [
-            'id'     => 123,
+            'id' => 123,
             'artist' => 'The Military Wives',
-            'title'  => 'In My Dreams',
+            'title' => 'In My Dreams',
         ];
-        $album = new Album();
+        $album = new Search();
         $album->exchangeArray($albumData);
 
         $resultSet = $this->prophesize(ResultSetInterface::class);

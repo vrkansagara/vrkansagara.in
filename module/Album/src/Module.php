@@ -10,13 +10,11 @@ declare(strict_types=1);
 
 namespace Album;
 
-use Album\Model\Album;
+use Album\Model\Search;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
-use Laminas\ModuleManager\ModuleManager;
-use Laminas\Mvc\MvcEvent;
 
 class Module implements ConfigProviderInterface
 {
@@ -29,14 +27,14 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\AlbumTable::class => function ($container) {
+                Model\SearchTable::class => function ($container) {
                     $tableGateway = $container->get(Model\AlbumTableGateway::class);
-                    return new Model\AlbumTable($tableGateway);
+                    return new Model\SearchTable($tableGateway);
                 },
                 Model\AlbumTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Album());
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Search());
                     return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
@@ -49,12 +47,12 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\AlbumController::class => function ($container) {
                     return new Controller\AlbumController(
-                        $container->get(Model\AlbumTable::class)
+                        $container->get(Model\SearchTable::class)
                     );
                 },
                 Api\AlbumController::class => function ($container) {
                     return new Api\AlbumController(
-                        $container->get(Model\AlbumTable::class)
+                        $container->get(Model\SearchTable::class)
                     );
                 },
             ],

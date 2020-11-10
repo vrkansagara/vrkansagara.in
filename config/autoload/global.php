@@ -15,9 +15,12 @@
 return [
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=vrkansagara.in;host=localhost',
+        'dsn' => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
+
+//        'driver' => 'Pdo',
+//        'dsn' => 'mysql:dbname=vrkansagara.in;host=localhost',
         'driver_options' => [
-            1002 => 'SET NAMES \'UTF8\'',
+            1002 => "SET NAMES 'UTF8'",
         ],
         'username' => 'YOUR SECRET USER NAME',
         'password' => 'YOUR SECRET PASSWORD',

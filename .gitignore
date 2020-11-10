@@ -13,3 +13,4 @@ yarn-error.log
 .phpcs-cache
 .env
 public/blog
+data/vrkansagara.sql

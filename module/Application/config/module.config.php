@@ -13,6 +13,8 @@ namespace Application;
 use Application\Controller\Factory\IndexControllerFactory;
 use Application\Controller\IndexController;
 use Application\Delegators\IndexControllerDelegatorFactory;
+use Application\Model\Factory\SearchTableFactory;
+use Application\Model\SearchTable;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -90,6 +92,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
+            SearchTable::class => SearchTableFactory::class,
             'PhlySimplePage\PageCache' => PageCacheFactory::class,
         ],
     ],

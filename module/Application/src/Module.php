@@ -32,6 +32,12 @@ class Module implements
         return include __DIR__ . '/../config/module.config.php';
     }
 
+    public function getServiceConfig()
+    {
+        return [
+        ];
+    }
+
     // The "init" method is called on application start-up and
     // allows to register an event listener.
     public function init(ModuleManager $manager)
@@ -242,14 +248,6 @@ class Module implements
 
         return trim($script);
     }
-
-    public function getServiceConfig()
-    {
-        return [
-            'initializers' => [
-            ]];
-    }
-
 
     public function rotateXPoweredByHeader(MvcEvent $e)
     {

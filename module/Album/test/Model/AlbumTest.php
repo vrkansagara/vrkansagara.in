@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlbumTest\Model;
 
-use Album\Model\Album;
+use Album\Model\Search;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -14,7 +14,7 @@ class AlbumTest extends TestCase
 
     public function testInitialAlbumValuesAreNull()
     {
-        $album = new Album();
+        $album = new Search();
 
         $this->assertNull($album->artist, '"artist" should be null by default');
         $this->assertNull($album->id, '"id" should be null by default');
@@ -23,7 +23,7 @@ class AlbumTest extends TestCase
 
     public function testExchangeArraySetsPropertiesCorrectly()
     {
-        $album = new Album();
+        $album = new Search();
         $data = [
             'artist' => 'some artist',
             'id' => 123,
@@ -53,7 +53,7 @@ class AlbumTest extends TestCase
 
     public function testExchangeArraySetsPropertiesToNullIfKeysAreNotPresent()
     {
-        $album = new Album();
+        $album = new Search();
 
         $album->exchangeArray([
             'artist' => 'some artist',
@@ -69,7 +69,7 @@ class AlbumTest extends TestCase
 
     public function testGetArrayCopyReturnsAnArrayWithPropertyValues()
     {
-        $album = new Album();
+        $album = new Search();
         $data = [
             'artist' => 'some artist',
             'id' => 123,
@@ -86,7 +86,7 @@ class AlbumTest extends TestCase
 
     public function testInputFiltersAreSetCorrectly()
     {
-        $album = new Album();
+        $album = new Search();
 
         $inputFilter = $album->getInputFilter();
 

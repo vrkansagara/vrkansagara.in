@@ -1,6 +1,6 @@
 <?php
 
-namespace Album\Model;
+namespace Application\Model;
 
 use DomainException;
 use Laminas\Filter\StringTrim;
@@ -11,27 +11,30 @@ use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\StringLength;
 
-class Album implements InputFilterAwareInterface
+class Search implements InputFilterAwareInterface
 {
     public $id;
-    public $artist;
-    public $title;
+    public $content;
+    public $tags;
+    public $url;
 
     public $inputFilter;
 
     public function exchangeArray(array $data)
     {
-        $this->id     = ! empty($data['id']) ? $data['id'] : null;
-        $this->artist = ! empty($data['artist']) ? $data['artist'] : null;
-        $this->title  = ! empty($data['title']) ? $data['title'] : null;
+        $this->id = !empty($data['id']) ? $data['id'] : null;
+        $this->content = !empty($data['content']) ? $data['content'] : null;
+        $this->tags = !empty($data['tags']) ? $data['tags'] : null;
+        $this->url = !empty($data['url']) ? $data['url'] : null;
     }
 
     public function getArrayCopy()
     {
         return [
-            'id'     => $this->id,
-            'artist' => $this->artist,
-            'title'  => $this->title,
+            'id' => $this->id,
+            'content' => $this->content,
+            'tags' => $this->tags,
+            'url' => $this->url,
         ];
     }
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -59,7 +62,7 @@ class Album implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
-            'name' => 'artist',
+            'name' => 'content',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
@@ -78,7 +81,7 @@ class Album implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
-            'name' => 'title',
+            'name' => 'tags',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],

@@ -1,17 +1,20 @@
 <div class="container ">
 
-    <h2>Search result...</h2>
+  <h2>Search result...</h2>
 
+    <?php foreach ($search as $row): ?>
+      <p><a href="<?= $this->url('blog') ?>/<?= $row->url ?>"><?= $row->url ?></a></p>
+    <?php endforeach; ?>
   <table>
-      <?php foreach($info as $key => $value): ?>
-      <tr>
-        <td><?=$key?></td>
+      <?php foreach ($info as $key => $value): ?>
+        <tr>
+        <td><?= $key ?></td>
 
-        <?php if (!is_array($value)) : ?>
-        <td><?=$value?></td>
-        <?php else: ?>
+          <?php if (!is_array($value)) : ?>
+          <td><?= $value ?></td>
+          <?php else: ?>
           <td>
-              <?php foreach($value as $k => $v): ?>
+              <?php foreach ($value as $k => $v): ?>
               <tr>
                 <td><?=$k?></td>
                   <?php if (!is_array($v)) : ?>

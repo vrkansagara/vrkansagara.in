@@ -2,9 +2,8 @@
 
 namespace Album\Api;
 
-use Album\Model\AlbumTable;
+use Album\Model\SearchTable;
 use Laminas\Mvc\Controller\AbstractRestfulController;
-use Laminas\View\Model\ViewModel;
 
 class AlbumController extends AbstractRestfulController
 {
@@ -13,7 +12,7 @@ class AlbumController extends AbstractRestfulController
     private $table;
 
     // Add this constructor:
-    public function __construct(AlbumTable $table)
+    public function __construct(SearchTable $table)
     {
         $this->table = $table;
     }

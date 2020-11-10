@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace AlbumTest\Controller;
 
 use Album\Controller\AlbumController;
-use Album\Model\AlbumTable;
+use Album\Model\Search;
+use Album\Model\SearchTable;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use Album\Model\Album;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -64,7 +64,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase
         $services->setAllowOverride(true);
 
         $services->setService('config', $this->updateConfig($services->get('config')));
-        $services->setService(AlbumTable::class, $this->mockAlbumTable()->reveal());
+        $services->setService(SearchTable::class, $this->mockAlbumTable()->reveal());
 
         $services->setAllowOverride(false);
     }
@@ -77,14 +77,14 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase
 
     protected function mockAlbumTable()
     {
-        $this->albumTable = $this->prophesize(AlbumTable::class);
+        $this->albumTable = $this->prophesize(SearchTable::class);
         return $this->albumTable;
     }
 
     public function testAddActionRedirectsAfterValidPost()
     {
         $this->albumTable
-            ->saveAlbum(Argument::type(Album::class))
+            ->saveAlbum(Argument::type(Search::class))
             ->shouldBeCalled();
 
         $postData = [

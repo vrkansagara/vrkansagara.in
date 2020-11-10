@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Model\SearchTable;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -18,14 +20,16 @@ class IndexController extends AbstractActionController
 
     private $config;
 
-    public function __construct($applicationConfig)
+    private $searchTable;
+
+    public function __construct(
+        $applicationConfig,
+        SearchTable $searchTable
+    )
     {
         $this->config = $applicationConfig;
+        $this->searchTable = $searchTable;
     }
-
-
-
-
 
     /**
      * We override the parent class' onDispatch() method to
@@ -69,6 +73,11 @@ class IndexController extends AbstractActionController
     {
         $searchInfo = $this->getRequest()->getQuery('name');
 
+
+        /** @var $searchData ResultSet */
+        $searchData = $this->searchTable->search($searchInfo);
+
+
         if (filter_var($searchInfo, FILTER_VALIDATE_IP)) {
             $info = getMyInfo($searchInfo);
         } elseif ($searchInfo == 'tag:php') {
@@ -78,7 +87,8 @@ class IndexController extends AbstractActionController
         }
         return new ViewModel(
             [
-                'info' => $info
+                'info' => $info,
+                'search' => $searchData
             ]
         );
     }
