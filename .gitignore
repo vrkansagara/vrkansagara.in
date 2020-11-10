@@ -14,4 +14,4 @@ yarn-error.log
 .env
 public/blog
 data/vrkansagara.sql
-.phpunit
+.phpunit*
