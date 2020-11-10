@@ -31,9 +31,9 @@ class PhlyCompilerDelegatorFactory implements DelegatorFactoryInterface
             $content = $entry->getBody() . $entry->getExtended();
             $tags = $entry->getTags();
             $url = $entry->getId();
-
+            $title = $entry->getTitle();
             /** @var  $searchModel SearchTable */
-            $searchModel->insertSearchData($content, $tags, $url, $type);
+            $searchModel->insertSearchData($title, $content, $tags, $url, $type);
 
             // Filename must be same as url
             // Id and title must be same for URL
