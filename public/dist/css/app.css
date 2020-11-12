@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Quicksand);@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+@import url(https://fonts.googleapis.com/css?family=Quicksand);@import url(https://fonts.googleapis.com/css?family=Nunito);/** DO NOT CHANGE @START */
+/*!
  * Bootstrap v5.0.0-alpha2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
@@ -10919,6 +10920,19 @@ fieldset:disabled .btn {
   }
 }
 
+/** DO NOT CHANGE @END */
+p > img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.blog-title {
+  font-family: "Quicksand", sans-serif;
+}
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -10927,16 +10941,4 @@ fieldset:disabled .btn {
  */
 main > .container {
   padding: 60px 15px 0;
-}
-
-.blog-title {
-  font-family: "Quicksand", sans-serif;
-}
-
-p > img {
-  width: 100%;
-}
-
-a {
-  text-decoration: none;
 }

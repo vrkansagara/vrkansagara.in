@@ -26,15 +26,7 @@ $title = $this->escapeHtml($entry->getTitle());
     </div>
   </div>
   <div class="col-md-10">
-    <div>
-      <h2 class="blog-post-title"><a href="<?php echo $entryUrl ?>"><?php echo ucfirst($title) ?></a></h2>
-        <?php echo $entry->getBody() ?>
-      <footer>
-        <p class="text-right">
-          <a href="<?php echo $entryUrl ?>">Continue reading...</a>
-        </p>
-      </footer>
-    </div>
+      <?php echo $this->render('blog/entry-short-post');?>
   </div>
 </div>
 

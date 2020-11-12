@@ -34,7 +34,8 @@
       "laminas/laminas-mvc-console": "^1.2",
       "phly/phly-blog": "^2.0",
       "league/commonmark": "^1.5",
-      "laminas/laminas-db": "^2.11"
+      "laminas/laminas-db": "^2.11",
+        "nesbot/carbon": "^2.41"
     },
     "repositories": [
         {
