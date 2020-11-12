@@ -1,0 +1,32 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+@import "~bootstrap/scss/bootstrap";
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+/**
+ Global level styples
+ */
+main > .container {
+  padding: 60px 15px 0;
+}
+
+.blog-title {
+  font-family: $font-family-quicksand;
+}
+
+p > img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
