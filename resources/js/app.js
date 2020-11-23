@@ -1,8 +1,8 @@
 import '@/styles/index.scss';
 import Vue from 'vue';
 import * as Sentry from '@sentry/browser';
-import {Vue as VueIntegration} from '@sentry/integrations';
-import {Integrations} from '@sentry/tracing';
+import { Vue as VueIntegration } from '@sentry/integrations';
+import { Integrations } from '@sentry/tracing';
 import * as filters from './filters'; // global filters
 // import App from './views/App';
 /**
