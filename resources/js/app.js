@@ -1,8 +1,8 @@
 import '@/styles/index.scss';
 import Vue from 'vue';
 import * as Sentry from '@sentry/browser';
-import { Vue as VueIntegration } from '@sentry/integrations';
-import { Integrations } from '@sentry/tracing';
+import {Vue as VueIntegration} from '@sentry/integrations';
+import {Integrations} from '@sentry/tracing';
 import * as filters from './filters'; // global filters
 // import App from './views/App';
 /**
@@ -58,7 +58,7 @@ Object.keys(filters).forEach(key => {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 new Vue({
   el: '#app',
 });

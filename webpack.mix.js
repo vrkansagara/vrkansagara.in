@@ -21,7 +21,6 @@ Mix.listen('configReady', webpackConfig => {
 });
 
 mix.webpackConfig(config);
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -34,6 +33,7 @@ mix.webpackConfig(config);
  */
 
 mix
+  .setPublicPath('./')
   .js('resources/js/app.js', 'public/dist/js')
   .sass('resources/sass/app.scss', 'public/dist/css', {
     implementation: require('node-sass'),

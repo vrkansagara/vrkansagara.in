@@ -28,7 +28,6 @@
 <script>
 
 export default {
-  name: 'HomeComponent',
   mounted() {
     console.log('Component mounted.');
   },
