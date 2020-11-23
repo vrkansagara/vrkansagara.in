@@ -1,6 +1,6 @@
 {
-    "/public/dist/js/app.js": "/public/dist/js/app.js",
-    "/public/dist/css/app.css": "/public/dist/css/app.css",
-    "/public/dist/js/manifest.js": "/public/dist/js/manifest.js",
-    "/public/dist/js/vendor.js": "/public/dist/js/vendor.js"
+    "/public/dist/js/app.js": "/public/dist/js/app.js?id=4700f3540926d762389b",
+    "/public/dist/css/app.css": "/public/dist/css/app.css?id=520aa16967c8f082ea79",
+    "/public/dist/js/manifest.js": "/public/dist/js/manifest.js?id=3c768977c2574a34506e",
+    "/public/dist/js/vendor.js": "/public/dist/js/vendor.js?id=f7eec0b90a7828eab29c"
 }
