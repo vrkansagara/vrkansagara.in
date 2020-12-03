@@ -6,7 +6,6 @@ namespace Blog\Delegators;
 
 use Application\Model\SearchTable;
 use Carbon\Carbon;
-use Carbon\Cli\Invoker;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Laminas\View\Model\ViewModel;
@@ -25,9 +24,9 @@ class PhlyCompilerDelegatorFactory implements DelegatorFactoryInterface
         $type = 'blog';
         $searchModel->cleanSearchData($type);
 
-        $filePath = sprintf('%s/%s',getcwd(),'module/Application/view/blog/home-post.phtml');
-        file_put_contents($filePath,null);
-        $eventManager->attach('compile', function (Event $event) use ($searchModel, $type,$container,$filePath) {
+        $filePath = sprintf('%s/%s', getcwd(), 'module/Application/view/blog/home-post.phtml');
+        file_put_contents($filePath, null);
+        $eventManager->attach('compile', function (Event $event) use ($searchModel, $type, $container, $filePath) {
 
             /** @var $entry EntryEntity */
             $entry = $event->getEntry();
@@ -35,7 +34,7 @@ class PhlyCompilerDelegatorFactory implements DelegatorFactoryInterface
             // Logic for last updated post list, for home page @START
             $lastUpdatedBlogEntries = Carbon::now()->subDays(3);
             $blogPostUpdatedDate = Carbon::parse($entry->getUpdated());
-            if ($blogPostUpdatedDate->isAfter($lastUpdatedBlogEntries) && $entry->isPublic()){
+            if ($blogPostUpdatedDate->isAfter($lastUpdatedBlogEntries) && $entry->isPublic()) {
                 /** @var RendererInterface $renderer */
                 $renderer = $container->get(RendererInterface::class);
 
@@ -44,7 +43,7 @@ class PhlyCompilerDelegatorFactory implements DelegatorFactoryInterface
                 $view->setTemplate('blog/entry-short-post');
                 $view->setVariables(['entry' => $entry]);
                 $html = $renderer->render($view);
-                file_put_contents($filePath,$html,FILE_APPEND);
+                file_put_contents($filePath, $html, FILE_APPEND);
             }
             // Logic for last updated post list, for home page @END
 

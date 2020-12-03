@@ -191,7 +191,7 @@ class Module implements
         return $new_buffer;
     }
 
-    public function formatSizeUnits($size)
+    public static function formatSizeUnits($size)
     {
         $base = log($size) / log(1024);
         $suffix = ['', 'KB', 'MB', 'GB', 'TB'];

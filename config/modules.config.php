@@ -32,6 +32,7 @@ return [
     'PhlyBlog',
     'PhlySimplePage',
 //    'PhlyContact',
+    'Laminas\Diactoros',
     'Blog',
     'Page',
     'Application',

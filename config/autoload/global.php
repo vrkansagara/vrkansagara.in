@@ -25,6 +25,11 @@ return [
         'username' => 'YOUR SECRET USER NAME',
         'password' => 'YOUR SECRET PASSWORD',
     ],
+    'service_manager' => [
+        'factories' => [
+            \Laminas\Db\Adapter\Adapter::class => \Laminas\Db\Adapter\AdapterServiceFactory::class,
+        ],
+    ],
     'session' => [
         'config' => [
             'class' => \Laminas\Session\Config\SessionConfig::class,
