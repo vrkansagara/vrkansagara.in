@@ -112,7 +112,12 @@ class IndexController extends AbstractActionController
 
         $oldBufferLength = strlen((string) $bodyContent);
         $newBufferLength = strlen($newBuffer);
-        printf('Old buffer length is %d , new buffer %d, you can compress %s per request.', $oldBufferLength, $newBufferLength, Module::formatSizeUnits($oldBufferLength - $newBufferLength));
+        printf(
+            'Old buffer length is %d , new buffer %d, you can compress %s per request.',
+            $oldBufferLength,
+            $newBufferLength,
+            Module::formatSizeUnits($oldBufferLength - $newBufferLength)
+        );
 //        printf("Response status: %d (%s)\n", $response->getStatusCode(), $response->getReasonPhrase());
 //        printf("Headers:\n");
 //        foreach ($response->getHeaders() as $header => $values) {
