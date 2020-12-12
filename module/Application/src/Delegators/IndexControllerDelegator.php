@@ -15,9 +15,8 @@ class IndexControllerDelegator extends IndexController
     public function __construct(IndexController $indexController, EventManagerInterface $eventManager)
     {
         $this->indexController = $indexController;
-        $this->eventManager = $eventManager;
+        $this->eventManager    = $eventManager;
     }
-
 
     public function indexAction()
     {

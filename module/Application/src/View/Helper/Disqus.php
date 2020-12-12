@@ -8,6 +8,8 @@ use DomainException;
 use InvalidArgumentException;
 use Laminas\View\Helper\AbstractHelper;
 use Traversable;
+use function is_array;
+use function preg_match;
 
 class Disqus extends AbstractHelper
 {
@@ -60,7 +62,7 @@ class Disqus extends AbstractHelper
             $url = $serverUrl($url);
         }
 
-        $html = <<<EOH
+        return <<<EOH
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_developer = $developer;
@@ -79,6 +81,5 @@ class Disqus extends AbstractHelper
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 EOH;
-        return $html;
     }
 }

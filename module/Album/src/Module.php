@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Album;
 
-use Album\Model\Search;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
@@ -27,12 +26,12 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\AlbumTable::class => function ($container) {
+                Model\AlbumTable::class        => function ($container) {
                     $tableGateway = $container->get(Model\AlbumTableGateway::class);
                     return new Model\SearchTable($tableGateway);
                 },
                 Model\AlbumTableGateway::class => function ($container) {
-                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $dbAdapter          = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Album());
                     return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
@@ -50,7 +49,7 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\SearchTable::class)
                     );
                 },
-                Api\AlbumController::class => function ($container) {
+                Api\AlbumController::class        => function ($container) {
                     return new Api\AlbumController(
                         $container->get(Model\SearchTable::class)
                     );

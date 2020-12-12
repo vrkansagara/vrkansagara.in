@@ -6,5 +6,4 @@ namespace Application\Middleware;
 
 class IndexMiddleware
 {
-
 }

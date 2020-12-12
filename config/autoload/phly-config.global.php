@@ -8,22 +8,22 @@ return [
     'phly-simple-page' => [
         'cache' => [
             'adapter' => [
-                'name' => Filesystem::class,
+                'name'    => Filesystem::class,
                 'options' => [
-                    'namespace' => 'pages',
-                    'cache_dir' => getcwd() . '/data/cache',
-                    'dir_permission' => '0777',
+                    'namespace'       => 'pages',
+                    'cache_dir'       => getcwd() . '/data/cache',
+                    'dir_permission'  => '0777',
                     'file_permission' => '0666',
                 ],
             ],
         ],
     ],
-    'phly_contact' => [
+    'phly_contact'     => [
         // This is simply configuration to pass to Laminas\Captcha\Factory
         'captcha' => [
-            'class' => Dumb::class,
+            'class'   => Dumb::class,
             'options' => [
-                'pubkey' => 'RECAPTCHA_PUBKEY_HERE',
+                'pubkey'  => 'RECAPTCHA_PUBKEY_HERE',
                 'privkey' => 'RECAPTCHA_PRIVKEY_HERE',
             ],
         ],
@@ -60,8 +60,7 @@ return [
 //                    'password' => 'password',
 //                ],
 //            ],
-
-            'class' => File::class,
+            'class'   => File::class,
             'options' => [
                 'path' => 'data/mail/',
             ],

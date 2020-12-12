@@ -23,6 +23,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use function getcwd;
+use function is_callable;
+use function sprintf;
 
 class CompileCommand extends Command
 {
@@ -65,12 +68,12 @@ class CompileCommand extends Command
         ContainerInterface $container,
         View $view
     ) {
-        $this->config = $config;
-        $this->container = $container;
-        $this->view = $view;
+        $this->config          = $config;
+        $this->container       = $container;
+        $this->view            = $view;
         $this->compilerOptions = new CompilerOptions($config['options'] ?? []);
-        $this->responseFile = new ResponseFile();
-        $this->writer = new FileWriter();
+        $this->responseFile    = new ResponseFile();
+        $this->writer          = new FileWriter();
 
         new ResponseStrategy($this->writer, $this->responseFile, $view);
 
@@ -83,7 +86,7 @@ class CompileCommand extends Command
     protected function configure(): void
     {
         $this->setDescription('Compile blog');
-        $this->setHelp(<<< 'HELP'
+        $this->setHelp(<<<'HELP'
             Compile blog posts into view scripts and feeds.
 
             The default action is to compile all entries and archives, pagination of
@@ -105,9 +108,9 @@ class CompileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-        $flags = $this->getFlags($input);
-        $tags = $this->getTags();
+        $io        = new SymfonyStyle($input, $output);
+        $flags     = $this->getFlags($input);
+        $tags      = $this->getTags();
         $listeners = $this->getListeners($flags, $tags);
 
         // Compile blog entries
@@ -134,11 +137,11 @@ class CompileCommand extends Command
     private function getFlags(InputInterface $input): array
     {
         $flags = [];
-        $all = true;
+        $all   = true;
 
         foreach (self::COMMAND_FLAGS as $flag) {
             $flags[$flag] = $input->getOption($flag);
-            $all = $all && ! $flags[$flag];
+            $all          = $all && ! $flags[$flag];
         }
 
         $flags['all'] = $all;
@@ -162,12 +165,12 @@ class CompileCommand extends Command
     /** @return ListenerInterface[] */
     private function getListeners(array $flags, Tags $tags): array
     {
-        $listeners = [];
-        $view = $this->view;
-        $compiler = $this->compiler;
-        $writer = $this->writer;
+        $listeners    = [];
+        $view         = $this->view;
+        $compiler     = $this->compiler;
+        $writer       = $this->writer;
         $responseFile = $this->responseFile;
-        $options = $this->compilerOptions;
+        $options      = $this->compilerOptions;
 
         if ($flags['all'] || $flags['entries']) {
             $entries = new Entries($view, $responseFile, $options);

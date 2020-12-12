@@ -3,11 +3,11 @@
 namespace Album\Api;
 
 use Album\Model\SearchTable;
+use Exception;
 use Laminas\Mvc\Controller\AbstractRestfulController;
 
 class AlbumController extends AbstractRestfulController
 {
-
     // Add this property:
     private $table;
 
@@ -26,11 +26,10 @@ class AlbumController extends AbstractRestfulController
     {
         try {
             $data = $this->table->fetchAll();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }
-
 
     public function create($data)
     {

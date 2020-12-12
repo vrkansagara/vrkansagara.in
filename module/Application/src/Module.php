@@ -18,12 +18,27 @@ use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\MvcEvent;
+use function array_keys;
+use function array_merge;
+use function array_values;
+use function count;
+use function floor;
+use function getRequestExecutionTime;
+use function json_encode;
+use function log;
+use function microtime;
+use function pow;
+use function preg_replace;
+use function printf;
+use function rand;
+use function round;
+use function str_replace;
+use function trim;
 
 class Module implements
     ConfigProviderInterface,
     ServiceProviderInterface
 {
-
     protected static $layout;
     protected $config;
 
@@ -34,8 +49,7 @@ class Module implements
 
     public function getServiceConfig()
     {
-        return [
-        ];
+        return [];
     }
 
     // The "init" method is called on application start-up and
@@ -52,17 +66,17 @@ class Module implements
 
     public function onBootstrap(MvcEvent $event)
     {
-        $application = $event->getApplication();
+        $application  = $event->getApplication();
         $eventManager = $application->getEventManager();
-        $services = $application->getServiceManager();
+        $services     = $application->getServiceManager();
 
         $eventManager->attach(MvcEvent::EVENT_FINISH, function ($e) {
             $timeF = getRequestExecutionTime(microtime(true), REQUEST_MICROTIME);
             // Search static content and replace for execution time
             $response = $e->getResponse();
-            $content = $response->getContent();
-            $content = $this->compressJscript($content);
-            $content = self::compress($content);
+            $content  = $response->getContent();
+            $content  = $this->compressJscript($content);
+            $content  = self::compress($content);
             $response->setContent(str_replace(
                 'Execution time:',
                 'Execution time: ' . $timeF,
@@ -90,21 +104,20 @@ class Module implements
                     $config = $config['disqus'];
                     return new View\Helper\Disqus($config);
                 },
-            ]
+            ],
         ];
     }
 
     // Event listener method.
     public function onDispatch(MvcEvent $event)
     {
-
         $whiteSpaceRules = [
-            '/(\s)+/s' => '\\1',// shorten multiple whitespace sequences
-            "#>\s+<#" => ">\n<",  // Strip excess whitespace using new line
-            "#\n\s+<#" => "\n<",// strip excess whitespace using new line
+            '/(\s)+/s'     => '\\1', // shorten multiple whitespace sequences
+            "#>\s+<#"      => ">\n<", // Strip excess whitespace using new line
+            "#\n\s+<#"     => "\n<", // strip excess whitespace using new line
             '/\>[^\S ]+/s' => '>',
             // Strip all whitespaces after tags, except space
-            '/[^\S ]+\</s' => '<',// strip whitespaces before tags, except space
+            '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
             /**
              * '/\s+     # Match one or more whitespace characters
              * (?!       # but only if it is impossible to match...
@@ -116,7 +129,7 @@ class Module implements
             //            '/\s+(?![^<>]*>)/x' => '', //Remove all whitespaces except content between html tags. //MOST DANGEROUS
         ];
         $commentRules = [
-            "/<!--.*?-->/ms" => '',// Remove all html comment.,
+            "/<!--.*?-->/ms" => '', // Remove all html comment.,
         ];
         $replaceWords = [
             //OldWord will be replaced by the NewWord
@@ -127,8 +140,8 @@ class Module implements
             $commentRules,
             $whiteSpaceRules
         );
-        $buffer = $this->compressJscript($buffer);
-        $buffer = preg_replace(array_keys($allRules), array_values($allRules), $buffer);
+        $buffer   = $this->compressJscript($buffer);
+        $buffer   = preg_replace(array_keys($allRules), array_values($allRules), $buffer);
 
         // Get controller to which the HTTP request was dispatched.
 //        $controller = $event->getTarget();
@@ -148,9 +161,7 @@ class Module implements
      * This method will no longer support.
      *
      * @param $buffer
-     *
      * @return null|string|string[] Compressed output
-     *
      */
     public static function compress($buffer)
     {
@@ -182,7 +193,7 @@ class Module implements
          */
         $regexRemoveWhiteSpace
             = '%(?>[^\S ]\s*| \s{2,})(?=(?:(?:[^<]++| <(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))%ix';
-        $new_buffer = preg_replace($regexRemoveWhiteSpace, ' ', $buffer);
+        $new_buffer            = preg_replace($regexRemoveWhiteSpace, ' ', $buffer);
         // We are going to check if processing has working
         if ($new_buffer === null) {
             $new_buffer = $buffer;
@@ -193,7 +204,7 @@ class Module implements
 
     public static function formatSizeUnits($size)
     {
-        $base = log($size) / log(1024);
+        $base   = log($size) / log(1024);
         $suffix = ['', 'KB', 'MB', 'GB', 'TB'];
         $f_base = floor($base);
 
@@ -208,43 +219,43 @@ class Module implements
             // remove comments from ' strings
             '#\"([^\n\"]*?)/\*([^\n\"]*)\"#' => '"\1/"+\'\'+"*\2"',
             // remove comments from " strings
-            '#/\*.*?\*/#s' => "",// strip C style comments
-            '#[\r\n]+#' => "\n",
+            '#/\*.*?\*/#s' => "", // strip C style comments
+            '#[\r\n]+#'    => "\n",
             // remove blank lines and \r's
             '#\n([ \t]*//.*?\n)*#s' => "\n",
             // strip line comments (whole line only)
             '#([^\\])//([^\'"\n]*)\n#s' => "\\1\n",
             // strip line comments
             // (that aren't possibly in strings or regex's)
-            '#\n\s+#' => "\n",// strip excess whitespace
-            '#\s+\n#' => "\n",// strip excess whitespace
+            '#\n\s+#'         => "\n", // strip excess whitespace
+            '#\s+\n#'         => "\n", // strip excess whitespace
             '#(//[^\n]*\n)#s' => "\\1\n",
             // extra line feed after any comments left
             // (important given later replacements)
-            '#/([\'"])\+\'\'\+([\'"])\*#' => "/*"
+            '#/([\'"])\+\'\'\+([\'"])\*#' => "/*",
             // restore comments in strings
         ];
-        $script = preg_replace(array_keys($replace), $replace, $buffer);
+        $script  = preg_replace(array_keys($replace), $replace, $buffer);
         $replace = [
             "&&\n" => "&&",
             "||\n" => "||",
-            "(\n" => "(",
-            ")\n" => ")",
-            "[\n" => "[",
-            "]\n" => "]",
-            "+\n" => "+",
-            ",\n" => ",",
-            "?\n" => "?",
-            ":\n" => ":",
-            ";\n" => ";",
-            "{\n" => "{",
+            "(\n"  => "(",
+            ")\n"  => ")",
+            "[\n"  => "[",
+            "]\n"  => "]",
+            "+\n"  => "+",
+            ",\n"  => ",",
+            "?\n"  => "?",
+            ":\n"  => ":",
+            ";\n"  => ";",
+            "{\n"  => "{",
             //  "}\n"  => "}", (because I forget to put semicolons after function assignments)
-            "\n]" => "]",
-            "\n)" => ")",
-            "\n}" => "}",
+            "\n]"  => "]",
+            "\n)"  => ")",
+            "\n}"  => "}",
             "\n\n" => "\n",
         ];
-        $script = str_replace(array_keys($replace), $replace, $script);
+        $script  = str_replace(array_keys($replace), $replace, $script);
 
         return trim($script);
     }
@@ -278,9 +289,9 @@ class Module implements
     public function sampleEvents(EventManager $eventManager)
     {
         $eventManager->attach('do', function (Event $event) {
-            $eventName = $event->getName();
-            $params = $event->getParams();
-            $target = $event->getTarget();
+            $eventName      = $event->getName();
+            $params         = $event->getParams();
+            $target         = $event->getTarget();
             $isPropaagation = $event->propagationIsStopped();
             printf(
                 'Handled event "%s", with parameters %s, And Targets is %s, propagation status %s',

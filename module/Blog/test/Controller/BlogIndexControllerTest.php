@@ -10,11 +10,8 @@ declare(strict_types=1);
 
 namespace Blog\Controller;
 
-use Application\Controller\IndexController;
-use Application\Delegators\IndexControllerDelegator;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use Symfony\Component\Dotenv\Dotenv;
 
 class BlogIndexControllerTest extends AbstractHttpControllerTestCase
 {
@@ -32,7 +29,6 @@ class BlogIndexControllerTest extends AbstractHttpControllerTestCase
         ));
         parent::setUp();
     }
-
 
     public function testDependentModuleMustBeLoadedFirst()
     {

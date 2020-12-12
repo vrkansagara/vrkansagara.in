@@ -11,6 +11,9 @@ use Laminas\Db\TableGateway\TableGatewayInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use RuntimeException;
+use function array_filter;
+use function in_array;
+use const ARRAY_FILTER_USE_KEY;
 
 class AlbumTableTest extends TestCase
 {
@@ -19,7 +22,7 @@ class AlbumTableTest extends TestCase
     protected function setUp(): void
     {
         $this->tableGateway = $this->prophesize(TableGatewayInterface::class);
-        $this->albumTable = new SearchTable($this->tableGateway->reveal());
+        $this->albumTable   = new SearchTable($this->tableGateway->reveal());
     }
 
     public function testFetchAllReturnsAllAlbums()
@@ -40,9 +43,9 @@ class AlbumTableTest extends TestCase
     {
         $albumData = [
             'artist' => 'The Military Wives',
-            'title' => 'In My Dreams'
+            'title'  => 'In My Dreams',
         ];
-        $album = new Search();
+        $album     = new Search();
         $album->exchangeArray($albumData);
 
         $this->tableGateway->insert($albumData)->shouldBeCalled();
@@ -52,11 +55,11 @@ class AlbumTableTest extends TestCase
     public function testSaveAlbumWillUpdateExistingAlbumsIfTheyAlreadyHaveAnId()
     {
         $albumData = [
-            'id' => 123,
+            'id'     => 123,
             'artist' => 'The Military Wives',
-            'title' => 'In My Dreams',
+            'title'  => 'In My Dreams',
         ];
-        $album = new Search();
+        $album     = new Search();
         $album->exchangeArray($albumData);
 
         $resultSet = $this->prophesize(ResultSetInterface::class);

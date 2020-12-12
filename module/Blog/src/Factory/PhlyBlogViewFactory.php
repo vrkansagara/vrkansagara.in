@@ -13,6 +13,8 @@ use Laminas\View\Renderer\RendererInterface;
 use Laminas\View\View;
 use Laminas\View\ViewEvent;
 use Psr\Container\ContainerInterface;
+use function method_exists;
+use function str_replace;
 
 class PhlyBlogViewFactory
 {

@@ -10,6 +10,7 @@ use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\StringLength;
+use function sprintf;
 
 class Search implements InputFilterAwareInterface
 {
@@ -23,28 +24,29 @@ class Search implements InputFilterAwareInterface
 
     public function exchangeArray(array $data)
     {
-        $this->id = ! empty($data['id']) ? $data['id'] : null;
+        $this->id      = ! empty($data['id']) ? $data['id'] : null;
         $this->content = ! empty($data['content']) ? $data['content'] : null;
-        $this->tags = ! empty($data['tags']) ? $data['tags'] : null;
-        $this->url = ! empty($data['url']) ? $data['url'] : null;
-        $this->name = ! empty($data['name']) ? $data['name'] : null;
+        $this->tags    = ! empty($data['tags']) ? $data['tags'] : null;
+        $this->url     = ! empty($data['url']) ? $data['url'] : null;
+        $this->name    = ! empty($data['name']) ? $data['name'] : null;
     }
 
     public function getArrayCopy()
     {
         return [
-            'id' => $this->id,
+            'id'      => $this->id,
             'content' => $this->content,
-            'tags' => $this->tags,
-            'url' => $this->url,
-            'name' => $this->name,
+            'tags'    => $this->tags,
+            'url'     => $this->url,
+            'name'    => $this->name,
         ];
     }
+
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new DomainException(sprintf(
             '%s does not allow injection of an alternate input filter',
-            __CLASS__
+            self::class
         ));
     }
 
@@ -57,46 +59,46 @@ class Search implements InputFilterAwareInterface
         $inputFilter = new InputFilter();
 
         $inputFilter->add([
-            'name' => 'id',
+            'name'     => 'id',
             'required' => true,
-            'filters' => [
+            'filters'  => [
                 ['name' => ToInt::class],
             ],
         ]);
 
         $inputFilter->add([
-            'name' => 'content',
-            'required' => true,
-            'filters' => [
+            'name'       => 'content',
+            'required'   => true,
+            'filters'    => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
             ],
             'validators' => [
                 [
-                    'name' => StringLength::class,
+                    'name'    => StringLength::class,
                     'options' => [
                         'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 100,
+                        'min'      => 1,
+                        'max'      => 100,
                     ],
                 ],
             ],
         ]);
 
         $inputFilter->add([
-            'name' => 'tags',
-            'required' => true,
-            'filters' => [
+            'name'       => 'tags',
+            'required'   => true,
+            'filters'    => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
             ],
             'validators' => [
                 [
-                    'name' => StringLength::class,
+                    'name'    => StringLength::class,
                     'options' => [
                         'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 100,
+                        'min'      => 1,
+                        'max'      => 100,
                     ],
                 ],
             ],

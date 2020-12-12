@@ -75,7 +75,7 @@ return [
              */
             'collectors' => [],
         ],
-        'events' => [
+        'events'   => [
             /**
              * Set to true to enable event-level logging for collectors that will support it. This enables a wildcard
              * listener onto the shared event manager that will allow profiling of user-defined events as well as the

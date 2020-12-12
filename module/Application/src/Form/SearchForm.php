@@ -6,7 +6,6 @@ use Laminas\Form\Form;
 
 class SearchForm extends Form
 {
-
     public function __construct($name = null)
     {
         parent::__construct($name);
@@ -23,15 +22,25 @@ class SearchForm extends Form
 
         $this->add([
             'name' => 'id',
-            'type' => 'hidden'
+            'type' => 'hidden',
         ]);
 
         $this->add([
-            'name' => 'searchAnyThing',
-            'type' => 's',
+            'name'    => 'searchAnyThing',
+            'type'    => 'text',
             'options' => [
-                'placeholder' => 'Search anything...'
+                'placeholder' => 'Search anything...',
             ],
         ]);
+
+        $this->add([
+            'name'       => 'submit-button',
+            'type'       => 'submit',
+            'attributes' => [
+                'value' => 'Search',
+                'id'    => 'searchButton',
+            ],
+        ]);
+        $this->setAttribute('method', 'POST');
     }
 }
