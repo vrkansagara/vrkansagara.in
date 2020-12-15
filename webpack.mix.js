@@ -1,6 +1,7 @@
 const config = require('./webpack.config');
 const mix = require('laravel-mix');
 require('laravel-mix-eslint');
+const path = require('path');
 
 function resolve(dir) {
   return path.join(
@@ -36,6 +37,7 @@ mix
   .setPublicPath('./')
   .js('resources/js/app.js', 'public/dist/js')
   .sass('resources/sass/app.scss', 'public/dist/css', {
+  // .sass('resources/scss/style.scss', 'public/dist/css', {
     implementation: require('node-sass'),
   })
   .extract([

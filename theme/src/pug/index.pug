@@ -21,6 +21,9 @@ html(lang='en')
         // Core theme CSS (includes Bootstrap)
         link(href='css/styles.css', rel='stylesheet')
 
+        // Code format css
+        link(href='https://vrkansagara.in/assets/css/prism.css', rel='stylesheet', type='text/css')
+
     body#page-top
 
         // Navigation
@@ -37,7 +40,7 @@ html(lang='en')
                     li.nav-item
                         a.nav-link.js-scroll-trigger(href='#vrkansagara') VRKANSAGARA
                     li.nav-item
-                        a.nav-link.js-scroll-trigger(href='#experience') Experience
+                        a.nav-link.js-scroll-trigger(href='#latestUpdate') Latest update
                     li.nav-item
                         a.nav-link.js-scroll-trigger(href='#education') Education
                     li.nav-item
@@ -46,7 +49,8 @@ html(lang='en')
                         a.nav-link.js-scroll-trigger(href='#interests') Interests
                     li.nav-item
                         a.nav-link.js-scroll-trigger(href='#awards') Awards
-
+            form
+                input.form-control.me-2(type="search" placeholder="Search" name="s" aria-label="Search anything...")
         // Page Content
         .container-fluid.p-0
 
@@ -79,17 +83,17 @@ html(lang='en')
 
             hr.m-0
 
-            // Experience
-            section#experience.resume-section
+            // LatestUpdate
+            section#latestUpdate.resume-section
                .resume-section-content
-                    h2.mb-5 Experience
+                    h2.mb-5 Latest update
 
                     .d-flex.flex-column.flex-md-row.justify-content-between.mb-5
                         .flex-grow-1
-                            h3.mb-0 Senior Web Developer
-                            .subheading.mb-3 Intelitec Solutions
+                            h3.mb-0 Blog post example
+                            .subheading.mb-3 How to resolve npm permission issue?
                             p
-                                | Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.
+                                |This is general solutions for all kind of <code>npm </code> permission issue.
                         .flex-shrink-0
                             span.text-primary March 2013 - Present
 
@@ -251,13 +255,19 @@ html(lang='en')
                             | 3
                             sup rd 
                             | Place - James Buchanan High School - Hackathon 2005
-
+            // Footer
+            footer.py-3.bg-light
+                div.container
+                    span.text-muted Place sticky footer content here.
         // Bootstrap core JS
         script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
-        script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js')
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW' crossorigin="anonymous")
 
         // Third party plugin JS
         script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js')
 
         // Core theme JS
         script(src='js/scripts.js')
+
+        // Code format js
+        script(src='https://vrkansagara.in/assets/js/prism.js')
