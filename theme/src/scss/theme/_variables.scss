@@ -1,0 +1,48 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+//
+// Bootstrap overrides ===================================
+//
+
+// Color system
+
+$white: #FFFFFF !default;
+$gray-100: #F9FBFD !default;
+$gray-200: #F1F4F8 !default;
+$gray-300: #D9E2EF !default;
+$gray-400: #C6D3E6 !default;
+$gray-500: #ABBCD5 !default;
+$gray-600: #869AB8 !default;
+$gray-700: #506690 !default;
+$gray-800: #384C74 !default;
+$gray-900: #1B2A4E !default;
+$black: #161C2D !default;
+
+$primary: #335EEA !default;
+$secondary: $gray-700 !default;
+$primary-desat: #6C8AEC !default; // NEW
+$success: #42BA96 !default;
+$info: #7C69EF !default;
+$warning: #FAD776 !default;
+$danger: #DF4759 !default;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+/* beautify ignore:start */
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "primary-desat": $primary-desat, // NEW
+  "black": $black, // NEW
+  "white": $white // NEW
+);
+/* beautify ignore:end */
