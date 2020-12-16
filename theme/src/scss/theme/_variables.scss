@@ -1,48 +1,71 @@
-// Variables
 //
-// Variables should follow the `$component-state-property-size` formula for
-// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
-
-//
-// Bootstrap overrides ===================================
+// Theme ===================================
 //
 
-// Color system
+// Paths
 
-$white: #FFFFFF !default;
-$gray-100: #F9FBFD !default;
-$gray-200: #F1F4F8 !default;
-$gray-300: #D9E2EF !default;
-$gray-400: #C6D3E6 !default;
-$gray-500: #ABBCD5 !default;
-$gray-600: #869AB8 !default;
-$gray-700: #506690 !default;
-$gray-800: #384C74 !default;
-$gray-900: #1B2A4E !default;
-$black: #161C2D !default;
+$path-to-img: "../img" !default;
+$path-to-fonts: "../fonts" !default;
 
-$primary: #335EEA !default;
-$secondary: $gray-700 !default;
-$primary-desat: #6C8AEC !default; // NEW
-$success: #42BA96 !default;
-$info: #7C69EF !default;
-$warning: #FAD776 !default;
-$danger: #DF4759 !default;
-$light: $gray-100 !default;
-$dark: $gray-900 !default;
 
-/* beautify ignore:start */
-$theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,
-  "success": $success,
-  "info": $info,
-  "warning": $warning,
-  "danger": $danger,
-  "light": $light,
-  "dark": $dark,
-  "primary-desat": $primary-desat, // NEW
-  "black": $black, // NEW
-  "white": $white // NEW
-);
-/* beautify ignore:end */
+/**
+Custom SCSS theme
+ */
+
+// Color
+// Pre-state grayscale colors used in other variables
+
+$gray-800: #343a40;
+
+// Override Bootstrap color system
+
+$orange: #bd5d38;
+
+// Override Bootstrap default state colors
+
+$primary: $base00;
+
+// Override Bootstrap yiq lightness value
+
+$yiq-contrasted-threshold: 205;
+
+// Typography
+
+// Override Bootstrap typography variables
+
+$font-family-base: 'Quicksand';
+
+$headings-font-family: 'Quicksand';
+$headings-font-weight: 700;
+
+$headings-color: $base00;
+
+$h1-font-size: 6rem;
+$h2-font-size: 3.5rem;
+$h3-font-size: 2rem;
+
+
+// Spacing
+// Restate and add to the Bootstrap default spacing variables
+//
+// The spacer is restated in order to add new entries to the $spacers map
+// The 10 and n1 through n10 spacers are newly added allowing for larger
+// spacing options and negative padding and margin utilities
+
+$spacer: 1rem;
+
+// Spacing variable to set the sidebar base width
+
+$sidebar-base-width: 17rem;
+
+// Spacing variable to add padding to the top of the body element that matches the height of the navbar
+
+$navbar-base-height: 3.375rem;
+
+
+// Gird
+// Override Bootstrap grid column variables
+//
+// Override the spacing between columns to add symmetry to the layout
+
+$grid-gutter-width: $spacer * 1.5;
