@@ -88,7 +88,7 @@
             "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
             "sudo chgrp -R www-data data",
             "sudo chmod -R ug+rwx data",
-            "php -S 0.0.0.0:8080 -t public"
+            "php -S 0.0.0.0:8181 -t public"
         ],
         "test": " ./vendor/bin/phpunit -c phpunit.xml"
     },

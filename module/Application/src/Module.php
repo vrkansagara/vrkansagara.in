@@ -76,7 +76,7 @@ class Module implements
             $response = $e->getResponse();
             $content  = $response->getContent();
             $content  = $this->compressJscript($content);
-            $content  = self::compress($content);
+//            $content  = self::compress($content);
             $response->setContent(str_replace(
                 'Execution time:',
                 'Execution time: ' . $timeF,

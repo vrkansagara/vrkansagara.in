@@ -33,7 +33,7 @@ $ds    = function ($entry)  {
     return $date->format('Y-m-d H:i:s');
 };
 ?>
-<div class="container">
+<div class="container-fluid p-0">
     <?php foreach ($this->entries as $entry): ?>
       <article class="blog-post">
           <?php echo $this->render('blog/entry-short', array('entry' => $entry)); ?>

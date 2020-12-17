@@ -4,21 +4,31 @@
  */
 ?>
 <?= $this->doctype() ?>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-
+    <meta charset="UTF-8">
+    <!-- Title -->
     <?= $this->headTitle('VRKANSAGARA')->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <?= $this->headMeta()
-        ->appendName('viewport', 'width=device-width, initial-scale=1')
+        ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 shrink-to-fit=no')
         ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ->appendHttpEquiv('description', 'Vallabh Kansagara (VRKANSAGARA)')
+        ->appendHttpEquiv('author', 'Vallabh Kansagara (VRKANSAGARA)')
     ?>
 
-  <!-- Le styles -->
-    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('/assets/images/favicon.ico')])
-        ->prependStylesheet($this->basePath('/dist/css/app.css'))
+    <!-- Favicon -->
+    <?= $this->headLink([
+        'rel' => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath('/assets/favicon/favicon.ico'
+        )])
+        ->prependStylesheet('https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css')
+        ->prependStylesheet($this->basePath('/assets/css/theme.bundle.css'))
+        ->prependStylesheet($this->basePath('/assets/css/libs.bundle.css'))
+
     ?>
+
   <!-- Scripts -->
     <?= $this->headScript() ?>
   <link rel="canonical" href="<?= $this->url('home') ?>">
@@ -40,44 +50,32 @@
     <?php endif; ?>
 
 </head>
-<body class="d-flex flex-column h-100">
-<header>
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="<?=$this->url('home')?>">
-        <img class='nav-logo' src="<?=$this->basePath('assets/images/favicon.ico')?>" alt="">
-        Vallabh Kansagara (VRKANSAGARA)
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto mb-2 mb-md-0">
-          <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="<?=$this->url('home')?>">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('blog')?>">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?=$this->url('page/contact')?>">Contact</a>
-          </li>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Vallabh Kansagara</span>
+        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<?=$this->basePath('assets/images/vrkansagara.jpeg')?>" alt="" /></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= $this->url('home') ?>">Home</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?=$this->url('blog')?>">Blog</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
+            <li>
+                <form method="get" action="s" class="d-flex"> <input name="name" value="" id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything..."> </form>
+            </li>
         </ul>
-        <form  method="get" action="<?=$this->url('search')?>"  class="d-flex">
-          <input  name="name" value="" id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything...">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
     </div>
-  </nav>
-</header>
+</nav>
 
 <!-- Begin page content -->
-<main id="app"  class="flex-shrink-0">
-    <?= $this->content ?>
-</main>
-
+<?= $this->content ?>
 
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
@@ -100,11 +98,23 @@
   </div>
 </footer>
 
+
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>-->
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+<!-- Map JS -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
+
 <?php
 echo $this->inlineScript()
-    ->prependFile($this->basePath('/dist/js/vendor.js'), 'text/javascript', ['defer' => true])
-    ->prependFile($this->basePath('/dist/js/manifest.js'), 'text/javascript', ['defer' => true])
-    ->prependFile($this->basePath('/dist/js/app.js'), 'text/javascript', ['defer' => true])
+    ->prependFile($this->basePath('/assets/js/theme.bundle.js'), 'text/javascript', ['defer' => false])
+    ->prependFile($this->basePath('/assets/js/vendor.bundle.js'), 'text/javascript', ['defer' => false])
 ?>
 </body>
 </html>
