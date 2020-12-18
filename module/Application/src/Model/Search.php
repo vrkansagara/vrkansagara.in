@@ -10,6 +10,7 @@ use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\StringLength;
+
 use function sprintf;
 
 class Search implements InputFilterAwareInterface

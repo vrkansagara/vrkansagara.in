@@ -6,6 +6,7 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 use RuntimeException;
+
 use function implode;
 use function sprintf;
 use function strip_tags;

@@ -7,6 +7,7 @@ namespace Application\Delegators;
 use Interop\Container\ContainerInterface;
 use Laminas\EventManager\Event;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
+
 use function call_user_func;
 
 class IndexControllerDelegatorFactory implements DelegatorFactoryInterface

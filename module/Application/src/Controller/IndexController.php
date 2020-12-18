@@ -17,12 +17,14 @@ use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Uri;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+
 use function count;
 use function filter_var;
 use function getMyInfo;
 use function printf;
 use function rand;
 use function strlen;
+
 use const FILTER_VALIDATE_IP;
 use const FILTER_VALIDATE_URL;
 

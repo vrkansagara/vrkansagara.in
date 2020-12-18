@@ -18,6 +18,7 @@ use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\MvcEvent;
+
 use function array_keys;
 use function array_merge;
 use function array_values;

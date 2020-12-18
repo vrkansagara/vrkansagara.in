@@ -11,9 +11,11 @@ use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\RendererInterface;
 use PhlyBlog\Compiler\Event;
+
 use function file_put_contents;
 use function getcwd;
 use function sprintf;
+
 use const FILE_APPEND;
 
 class PhlyCompilerDelegatorFactory implements DelegatorFactoryInterface

@@ -6,6 +6,7 @@ namespace Page;
 
 use Laminas\Router\Http\Literal;
 use PhlySimplePage\PageController;
+
 use function is_production_mode;
 
 return [

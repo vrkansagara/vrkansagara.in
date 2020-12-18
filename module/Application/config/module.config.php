@@ -19,6 +19,7 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use PhlySimplePage\ClearCacheCommand;
 use PhlySimplePage\PageCacheFactory;
+
 use function is_production_mode;
 
 return [
