@@ -42,121 +42,6 @@ class Module implements
     protected static $layout;
     protected $config;
 
-    public function getConfig(): array
-    {
-        return include __DIR__ . '/../config/module.config.php';
-    }
-
-    public function getServiceConfig()
-    {
-        return [];
-    }
-
-    // The "init" method is called on application start-up and
-    // allows to register an event listener.
-    public function init(ModuleManager $manager)
-    {
-//         Get event manager.
-//        $eventManager = $manager->getEventManager();
-//        $sharedEventManager = $eventManager->getSharedManager();
-//        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', [$this, 'onDispatch'], 100);
-
-//        $this->sampleEvents($eventManager);
-    }
-
-    public function onBootstrap(MvcEvent $event)
-    {
-        $application  = $event->getApplication();
-        $eventManager = $application->getEventManager();
-        $services     = $application->getServiceManager();
-
-        $eventManager->attach(MvcEvent::EVENT_FINISH, function ($e) {
-            $timeF = getRequestExecutionTime(microtime(true), REQUEST_MICROTIME);
-            // Search static content and replace for execution time
-            $response = $e->getResponse();
-            $content  = $response->getContent();
-            $content  = $this->compressJscript($content);
-//            $content  = self::compress($content);
-            $response->setContent(str_replace(
-                'Execution time:',
-                'Execution time: ' . $timeF,
-                $content
-            ));
-        }, 100000);
-
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'rotateXPoweredByHeader']);
-//        $eventManager->attach(
-//            MvcEvent::EVENT_ROUTE,
-//            $services->get('Application\RedirectListener'),
-//            -1
-//        );
-    }
-
-    public function getViewHelperConfig()
-    {
-        return [
-            'factories' => [
-                'disqus' => function ($serviceManager) {
-                    $config = $serviceManager->get('config');
-                    if ($config instanceof Config) {
-                        $config = $config->toArray();
-                    }
-                    $config = $config['disqus'];
-                    return new View\Helper\Disqus($config);
-                },
-            ],
-        ];
-    }
-
-    // Event listener method.
-    public function onDispatch(MvcEvent $event)
-    {
-        $whiteSpaceRules = [
-            '/(\s)+/s'     => '\\1', // shorten multiple whitespace sequences
-            "#>\s+<#"      => ">\n<", // Strip excess whitespace using new line
-            "#\n\s+<#"     => "\n<", // strip excess whitespace using new line
-            '/\>[^\S ]+/s' => '>',
-            // Strip all whitespaces after tags, except space
-            '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
-            /**
-             * '/\s+     # Match one or more whitespace characters
-             * (?!       # but only if it is impossible to match...
-             * [^<>]*   # any characters except angle brackets
-             * >        # followed by a closing bracket.
-             * )         # End of lookahead
-             * /x',
-             */
-            //            '/\s+(?![^<>]*>)/x' => '', //Remove all whitespaces except content between html tags. //MOST DANGEROUS
-        ];
-        $commentRules = [
-            "/<!--.*?-->/ms" => '', // Remove all html comment.,
-        ];
-        $replaceWords = [
-            //OldWord will be replaced by the NewWord
-            //              '/\bOldWord\b/i' =>'NewWord' // OldWord <-> NewWord DO NOT REMOVE THIS LINE. {REFERENCE LINE}
-        ];
-        $allRules = array_merge(
-            $replaceWords,
-            $commentRules,
-            $whiteSpaceRules
-        );
-        $buffer   = $this->compressJscript($buffer);
-        $buffer   = preg_replace(array_keys($allRules), array_values($allRules), $buffer);
-
-        // Get controller to which the HTTP request was dispatched.
-//        $controller = $event->getTarget();
-        // Get fully qualified class name of the controller.
-//        $controllerClass = get_class($controller);
-        // Get module name of the controller.
-//        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
-
-        // Switch layout only for controllers belonging to our module.
-//        if ($moduleNamespace == __NAMESPACE__) {
-//            $viewModel = $event->getViewModel();
-//            $viewModel->setTemplate('layout/layout2');
-//        }
-    }
-
     /**
      * This method will no longer support.
      *
@@ -211,6 +96,59 @@ class Module implements
         return round(pow(1024, $base - floor($base)), 2) . $suffix[$f_base];
     }
 
+    // The "init" method is called on application start-up and
+    // allows to register an event listener.
+
+    public function getConfig(): array
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+
+    public function getServiceConfig()
+    {
+        return [];
+    }
+
+    public function init(ModuleManager $manager)
+    {
+//         Get event manager.
+//        $eventManager = $manager->getEventManager();
+//        $sharedEventManager = $eventManager->getSharedManager();
+//        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', [$this, 'onDispatch'], 100);
+
+//        $this->sampleEvents($eventManager);
+    }
+
+    // Event listener method.
+
+    public function onBootstrap(MvcEvent $event)
+    {
+        $application  = $event->getApplication();
+        $eventManager = $application->getEventManager();
+        $services     = $application->getServiceManager();
+
+        $eventManager->attach(MvcEvent::EVENT_FINISH, function ($e) {
+            $timeF = getRequestExecutionTime(microtime(true), REQUEST_MICROTIME);
+            // Search static content and replace for execution time
+            $response = $e->getResponse();
+            $content  = $response->getContent();
+            $content  = $this->compressJscript($content);
+//            $content  = self::compress($content);
+            $response->setContent(str_replace(
+                'Execution time:',
+                'Execution time: ' . $timeF,
+                $content
+            ));
+        }, 100000);
+
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'rotateXPoweredByHeader']);
+//        $eventManager->attach(
+//            MvcEvent::EVENT_ROUTE,
+//            $services->get('Application\RedirectListener'),
+//            -1
+//        );
+    }
+
     public static function compressJscript($buffer): string
     {
         // JavaScript compressor by John Elliot <jj5@jj5.net>
@@ -258,6 +196,70 @@ class Module implements
         $script  = str_replace(array_keys($replace), $replace, $script);
 
         return trim($script);
+    }
+
+    public function getViewHelperConfig()
+    {
+        return [
+            'factories' => [
+                'disqus' => function ($serviceManager) {
+                    $config = $serviceManager->get('config');
+                    if ($config instanceof Config) {
+                        $config = $config->toArray();
+                    }
+                    $config = $config['disqus'];
+                    return new View\Helper\Disqus($config);
+                },
+            ],
+        ];
+    }
+
+    public function onDispatch(MvcEvent $event)
+    {
+        $whiteSpaceRules = [
+            '/(\s)+/s'     => '\\1', // shorten multiple whitespace sequences
+            "#>\s+<#"      => ">\n<", // Strip excess whitespace using new line
+            "#\n\s+<#"     => "\n<", // strip excess whitespace using new line
+            '/\>[^\S ]+/s' => '>',
+            // Strip all whitespaces after tags, except space
+            '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
+            /**
+             * '/\s+     # Match one or more whitespace characters
+             * (?!       # but only if it is impossible to match...
+             * [^<>]*   # any characters except angle brackets
+             * >        # followed by a closing bracket.
+             * )         # End of lookahead
+             * /x',
+             */
+            //            '/\s+(?![^<>]*>)/x' => '', //Remove all whitespaces except content between html tags. //MOST DANGEROUS
+        ];
+        $commentRules = [
+            "/<!--.*?-->/ms" => '', // Remove all html comment.,
+        ];
+        $replaceWords = [
+            //OldWord will be replaced by the NewWord
+            //              '/\bOldWord\b/i' =>'NewWord' // OldWord <-> NewWord DO NOT REMOVE THIS LINE. {REFERENCE LINE}
+        ];
+        $allRules = array_merge(
+            $replaceWords,
+            $commentRules,
+            $whiteSpaceRules
+        );
+        $buffer   = $this->compressJscript($buffer);
+        $buffer   = preg_replace(array_keys($allRules), array_values($allRules), $buffer);
+
+        // Get controller to which the HTTP request was dispatched.
+//        $controller = $event->getTarget();
+        // Get fully qualified class name of the controller.
+//        $controllerClass = get_class($controller);
+        // Get module name of the controller.
+//        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+
+        // Switch layout only for controllers belonging to our module.
+//        if ($moduleNamespace == __NAMESPACE__) {
+//            $viewModel = $event->getViewModel();
+//            $viewModel->setTemplate('layout/layout2');
+//        }
     }
 
     public function rotateXPoweredByHeader(MvcEvent $e)
