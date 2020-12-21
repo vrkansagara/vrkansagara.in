@@ -23,25 +23,25 @@
         "laminas/laminas-recaptcha": "^3.2",
         "laminas/laminas-form": "^2.15",
         "laminas/laminas-session": "^2.9",
-      "laminas/laminas-i18n": "^2.10",
-      "laminas/laminas-test": "^3.4",
-      "laminas/laminas-crypt": "^3.3",
-      "symfony/dotenv": "^5.1",
-      "symfony/dom-crawler": "^5.1",
-      "sentry/sdk": "^3.0",
-      "laminas/laminas-dependency-plugin": "^2.1",
-      "laminas/laminas-navigation": "^2.9",
-      "laminas/laminas-mvc-console": "^1.2",
-      "phly/phly-blog": "^2.0",
-      "league/commonmark": "^1.5",
-      "laminas/laminas-db": "^2.11",
-        "nesbot/carbon": "^2.41",
+        "laminas/laminas-i18n": "^2.10",
+        "laminas/laminas-test": "^3.4",
+        "laminas/laminas-crypt": "^3.3",
+        "symfony/dotenv": "^5.1",
+        "symfony/dom-crawler": "^5.1",
+        "sentry/sdk": "^3.0",
+        "laminas/laminas-dependency-plugin": "^2.1",
+        "laminas/laminas-navigation": "^2.9",
+        "laminas/laminas-mvc-console": "^1.2",
+        "phly/phly-blog": "^2.0",
+        "league/commonmark": "^1.5",
+        "laminas/laminas-db": "^2.11",
+        "nesbot/carbon": "^2.43",
         "laminas/laminas-diactoros": "^2.5"
     },
     "repositories": [
         {
             "type": "git",
-          "url": "https://github.com/phly/PhlyBlog"
+            "url": "https://github.com/phly/PhlyBlog"
         }
     ],
     "autoload": {
@@ -85,10 +85,10 @@
             "sudo rm -rf data/cache/static-page-data/*",
             "/usr/bin/php7.3 composer.phar install -vv",
             "/usr/bin/php7.3 composer.phar dump-autoload",
-            "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
+            "if sudo lsof -t -i:8181; then sudo kill -9 $(sudo lsof -t -i:8181 ); fi",
             "sudo chgrp -R www-data data",
             "sudo chmod -R ug+rwx data",
-            "php -S 0.0.0.0:8080 -t public"
+            "php -S 0.0.0.0:8181 -t public"
         ],
         "test": " ./vendor/bin/phpunit -c phpunit.xml"
     },
@@ -109,6 +109,7 @@
         "roave/security-advisories": "dev-latest",
         "phly/keep-a-changelog": "^2.10",
         "vimeo/psalm": "^4.1",
-        "phpunit/phpunit": "^9"
+        "phpunit/phpunit": "^9",
+        "laminas/laminas-coding-standard": "^2.1"
     }
 }

@@ -121,4 +121,24 @@ class IndexController extends AbstractActionController
 //        printf("Message:\n%s\n", $newBuffer);
         exit;
     }
+
+    public function postdataAction()
+    {
+        try{
+            $request    = $this->getRequest();
+            if ($request->isPost()){
+                $payLoad = $request->getPost()->getArrayCopy();
+                $filePath = getcwd() . '/data/tmp.txt';
+                $payLoad['timestamp'] = Carbon::now()->format('Y-m-d H:i:s');
+                file_put_contents($filePath,json_encode($payLoad),FILE_APPEND);
+            }
+            $response = new JsonResponse([
+                'message' => 'Sent successfully!',
+                'data' => [],
+            ]);
+            return $response;
+        }catch (\Exception $exception){
+            throw $exception;
+        }
+    }
 }
