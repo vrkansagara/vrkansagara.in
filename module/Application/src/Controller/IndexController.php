@@ -132,7 +132,9 @@ class IndexController extends AbstractActionController
                 $payLoad = $request->getPost()->getArrayCopy();
                 $filePath = getcwd() . '/data/tmp.txt';
                 $payLoad['timestamp'] = Carbon::now()->format('Y-m-d H:i:s');
-                file_put_contents($filePath,json_encode($payLoad),FILE_APPEND);
+                $payLoad['http_agent'] = $request->getHeader('User-Agent')->toString();
+                ;
+                file_put_contents($filePath,json_encode($payLoad) .PHP_EOL,FILE_APPEND);
             }
             $response = new JsonResponse([
                 'message' => 'Sent successfully!',
