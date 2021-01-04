@@ -1,0 +1,55 @@
+# Close all = docker rm -vf $(docker ps -a -q)
+# Remove all = docker rmi -f $(docker images -a -q)
+# Remove everything  = docker system prune -a --volumes
+# Docker clean everything  = docker rm -vf $(docker ps -a -q) && docker rmi -f $(docker images -a -q) && docker system prune -a --volumes -y
+# Docker build image = docker build . -f .docker/vrkansagara.docker  --force-rm  -q -t vrkansagara:latest
+# Docker run image in detach mode    = docker run --publish 8090:80 --detach --name vrkansagara vrkansagara:latest
+# Docker run image = docker run --publish 8090:80 --name vrkansagara vrkansagara:latest
+# Docker refresh image = docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker run --publish 8090:80 --detach --name vrkansagara vrkansagara:latest
+# Docker run container  =  docker exec -it <CONTAINER ID> /bin/bash
+# lsof -iTCP -sTCP:LISTEN -Pn
+# RUN means it creates an intermediate container,
+# ENTRYPOINT means your image (which has not executed the script yet) will create a container, and runs that script.
+
+FROM debian:stable-slim
+
+# Copy all installation pre script
+COPY .docker/sh /root/sh
+COPY .docker/config /root/config
+COPY .docker/env /root/env
+
+RUN chmod +x /root/sh/*
+
+# Copy application code
+COPY . /var/www/html
+
+# Copy application entry point
+COPY .docker/run.sh /var/www/html
+
+#application working directory
+WORKDIR /var/www/html
+
+
+# First time System Update and it's packages
+RUN apt-get update -y
+
+RUN /root/sh/ubuntu.sh
+
+
+
+#Nginx config
+RUN apt install lsof htop vim git net-tools elinks -y
+
+# PHP Install
+RUN apt install gpg software-properties-common -y
+
+
+
+RUN /root/sh/nginx-installation.sh
+RUN /root/sh/php-installation.sh
+RUN /root/sh/application.sh
+
+RUN chmod +x ./run.sh && chown -R www-data.www-data ./
+
+ENTRYPOINT ./run.sh
+

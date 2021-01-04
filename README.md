@@ -18,3 +18,13 @@ This is the code behind vrkansagara.in
 - Application.
 - [PhlyBlog](!https://github.com/phly/PhlyBlog) for blog generation.
 - [PhlySimplePage](!https://github.com/phly/PhlySimplePage) for static page.
+
+
+### How to setup this project ###
+
+-[]
+docker run --rm --interactive --tty \
+--volume $PWD:/app \
+--volume ${COMPOSER_HOME:-$HOME/.composer}:/tmp \
+--user $(id -u):$(id -g) \
+composer install

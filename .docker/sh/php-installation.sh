@@ -24,5 +24,9 @@ else
     /usr/local/bin/composer self-update -q --stable --no-ansi --no-interaction
 fi
 
+php composer.phar install --no-ansi --no-dev --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader -vvv
+# php composer.phar install --no-ansi --no-dev --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader -vvv
+php laminas phly-blog:compile
+
 echo "[DONE] php-installation.sh"
 exit 0
