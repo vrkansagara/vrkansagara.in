@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
 
 
 # Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
+COPY composer.lock composer.json /var/www/html/
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -27,13 +27,13 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
+    wget \
     curl
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#RUN wget https://github.com/phpmyadmin/phpmyadmin/archive/RELEASE_5_0_4.tar.gz /tmp && tar -xvf  /tmp/RELEASE_5_0_4.tar.gz -C /var/www/phpmyadmin-RELEASE_5_0_4
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
@@ -45,13 +45,17 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 # Change current user to www
 USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
-
 # ========== @START
 #
 #
