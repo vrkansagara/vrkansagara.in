@@ -27,4 +27,4 @@ docker run --rm --interactive --tty \
 --volume $PWD:/app \
 --volume ${COMPOSER_HOME:-$HOME/.composer}:/tmp \
 --user $(id -u):$(id -g) \
-composer install
+composer update  --no-ansi --no-dev -- prefer-dist--no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader

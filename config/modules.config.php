@@ -27,7 +27,6 @@ return [
     'Laminas\Cache',
     'Laminas\Router',
     'Laminas\Validator',
-    'Laminas\DeveloperTools',
 //    'FileEditor',
     'PhlyBlog',
     'PhlySimplePage',
