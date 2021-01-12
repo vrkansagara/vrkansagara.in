@@ -20,7 +20,7 @@ ENV TZ='Asia/Kolkata'
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Copy composer.lock and composer.json
-COPY composer.json /var/www/html/
+COPY composer.lock composer.json /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html
@@ -59,8 +59,6 @@ RUN chmod +x /root/etc/sh/* \
 
 # Download composer as project dependecies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-#RUN wget https://github.com/phpmyadmin/phpmyadmin/archive/RELEASE_5_0_4.tar.gz /tmp && tar -xvf  /tmp/RELEASE_5_0_4.tar.gz -C /var/www/phpmyadmin-RELEASE_5_0_4
-
 
 ## Make sure current container has super-user
 USER root
