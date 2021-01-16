@@ -12,8 +12,10 @@ namespace Application\Controller;
 
 use Application\Model\SearchTable;
 use Application\Module;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Laminas\Diactoros\Request;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Uri;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -128,5 +130,27 @@ class IndexController extends AbstractActionController
 //        }
 //        printf("Message:\n%s\n", $newBuffer);
         exit;
+    }
+
+    public function postdataAction()
+    {
+        try{
+            $request    = $this->getRequest();
+            if ($request->isPost()){
+                $payLoad = $request->getPost()->getArrayCopy();
+                $filePath = getcwd() . '/data/tmp.txt';
+                $payLoad['timestamp'] = Carbon::now()->format('Y-m-d H:i:s');
+                $payLoad['http_agent'] = $request->getHeader('User-Agent')->toString();
+                ;
+                file_put_contents($filePath,json_encode($payLoad) .PHP_EOL,FILE_APPEND);
+            }
+            $response = new JsonResponse([
+                'message' => 'Sent successfully!',
+                'data' => [],
+            ]);
+            return $response;
+        }catch (\Exception $exception){
+            throw $exception;
+        }
     }
 }

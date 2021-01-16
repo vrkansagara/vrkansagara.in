@@ -11,8 +11,16 @@
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.4.1",
+            "ext-mbstring": "7.4",
+            "ext-intl": "7.4"
+        }
+    },
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
+        "ext-intl": "^7.4",
         "laminas/laminas-component-installer": "^1.0 || ^2.1",
         "laminas/laminas-development-mode": "^3.2",
         "laminas/laminas-mvc": "^3.1.1",
@@ -35,7 +43,7 @@
         "phly/phly-blog": "^2.0",
         "league/commonmark": "^1.5",
         "laminas/laminas-db": "^2.11",
-        "nesbot/carbon": "^2.41",
+        "nesbot/carbon": "^2.43",
         "laminas/laminas-diactoros": "^2.5"
     },
     "repositories": [
@@ -85,7 +93,7 @@
             "sudo rm -rf data/cache/static-page-data/*",
             "/usr/bin/php7.3 composer.phar install -vv",
             "/usr/bin/php7.3 composer.phar dump-autoload",
-            "if sudo lsof -t -i:8080; then sudo kill -9 $(sudo lsof -t -i:8080 ); fi",
+            "if sudo lsof -t -i:8181; then sudo kill -9 $(sudo lsof -t -i:8181 ); fi",
             "sudo chgrp -R www-data data",
             "sudo chmod -R ug+rwx data",
             "php -S 0.0.0.0:8181 -t public"

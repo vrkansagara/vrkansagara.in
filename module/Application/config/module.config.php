@@ -44,6 +44,18 @@ return [
                     ],
                 ],
             ],
+            'api'        => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/api',
+//                    'verb' => 'post',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'postdata',
+//                        'do_not_cache' => ! is_production_mode(),
+                    ],
+                ],
+            ],
             'application' => [
                 'type'          => Segment::class,
                 'options'       => [

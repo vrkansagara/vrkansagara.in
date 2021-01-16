@@ -12,42 +12,36 @@
  * file.
  */
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Adapter\AdapterServiceFactory;
-use Laminas\Session\Config\SessionConfig;
-use Laminas\Session\Storage\SessionArrayStorage;
-use Laminas\Session\Validator\HttpUserAgent;
-use Laminas\Session\Validator\RemoteAddr;
-
 return [
-    'db'              => [
-        'driver' => 'Pdo',
-        'dsn'    => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
-
+    'db' => [
 //        'driver' => 'Pdo',
-//        'dsn' => 'mysql:dbname=vrkansagara.in;host=localhost',
+//        'dsn' => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
+
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=vrkansagara_in;host=mysql',
         'driver_options' => [
             1002 => "SET NAMES 'UTF8'",
         ],
-        'username'       => 'YOUR SECRET USER NAME',
-        'password'       => 'YOUR SECRET PASSWORD',
+        'username' => 'root',
+        'password' => 'toor',
     ],
     'service_manager' => [
         'factories' => [
-            Adapter::class => AdapterServiceFactory::class,
+            \Laminas\Db\Adapter\Adapter::class => \Laminas\Db\Adapter\AdapterServiceFactory::class,
         ],
     ],
-    'session'         => [
-        'config'     => [
-            'class'   => SessionConfig::class,
+    'session' => [
+        'config' => [
+            'class' => \Laminas\Session\Config\SessionConfig::class,
             'options' => [
                 'name' => 'session_name',
             ],
         ],
-        'storage'    => SessionArrayStorage::class,
+        'storage' => \Laminas\Session\Storage\SessionArrayStorage::class,
         'validators' => [
-            RemoteAddr::class,
-            HttpUserAgent::class,
+            \Laminas\Session\Validator\RemoteAddr::class,
+            \Laminas\Session\Validator\HttpUserAgent::class,
         ],
     ],
-];
+
+    ];
