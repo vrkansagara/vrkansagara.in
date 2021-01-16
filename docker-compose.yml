@@ -2,7 +2,7 @@
 # https://github.com/compose-spec/compose-spec/blob/master/spec.md
 version: '3.8'
 services:
-  php:
+  app:
     container_name: app
     build:
       context: .
@@ -38,6 +38,7 @@ services:
       - app-network
   mysql:
     image: 'mysql:5.7.22'
+#    image: 'mysql:8.0'
     container_name: database
     restart: unless-stopped
     tty: true
@@ -45,7 +46,10 @@ services:
       - '3307:3306'
     environment:
       MYSQL_DATABASE: vrkansagara_in
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_HOST: database_local
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
       SERVICE_TAGS: dev
       SERVICE_NAME: database_local
     volumes:

@@ -37,7 +37,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
 //$cfg['Servers'][$i]['user'] = 'root';
 //$cfg['Servers'][$i]['password'] = '';
 $cfg['Servers'][$i]['AllowNoPassword'] = true;
-$cfg['AllowArbitraryServer'] = false;
+//$cfg['AllowArbitraryServer'] = false;
 
 
 /**

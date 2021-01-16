@@ -12,7 +12,7 @@
 # ENTRYPOINT means your image (which has not executed the script yet) will create a container, and runs that script.
 #  docker logs --tail 50 --follow --timestamps  webserver
 # docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
-
+# docker-compose build . -t vrkansagara_in:latest --parallel --no-rm  --memory --compress
 FROM debian:stable-slim
 
 ## Setup Tzdata First(container image timezone), This will set container timezone
@@ -59,6 +59,8 @@ RUN chmod +x /root/etc/sh/* \
 
 # Download composer as project dependecies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet
+
 
 ## Make sure current container has super-user
 USER root
