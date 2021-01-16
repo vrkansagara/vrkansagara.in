@@ -3,7 +3,7 @@
   <h2>Search result...</h2>
 
     <?php foreach ($search as $row): ?>
-      <p><a href="<?= $this->url('blog') ?><?= urlencode($row->url) ?>.html"><?= $row->name ?></a></p>
+      <p><a href="<?= $this->url('blog') ?>/<?= urlencode($row->url) ?>.html"><?= $row->name ?></a></p>
     <?php endforeach; ?>
   <table>
       <?php foreach ($info as $key => $value): ?>
