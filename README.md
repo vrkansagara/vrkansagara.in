@@ -10,18 +10,16 @@ This is the code behind vrkansagara.in
 - Laminas MVC Framework (Formaly known as Zend Framework)
 - Bootstrap5
 - jQuery
-- VueJs
 
 
 ### Application module(s)
-- Application.
+- Application
 - [PhlyBlog](!https://github.com/phly/PhlyBlog) for blog generation.
 - [PhlySimplePage](!https://github.com/phly/PhlySimplePage) for static page.
 
 
 ### How to setup this project ###
 
--[]
 docker run --rm --interactive --tty \
 --volume $PWD:/app \
 --volume ${COMPOSER_HOME:-$HOME/.composer}:/tmp \
