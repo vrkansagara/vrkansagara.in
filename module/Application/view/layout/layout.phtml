@@ -10,24 +10,24 @@
     <!-- Title -->
     <?= $this->headTitle('VRKANSAGARA')->setSeparator(' - ')->setAutoEscape(false) ?>
 
-    <?= $this->headMeta()
-        ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 shrink-to-fit=no')
-        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ->appendHttpEquiv('description', 'Vallabh Kansagara (VRKANSAGARA)')
-        ->appendHttpEquiv('author', 'Vallabh Kansagara (VRKANSAGARA)')
-    ?>
+<?= $this->headMeta()
+         ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 shrink-to-fit=no')
+         ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+         ->appendHttpEquiv('description', 'Vallabh Kansagara (VRKANSAGARA)')
+         ->appendHttpEquiv('author', 'Vallabh Kansagara (VRKANSAGARA)')
+?>
 
     <!-- Favicon -->
-    <?= $this->headLink([
-        'rel' => 'shortcut icon',
-        'type' => 'image/vnd.microsoft.icon',
-        'href' => $this->basePath('/assets/favicon/favicon.ico'
-        )])
-        ->prependStylesheet('https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css')
-        ->prependStylesheet($this->basePath('/assets/css/theme.bundle.css'))
-        ->prependStylesheet($this->basePath('/assets/css/libs.bundle.css'))
+<?= $this->headLink([
+    'rel' => 'shortcut icon',
+    'type' => 'image/vnd.microsoft.icon',
+    'href' => $this->basePath('/assets/favicon/favicon.ico'
+    )])
+         ->prependStylesheet('https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css')
+         ->prependStylesheet($this->basePath('/assets/css/theme.bundle.css'))
+         ->prependStylesheet($this->basePath('/assets/css/libs.bundle.css'))
 
-    ?>
+?>
 
   <!-- Scripts -->
     <?= $this->headScript() ?>
@@ -36,19 +36,15 @@
     <?php if (is_production_mode()): ?>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script data-cfasync="false" async src="https://www.googletagmanager.com/gtag/js?id=UA-62451902-2"></script>
-      <script>
-          window.dataLayer = window.dataLayer || [];
-
-          function gtag() {
-              dataLayer.push(arguments);
+     <script>
+     window.dataLayer = window.dataLayer || [];
+function gtag() {
+    dataLayer.push(arguments);
           }
-
           gtag('js', new Date());
-
           gtag('config', 'UA-62451902-2');
-      </script>
+          </script>
     <?php endif; ?>
-
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -62,13 +58,8 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= $this->url('home') ?>">Home</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?=$this->url('blog')?>">Blog</a></li>
-<!--            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>-->
-<!--            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>-->
-<!--            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>-->
-<!--            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>-->
-<!--            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>-->
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?=$this->url('page/contact')?>">Contact</a></li>
-            <li>
+            <li class='mt-5'>
                 <form method="get" action="s" class="d-flex"> <input name="name" value="" id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything..."> </form>
             </li>
         </ul>

@@ -45,6 +45,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     supervisor \
     tzdata \
+    npm \
     && sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
 
 #Other utility stuff
