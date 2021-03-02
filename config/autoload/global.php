@@ -14,11 +14,11 @@
 
 return [
     'db' => [
-//        'driver' => 'Pdo',
-//        'dsn' => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
-
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=vrkansagara_in;host=mysql',
+        'dsn' => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
+
+        // 'driver' => 'Pdo',
+        // 'dsn' => 'mysql:dbname=vrkansagara_in;host=mysql',
         'driver_options' => [
             1002 => "SET NAMES 'UTF8'",
         ],

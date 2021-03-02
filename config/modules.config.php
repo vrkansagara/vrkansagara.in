@@ -16,7 +16,6 @@ return [
     'Laminas\Paginator',
     'Laminas\Mvc\Console',
     'Laminas\Navigation',
-    'Laminas\ZendFrameworkBridge',
     'Laminas\I18n',
     'Laminas\Session',
     'Laminas\Form',

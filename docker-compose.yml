@@ -13,6 +13,7 @@ services:
       - nginx
     ports:
       - '9000:9000'
+      - '35729:35729'
     restart: unless-stopped
     tty: true
     working_dir: /var/www/html

@@ -1,6 +1,7 @@
 <?php
-
 declare(strict_types=1);
+
+define('LAMINAS_START', microtime(true));
 
 use Laminas\Mvc\Application;
 use Laminas\Stdlib\ArrayUtils;
@@ -10,7 +11,6 @@ include __DIR__ . '/../vendor/autoload.php';
 
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-//phpinfo();exit;
 
 // Do 301 rewrites
 include __DIR__ . '/../rewrites.php';
