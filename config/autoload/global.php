@@ -17,13 +17,18 @@ return [
         'driver' => 'Pdo',
         'dsn' => sprintf('sqlite:%s/data/vrkansagara.sqlite3', realpath(getcwd())),
 
-//        'driver' => 'Pdo',
-//        'dsn' => 'mysql:dbname=vrkansagara.in;host=localhost',
+        // 'driver' => 'Pdo',
+        // 'dsn' => 'mysql:dbname=vrkansagara_in;host=mysql',
         'driver_options' => [
             1002 => "SET NAMES 'UTF8'",
         ],
-        'username' => 'YOUR SECRET USER NAME',
-        'password' => 'YOUR SECRET PASSWORD',
+        'username' => 'root',
+        'password' => 'toor',
+    ],
+    'service_manager' => [
+        'factories' => [
+            \Laminas\Db\Adapter\Adapter::class => \Laminas\Db\Adapter\AdapterServiceFactory::class,
+        ],
     ],
     'session' => [
         'config' => [

@@ -9,7 +9,6 @@ sudo find ./ -type f -exec chmod 664 {} \;
 sudo find ./ -type d -exec chmod 775 {} \;
 sudo chmod -R a+x vendor
 sudo chmod 0777 data/cache -Rf
-
 sudo chmod 0777 data/ -Rf
 
 sudo rm -rf yarn.lock package-lock.json

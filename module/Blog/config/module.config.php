@@ -113,7 +113,7 @@ return [
             'blog' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/blog',
+                    'route' => '/blog/',
                 ],
                 'may_terminate' => true,
                 'child_routes' => [

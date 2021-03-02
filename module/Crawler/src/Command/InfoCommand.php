@@ -1,6 +1,6 @@
 <?php
 
-namespace  Crawler\Command;
+namespace Crawler\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

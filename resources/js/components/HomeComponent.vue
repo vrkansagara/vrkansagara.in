@@ -2,8 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <img class="bd-placeholder-img card-img-top"
-             src="/assets/images/vrkansagara.jpeg" alt="Vallabh Kansagara (VRKANSAGARA)">
+        <img
+          class="bd-placeholder-img card-img-top"
+          src="/assets/images/vrkansagara.jpeg"
+          alt="Vallabh Kansagara (VRKANSAGARA)"
+        >
       </div>
       <div class="col-md-9">
         <h1 class="display-3 font-q">नमस्ते, World!</h1>
@@ -23,9 +26,10 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-          console.log('Component mounted.')
-        }
-    }
+
+export default {
+  mounted() {
+    console.log('Component mounted.');
+  },
+};
 </script>

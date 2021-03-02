@@ -24,10 +24,10 @@ class AlbumTest extends TestCase
     public function testExchangeArraySetsPropertiesCorrectly()
     {
         $album = new Search();
-        $data = [
+        $data  = [
             'artist' => 'some artist',
-            'id' => 123,
-            'title' => 'some title'
+            'id'     => 123,
+            'title'  => 'some title',
         ];
 
         $album->exchangeArray($data);
@@ -57,8 +57,8 @@ class AlbumTest extends TestCase
 
         $album->exchangeArray([
             'artist' => 'some artist',
-            'id' => 123,
-            'title' => 'some title',
+            'id'     => 123,
+            'title'  => 'some title',
         ]);
         $album->exchangeArray([]);
 
@@ -70,10 +70,10 @@ class AlbumTest extends TestCase
     public function testGetArrayCopyReturnsAnArrayWithPropertyValues()
     {
         $album = new Search();
-        $data = [
+        $data  = [
             'artist' => 'some artist',
-            'id' => 123,
-            'title' => 'some title'
+            'id'     => 123,
+            'title'  => 'some title',
         ];
 
         $album->exchangeArray($data);

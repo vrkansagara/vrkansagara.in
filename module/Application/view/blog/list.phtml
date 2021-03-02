@@ -33,11 +33,11 @@ $ds    = function ($entry)  {
     return $date->format('Y-m-d H:i:s');
 };
 ?>
-<div class="container font-q">
+<div class="container-fluid p-0">
     <?php foreach ($this->entries as $entry): ?>
-      <div class="blog-post mt-5">
+      <article class="blog-post">
           <?php echo $this->render('blog/entry-short', array('entry' => $entry)); ?>
-      </div><!-- /.blog-post -->
+      </article><!-- /.blog-post -->
       <hr>
     <?php endforeach;?>
     <?=$this->paginationControl($this->entries, 'Sliding', 'blog/paginator', array('url' => $paginatorUrl, 'substitution' => $urlSubstitutionString,)) ?>

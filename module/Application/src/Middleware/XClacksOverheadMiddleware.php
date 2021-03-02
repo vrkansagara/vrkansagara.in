@@ -11,8 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class XClacksOverheadMiddleware implements MiddlewareInterface
 {
-
-
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $response = $delegate->handle($request);

@@ -9,10 +9,6 @@ use Psr\Container\ContainerInterface;
 
 class CompileCommandFactory
 {
-    /**
-     * @param ContainerInterface $container
-     * @return CompileCommand
-     */
     public function __invoke(ContainerInterface $container): CompileCommand
     {
         $config = $container->has('config') ? $container->get('config') : [];

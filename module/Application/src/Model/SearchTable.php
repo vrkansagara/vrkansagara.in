@@ -7,6 +7,10 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 use RuntimeException;
 
+use function implode;
+use function sprintf;
+use function strip_tags;
+
 class SearchTable
 {
     private $tableGateway;
@@ -25,10 +29,10 @@ class SearchTable
     {
         $data = [
             'artist' => $album->artist,
-            'title' => $album->title,
+            'title'  => $album->title,
         ];
 
-        $id = (int)$album->id;
+        $id = (int) $album->id;
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
@@ -49,9 +53,9 @@ class SearchTable
 
     public function getSearch($id)
     {
-        $id = (int)$id;
+        $id     = (int) $id;
         $rowset = $this->tableGateway->select(['id' => $id]);
-        $row = $rowset->current();
+        $row    = $rowset->current();
         if (! $row) {
             throw new RuntimeException(sprintf(
                 'Could not find row with identifier %d',
@@ -64,38 +68,36 @@ class SearchTable
 
     public function deleteSearch($id)
     {
-        $this->tableGateway->delete(['id' => (int)$id]);
+        $this->tableGateway->delete(['id' => (int) $id]);
     }
 
     public function search($name): ResultSet
     {
         // search for at most 2 artists who's name starts with Brit, ascending
-        /** @var $rowset ResultSet */
-        $rowset = $this->tableGateway->select(function (Select $select) use ($name) {
+        /** @var ResultSet $rowset */
+        return $this->tableGateway->select(function (Select $select) use ($name) {
             $select->where->like('content', "%$name%");
 //            $select->where->like('tags', "%$name%");
             $select->order('url DESC')->limit(10);
         });
-
-        return $rowset;
     }
 
     public function cleanSearchData($type)
     {
         if ($type == 'blog') {
             // Remove all records.
-            $this->tableGateway->delete(['type' => (string)$type]);
+            $this->tableGateway->delete(['type' => (string) $type]);
         }
     }
 
     public function insertSearchData($title, $content, $tags, $url, $type)
     {
         $data = [
-            'name' => $title,
+            'name'    => $title,
             'content' => strip_tags($content),
-            'tags' => implode(',', $tags),
-            'url' => $url,
-            'type' => $type
+            'tags'    => implode(',', $tags),
+            'url'     => $url,
+            'type'    => $type,
         ];
         $this->tableGateway->insert($data);
     }

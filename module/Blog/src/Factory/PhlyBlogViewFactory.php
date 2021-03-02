@@ -14,6 +14,9 @@ use Laminas\View\View;
 use Laminas\View\ViewEvent;
 use Psr\Container\ContainerInterface;
 
+use function method_exists;
+use function str_replace;
+
 class PhlyBlogViewFactory
 {
     public function __invoke(ContainerInterface $container): View

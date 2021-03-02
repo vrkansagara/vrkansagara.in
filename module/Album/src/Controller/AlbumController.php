@@ -5,12 +5,12 @@ namespace Album\Controller;
 use Album\Form\AlbumForm;
 use Album\Model\Album;
 use Album\Model\AlbumTable;
+use Exception;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class AlbumController extends AbstractActionController
 {
-
     // Add this property:
     private $table;
 
@@ -26,7 +26,7 @@ class AlbumController extends AbstractActionController
             return new ViewModel([
                 'albums' => $this->table->fetchAll(),
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }
@@ -54,7 +54,7 @@ class AlbumController extends AbstractActionController
             $album->exchangeArray($form->getData());
             $this->table->saveAlbum($album);
             return $this->redirect()->toRoute('album');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }
@@ -62,7 +62,7 @@ class AlbumController extends AbstractActionController
     public function editAction()
     {
         try {
-            $id = (int)$this->params()->fromRoute('id', 0);
+            $id = (int) $this->params()->fromRoute('id', 0);
 
             if (0 === $id) {
                 return $this->redirect()->toRoute('album', ['action' => 'add']);
@@ -73,7 +73,7 @@ class AlbumController extends AbstractActionController
             // in redirecting to the landing page.
             try {
                 $album = $this->table->getAlbum($id);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return $this->redirect()->toRoute('album', ['action' => 'index']);
             }
 
@@ -81,7 +81,7 @@ class AlbumController extends AbstractActionController
             $form->bind($album);
             $form->get('submit')->setAttribute('value', 'Edit');
 
-            $request = $this->getRequest();
+            $request  = $this->getRequest();
             $viewData = ['id' => $id, 'form' => $form];
 
             if (! $request->isPost()) {
@@ -99,7 +99,7 @@ class AlbumController extends AbstractActionController
 
             // Redirect to album list
             return $this->redirect()->toRoute('album', ['action' => 'index']);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }
@@ -107,7 +107,7 @@ class AlbumController extends AbstractActionController
     public function deleteAction()
     {
         try {
-            $id = (int)$this->params()->fromRoute('id', 0);
+            $id = (int) $this->params()->fromRoute('id', 0);
             if (! $id) {
                 return $this->redirect()->toRoute('album');
             }
@@ -117,7 +117,7 @@ class AlbumController extends AbstractActionController
                 $del = $request->getPost('del', 'No');
 
                 if ($del == 'Yes') {
-                    $id = (int)$request->getPost('id');
+                    $id = (int) $request->getPost('id');
                     $this->table->deleteAlbum($id);
                 }
 
@@ -126,10 +126,10 @@ class AlbumController extends AbstractActionController
             }
 
             return [
-                'id' => $id,
+                'id'    => $id,
                 'album' => $this->table->getAlbum($id),
             ];
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }

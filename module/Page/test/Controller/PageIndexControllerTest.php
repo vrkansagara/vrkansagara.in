@@ -30,12 +30,10 @@ class PageIndexControllerTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-
     public function testDependentModuleMustBeLoadedFirst()
     {
         $this->assertModulesLoaded(['PhlySimplePage']);
     }
-
 
     public function testContactPageIsAssible()
     {

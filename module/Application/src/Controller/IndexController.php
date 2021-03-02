@@ -11,13 +11,27 @@ declare(strict_types=1);
 namespace Application\Controller;
 
 use Application\Model\SearchTable;
-use Laminas\Db\ResultSet\ResultSet;
+use Application\Module;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
+use Laminas\Diactoros\Request;
+use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Uri;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
+use function count;
+use function filter_var;
+use function getMyInfo;
+use function printf;
+use function rand;
+use function strlen;
+
+use const FILTER_VALIDATE_IP;
+use const FILTER_VALIDATE_URL;
+
 class IndexController extends AbstractActionController
 {
-
     private $config;
 
     private $searchTable;
@@ -26,7 +40,7 @@ class IndexController extends AbstractActionController
         $applicationConfig,
         SearchTable $searchTable
     ) {
-        $this->config = $applicationConfig;
+        $this->config      = $applicationConfig;
         $this->searchTable = $searchTable;
     }
 
@@ -54,31 +68,29 @@ class IndexController extends AbstractActionController
 
         $inspire = [
             [
-                'text' => "Don't repeat yourself",
-                'author' => null
-            ]
+                'text'   => "Don't repeat yourself",
+                'author' => null,
+            ],
         ];
-        $count = count($inspire) - 1;
+        $count   = count($inspire) - 1;
 
         return new ViewModel([
             'inspire' => $inspire[rand(0, $count)],
         ]);
     }
 
-    /**
-     * @return ViewModel
-     */
-    public function searchAction()
+    public function searchAction(): ViewModel
     {
-        $searchInfo = $this->getRequest()->getQuery('name');
+        $request    = $this->getRequest();
+        $searchInfo = $request->getQuery('name');
 
-
-        /** @var $searchData ResultSet */
+        /** @var ResultSet $searchData */
         $searchData = $this->searchTable->search($searchInfo);
-
 
         if (filter_var($searchInfo, FILTER_VALIDATE_IP)) {
             $info = getMyInfo($searchInfo);
+        } elseif (filter_var($searchInfo, FILTER_VALIDATE_URL)) {
+            $this->checkUrl($searchInfo);
         } elseif ($searchInfo == 'tag:php') {
             return $this->redirect()->toRoute('blog/tag', ['name' => 'php']);
         } else {
@@ -86,9 +98,59 @@ class IndexController extends AbstractActionController
         }
         return new ViewModel(
             [
-                'info' => $info,
-                'search' => $searchData
+                'info'   => $info,
+                'search' => $searchData,
             ]
         );
+    }
+
+    public function checkUrl(string $url)
+    {
+        // Create a request
+        $request = (new Request())->withUri(new Uri($url));
+
+        $client   = new Client();
+        $response = $client->send($request);
+
+        $bodyContent = $response->getBody();
+        $newBuffer   = Module::compress($bodyContent);
+
+        $oldBufferLength = strlen((string) $bodyContent);
+        $newBufferLength = strlen($newBuffer);
+        printf(
+            'Old buffer length is %d , new buffer %d, you can compress %s per request.',
+            $oldBufferLength,
+            $newBufferLength,
+            Module::formatSizeUnits($oldBufferLength - $newBufferLength)
+        );
+//        printf("Response status: %d (%s)\n", $response->getStatusCode(), $response->getReasonPhrase());
+//        printf("Headers:\n");
+//        foreach ($response->getHeaders() as $header => $values) {
+//            printf("    %s: %s\n", $header, implode(', ', $values));
+//        }
+//        printf("Message:\n%s\n", $newBuffer);
+        exit;
+    }
+
+    public function postdataAction()
+    {
+        try{
+            $request    = $this->getRequest();
+            if ($request->isPost()){
+                $payLoad = $request->getPost()->getArrayCopy();
+                $filePath = getcwd() . '/data/tmp.txt';
+                $payLoad['timestamp'] = Carbon::now()->format('Y-m-d H:i:s');
+                $payLoad['http_agent'] = $request->getHeader('User-Agent')->toString();
+                ;
+                file_put_contents($filePath,json_encode($payLoad) .PHP_EOL,FILE_APPEND);
+            }
+            $response = new JsonResponse([
+                'message' => 'Sent successfully!',
+                'data' => [],
+            ]);
+            return $response;
+        }catch (\Exception $exception){
+            throw $exception;
+        }
     }
 }

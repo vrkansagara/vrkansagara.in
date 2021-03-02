@@ -36,7 +36,7 @@ return [
          * Please note that when an identity is found, it MUST implements the ZfcRbac\Identity\IdentityProviderInterface
          * interface, otherwise it will throw an exception.
          */
-         'identity_provider' => 'ZfcRbac\Identity\AuthenticationIdentityProvider',
+        'identity_provider' => 'ZfcRbac\Identity\AuthenticationIdentityProvider',
 
         /**
          * Set the guest role
@@ -56,12 +56,12 @@ return [
          *          ]
          *      ]
          */
-         'guards' => [
-             'ZfcRbac\Guard\RouteGuard' => [
-                 'admin*' => ['admin'],
-                 'login'   => ['guest']
-             ]
-         ],
+        'guards' => [
+            'ZfcRbac\Guard\RouteGuard' => [
+                'admin*' => ['admin'],
+                'login'  => ['guest'],
+            ],
+        ],
 
         /**
          * As soon as one rule for either route or controller is specified, a guard will be automatically
@@ -90,64 +90,64 @@ return [
          *
          * Supported options depend of the role provider, so please refer to the official documentation
          */
-         'role_provider' => [
+        'role_provider' => [
             'ZfcRbac\Role\InMemoryRoleProvider' => [
-                'admin' => [
+                'admin'  => [
                     'children'    => ['member'],
-                    'permissions' => ['article.delete']
+                    'permissions' => ['article.delete'],
                 ],
                 'member' => [
                     'children'    => ['guest'],
-                    'permissions' => ['article.edit', 'article.archive']
+                    'permissions' => ['article.edit', 'article.archive'],
                 ],
-                'guest' => [
-                    'permissions' => ['article.read']
-                ]
-            ]
-         ],
+                'guest'  => [
+                    'permissions' => ['article.read'],
+                ],
+            ],
+        ],
 
         /**
          * Configure the unauthorized strategy. It is used to render a template whenever a user is unauthorized
          */
-         'unauthorized_strategy' => [
+        'unauthorized_strategy' => [
             /**
              * Set the template name to render
              */
             // 'template' => 'error/403'
-         ],
+        ],
 
         /**
          * Configure the redirect strategy. It is used to redirect the user to another route when a user is
          * unauthorized
          */
-         'redirect_strategy' => [
+        'redirect_strategy' => [
             /**
              * Enable redirection when the user is connected
              */
-             'redirect_when_connected' => true,
+            'redirect_when_connected' => true,
 
             /**
              * Set the route to redirect when user is connected (of course, it must exist!)
              */
-             'redirect_to_route_connected' => 'home',
+            'redirect_to_route_connected' => 'home',
 
             /**
              * Set the route to redirect when user is disconnected (of course, it must exist!)
              */
-             'redirect_to_route_disconnected' => 'login',
+            'redirect_to_route_disconnected' => 'login',
 
             /**
              * If a user is unauthorized and redirected to another route (login, for instance), should we
              * append the previous URI (the one that was unauthorized) in the query params?
              */
-             'append_previous_uri' => true,
+            'append_previous_uri' => true,
 
             /**
              * If append_previous_uri option is set to true, this option set the query key to use when
              * the previous uri is appended
              */
-             'previous_uri_query_key' => 'redirectTo'
-         ],
+            'previous_uri_query_key' => 'redirectTo',
+        ],
 
         /**
          * Various plugin managers for guards and role providers. Each of them must follow a common
@@ -155,5 +155,5 @@ return [
          */
         // 'guard_manager'               => [],
         // 'role_provider_manager'       => []
-    ]
+    ],
 ];

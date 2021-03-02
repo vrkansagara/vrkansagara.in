@@ -7,6 +7,8 @@
  * drop this config file in it and change the values as you wish.
  */
 
+use Laminas\Db\Adapter\Adapter;
+
 $settings = [
     /**
      * Laminas\Db\Adapter\Adapter DI Alias
@@ -14,7 +16,7 @@ $settings = [
      * Please specify the DI alias for the configured Laminas\Db\Adapter\Adapter
      * instance that ZfcUser should use.
      */
-    'laminas_db_adapter' => 'Laminas\Db\Adapter\Adapter',
+    'laminas_db_adapter' => Adapter::class,
 
     /**
      * User Model Entity Class
@@ -52,7 +54,7 @@ $settings = [
      * Default value: array containing 'ZfcUser\Authentication\Adapter\Db' with priority 100
      * Accepted values: array containing services that implement 'ZfcUser\Authentication\Adapter\ChainableAdapter'
      */
-    'auth_adapters' => [ 100 => 'ZfcUser\Authentication\Adapter\Db' ],
+    'auth_adapters' => [100 => 'ZfcUser\Authentication\Adapter\Db'],
 
     /**
      * Enable Display Name
@@ -153,7 +155,6 @@ $settings = [
      *
      * Default value: 'zfcuser'
      * Accepted values: A valid route name within your application
-     *
      */
     'login_redirect_route' => 'zfcuser',
 
@@ -228,10 +229,10 @@ $settings = [
  * You do not need to edit below this line
  */
 return [
-    'zfcuser' => $settings,
+    'zfcuser'         => $settings,
     'service_manager' => [
         'aliases' => [
-            'zfcuser_laminas_db_adapter' => (isset($settings['laminas_db_adapter'])) ? $settings['laminas_db_adapter'] : 'Laminas\Db\Adapter\Adapter',
+            'zfcuser_laminas_db_adapter' => $settings['laminas_db_adapter'] ?? Adapter::class,
         ],
     ],
 ];

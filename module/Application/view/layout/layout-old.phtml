@@ -1,0 +1,110 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<html lang="en" class="h-100">
+<head>
+  <meta charset="utf-8">
+
+    <?= $this->headTitle('VRKANSAGARA')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+  <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('/assets/images/favicon.ico')])
+        ->prependStylesheet($this->basePath('/dist/css/app.css'))
+    ?>
+  <!-- Scripts -->
+    <?= $this->headScript() ?>
+  <link rel="canonical" href="<?= $this->url('home') ?>">
+
+    <?php if (is_production_mode()): ?>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script data-cfasync="false" async src="https://www.googletagmanager.com/gtag/js?id=UA-62451902-2"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+
+          gtag('js', new Date());
+
+          gtag('config', 'UA-62451902-2');
+      </script>
+    <?php endif; ?>
+
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="<?=$this->url('home')?>">
+        <img class='nav-logo' src="<?=$this->basePath('assets/images/favicon.ico')?>" alt="">
+        Vallabh Kansagara (VRKANSAGARA)
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="<?=$this->url('home')?>">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=$this->url('blog')?>">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=$this->url('page/contact')?>">Contact</a>
+          </li>
+        </ul>
+        <form  method="get" action="<?=$this->url('search')?>"  class="d-flex">
+          <input  name="name" value="" id="searchAnyThing" class="form-control mr-2" type="search" placeholder="Search anything..." aria-label="Search anything...">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main id="app"  class="flex-shrink-0">
+    <?= $this->content ?>
+</main>
+
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+                    <span>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cup-fill" fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd"
+        d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1h.5A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-.55a2.5 2.5 0 0 1-2.45 2h-8A2.5 2.5 0 0 1 1 12.5V2zm13 10h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H14v8z"/>
+</svg>
+                      <a target="_blank" href="https://imjo.in/3aZSG9">Buy me a coffee.</a>
+                    </span>
+      </div>
+      <div class="col-md-8">
+        <p>Unless otherwise noted © 2015 - <?= date('Y') ?>, Vallabh Kansagara ( 56 52 4B 41 4E 53 41 47 41 52 41 )</p>
+      </div>
+      <div class="col-md-2 pull-right">Execution time:</div>
+    </div>
+  </div>
+</footer>
+
+<?php
+echo $this->inlineScript()
+    ->prependFile($this->basePath('/dist/js/vendor.js'), 'text/javascript', ['defer' => true])
+    ->prependFile($this->basePath('/dist/js/manifest.js'), 'text/javascript', ['defer' => true])
+    ->prependFile($this->basePath('/dist/js/app.js'), 'text/javascript', ['defer' => true])
+?>
+</body>
+</html>

@@ -1,0 +1,39 @@
+/**
+ * Custom variables followed by theme variables followed by Bootstrap variables
+ * to ensure cascade of styles.
+ */
+
+// Custom colour scheme
+@import 'solarized';
+
+// Theme variables
+@import 'theme/variables';
+
+// Bootstrap core
+@import '~bootstrap/scss/bootstrap';
+
+// Theme functions
+@import 'theme/functions';
+
+// Bootstrap functions
+@import '~bootstrap/scss/functions';
+
+
+// Theme core
+@import 'theme/theme';
+
+// Sections
+@import "./theme/resume-section.scss";
+
+
+// Custom variables
+@import 'user-variables';
+
+
+
+
+
+
+
+
+@import 'user';

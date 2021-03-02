@@ -1,0 +1,22 @@
+<?php
+$entry = $this->entry;
+$ds = function ($ts) use ($entry) {
+    $tz = $entry->getTimezone();
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone($tz));
+    $date->setTimestamp($ts);
+    return $date->format('Y-m-d H:i:s');
+};
+$url = $this->plugin('url');
+$entryUrl = $url('phly-blog/entry', array('id' => $entry->getId()));
+$title = $this->escapeHtml($entry->getTitle());
+?>
+<div>
+  <h2 class="blog-post-title"><a href="<?php echo $entryUrl ?>"><?php echo ucfirst($title) ?></a></h2>
+    <?php echo $entry->getBody() ?>
+  <footer>
+    <p class="text-right">
+      <a href="<?php echo $entryUrl ?>">Continue reading...</a>
+    </p>
+  </footer>
+</div>

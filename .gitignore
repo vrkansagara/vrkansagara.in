@@ -1,3 +1,9 @@
+# https://git-scm.com/docs/gitignore
+
+node_modules/
+dist/
+.DS_Store
+
 .vagrant/
 /vendor/
 config/development.config.php
@@ -7,7 +13,6 @@ data/mail/*
 composer.lock
 .phpunit.result.cache
 .idea/
-/node_modules
 npm-debug.log
 yarn-error.log
 .phpcs-cache

@@ -16,22 +16,22 @@ class AlbumForm extends Form
             'type' => 'hidden',
         ]);
         $this->add([
-            'name' => 'title',
-            'type' => 'text',
+            'name'    => 'title',
+            'type'    => 'text',
             'options' => [
                 'label' => 'Title',
             ],
         ]);
         $this->add([
-            'name' => 'artist',
-            'type' => 'text',
+            'name'    => 'artist',
+            'type'    => 'text',
             'options' => [
                 'label' => 'Artist',
             ],
         ]);
         $this->add([
-            'name' => 'submit',
-            'type' => 'submit',
+            'name'       => 'submit',
+            'type'       => 'submit',
             'attributes' => [
                 'value' => 'Go',
                 'id'    => 'submitbutton',

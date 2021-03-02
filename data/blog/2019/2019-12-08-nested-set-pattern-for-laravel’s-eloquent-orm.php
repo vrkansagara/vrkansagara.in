@@ -23,9 +23,9 @@ $entry->setTimezone('Asia/Kolkata');
 $entry->setTags(['laravel', 'php']);
 
 $body = <<<'EOT'
-## For Nested Set pattern , I would suggest to follow this links
+#### For Nested Set pattern , I would suggest to follow this links
 
-## The theory behind, a TL;DR version
+### The theory behind, a TL;DR version
 
 An easy way to visualize how a nested set works is to think of a parent entity surrounding all of its children,
  and its parent surrounding it, etc. So this tree:

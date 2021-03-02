@@ -20,21 +20,23 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 use PhlySimplePage\ClearCacheCommand;
 use PhlySimplePage\PageCacheFactory;
 
+use function is_production_mode;
+
 return [
-    'laminas-cli' => [
+    'laminas-cli'        => [
         'commands' => [
             'cache:clear' => ClearCacheCommand::class,
         ],
     ],
-    'router' => [
+    'router'             => [
         'routes' => [
-            'home' => [
-                'type' => Literal::class,
+            'home'        => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action' => 'index',
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
 //                        'controller' => PageController::class,
 //                        'template' => 'application/index/index',
                         'do_not_cache' => ! is_production_mode(),
@@ -42,45 +44,56 @@ return [
                     ],
                 ],
             ],
-            'application' => [
-                'type' => Segment::class,
+            'api'        => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/application[/:action]',
+                    'route'    => '/api',
+//                    'verb' => 'post',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action' => 'index',
+                        'controller' => IndexController::class,
+                        'action'     => 'postdata',
+//                        'do_not_cache' => ! is_production_mode(),
+                    ],
+                ],
+            ],
+            'application' => [
+                'type'          => Segment::class,
+                'options'       => [
+                    'route'    => '/application[/:action]',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
                     ],
                 ],
                 'may_terminate' => true,
-                'child_routes' => [
+                'child_routes'  => [
                     'default' => [
-                        'type' => Segment::class,
+                        'type'    => Segment::class,
                         'options' => [
-                            'route' => '/[:controller[/:action]]',
+                            'route'       => '/[:controller[/:action]]',
                             'constraints' => [
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
-                            'defaults' => [
-                            ],
+                            'defaults'    => [],
                         ],
                     ],
                 ],
             ],
-            'search' => [
-                'type' => Literal::class,
+            'search'      => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/s',
+                    'route'    => '/s',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action' => 'search',
+                        'controller' => IndexController::class,
+                        'action'     => 'search',
                     ],
                 ],
             ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
+    'controllers'        => [
+        'factories'  => [
             IndexController::class => IndexControllerFactory::class,
         ],
         'delegators' => [
@@ -89,31 +102,31 @@ return [
 //            ],
         ],
     ],
-    'service_manager' => [
+    'service_manager'    => [
         'factories' => [
-            SearchTable::class => SearchTableFactory::class,
+            SearchTable::class         => SearchTableFactory::class,
             'PhlySimplePage\PageCache' => PageCacheFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'       => [
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'base_path' => '/',
-        'template_map' => [
-            'layout' => __DIR__ . '/../view/layout/layout.phtml',
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
-            'phly-contact/contact/index' => __DIR__ . '/../view/phly-contact/contact/index.phtml',
-            'phly-contact/contact/thank-you' => __DIR__ . '/../view/phly-contact/contact/thank-you.phtml',
-            'application/delegators/index-controller-delegator/index' => __DIR__ . '/../view/application/index/index.phtml',
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'base_path'                => '/',
+        'template_map'             => [
+            'layout'                                                   => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout'                                            => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index'                                  => __DIR__ . '/../view/application/index/index.phtml',
+            'error/404'                                                => __DIR__ . '/../view/error/404.phtml',
+            'error/index'                                              => __DIR__ . '/../view/error/index.phtml',
+            'phly-contact/contact/index'                               => __DIR__ . '/../view/phly-contact/contact/index.phtml',
+            'phly-contact/contact/thank-you'                           => __DIR__ . '/../view/phly-contact/contact/thank-you.phtml',
+            'application/delegators/index-controller-delegator/index'  => __DIR__ . '/../view/application/index/index.phtml',
             'application/delegators/index-controller-delegator/search' => __DIR__ . '/../view/application/index/search.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
     ],
@@ -121,8 +134,8 @@ return [
         'factories' => [
             Controller\Plugin\AccessPlugin::class => InvokableFactory::class,
         ],
-        'aliases' => [
+        'aliases'   => [
             'access' => Controller\Plugin\AccessPlugin::class,
-        ]
-    ]
+        ],
+    ],
 ];

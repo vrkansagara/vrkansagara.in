@@ -1,0 +1,100 @@
+# User latest version from here. https://docs.docker.com/compose/compose-file/compose-versioning/
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md
+version: '3.8'
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'vrkansagara.in:latest'
+    depends_on:
+      - mysql
+      - nginx
+    ports:
+      - '9000:9000'
+      - '35729:35729'
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html
+    volumes:
+      - './:/var/www/html'
+      - './etc/php/7.4/fpm/local.ini:/usr/local/etc/php/conf.d/local.ini'
+      - './etc/php/7.4/fpm/pool.d/www.conf:/etc/php/7.4/fpm/pool.d/www.conf'
+      - './etc/supervisor/:/etc/supervisor'
+    networks:
+      - app-network
+  nginx:
+    image: 'nginx:alpine'
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '8000:80'
+      - '8443:443'
+    volumes:
+      - './:/var/www/html'
+      - './etc/nginx/conf.d/:/etc/nginx/conf.d/'
+    networks:
+      - app-network
+  mysql:
+    image: 'mysql:5.7.22'
+#    image: 'mysql:8.0'
+    container_name: database
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_DATABASE: vrkansagara_in
+      MYSQL_ROOT_HOST: database_local
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      SERVICE_TAGS: dev
+      SERVICE_NAME: database_local
+    volumes:
+      - 'dbdata:/var/lib/mysql/'
+      - './etc/mysql/my.cnf:/etc/mysql/my.cnf'
+    networks:
+      - app-network
+  php_myadmin:
+    image: 'phpmyadmin/phpmyadmin:latest'
+    container_name: phpmyadmin
+    restart: always
+    volumes:
+      - './etc/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php'
+    environment:
+      PMA_PORT: 3306
+      PMA_HOSTS: mysql
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - '8001:80'
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  #redis:latest
+  redis:
+    image: 'redis:latest'
+    container_name: cache
+    restart: always
+    ports:
+      - '8379:6379'
+    volumes:
+      - 'cachedata:/data'
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  cachedata:
+    driver: local

@@ -14,25 +14,19 @@ $title = $this->escapeHtml($entry->getTitle());
 
 <div class="row">
   <div class="col-md-2">
-    <p>Written on <?php echo $ds($entry->getCreated()) ?> </p>
-    <p>Last updated <?php echo $ds($entry->getUpdated()) ?></p>
-    <ul>
-        <?php foreach ($entry->getTags() as $k => $tag) : ?>
-          <li><a href="<?php echo $this->url('blog/tag', ['name' => $tag]) ?>"
-                 class="ml-1"><?php echo ucfirst($tag) ?> </a></li>
-        <?php endforeach; ?>
-    </ul>
+    <div class="blog-post-meta">
+      <p>Written on <?php echo $ds($entry->getCreated()) ?> </p>
+      <p>Last updated <?php echo $ds($entry->getUpdated()) ?></p>
+      <ul>
+          <?php foreach ($entry->getTags() as $k => $tag) : ?>
+            <li><a href="<?php echo $this->url('blog/tag', ['name' => $tag]) ?>"
+                   class="ml-1"><?php echo ucfirst($tag) ?> </a></li>
+          <?php endforeach; ?>
+      </ul>
+    </div>
   </div>
   <div class="col-md-10">
-    <h2 class="blog-post-title"><a href="<?php echo $entryUrl ?>"><?php echo ucfirst($title) ?></a></h2>
-    <article>
-        <?php echo $entry->getBody() ?>
-      <footer>
-        <p class="text-right">
-          <a href="<?php echo $entryUrl ?>">Continue reading...</a>
-        </p>
-      </footer>
-    </article>
+      <?php echo $this->render('blog/entry-short-post');?>
   </div>
 </div>
 

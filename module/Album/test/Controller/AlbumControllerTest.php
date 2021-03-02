@@ -20,7 +20,6 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase
     protected $traceError = true;
     protected $albumTable;
 
-
     protected function setUp(): void
     {
         // The module configuration should still be applicable for tests.
@@ -57,7 +56,6 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('AlbumController');
         $this->assertMatchedRouteName('album');
     }
-
 
     protected function configureServiceManager(ServiceManager $services)
     {
