@@ -4,10 +4,10 @@
     "type": "project",
     "license": "BSD-3-Clause",
     "keywords": [
+		"Vallabh",
+		"Kansagara",
+		"Personal",
         "vrkansagara",
-        "Vallabh",
-        "Kansagara",
-        "Personal"
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -95,8 +95,7 @@
             "/usr/bin/php7.3 composer.phar dump-autoload",
             "if sudo lsof -t -i:8181; then sudo kill -9 $(sudo lsof -t -i:8181 ); fi",
             "sudo chgrp -R www-data data",
-            "sudo chmod -R ug+rwx data",
-            "php -S 0.0.0.0:8181 -t public"
+            "sudo chmod -R ug+rwx data"
         ],
         "test": " ./vendor/bin/phpunit -c phpunit.xml"
     },
