@@ -1,8 +1,6 @@
 # TODO
 
-
 Things to work upon.
-
 - [x] Make disqus comments workable using PhlyBlog
 - [x] Make search workable.
 - [x] Improve home page performance
@@ -12,9 +10,9 @@ Things to work upon.
 - [ ] Fix canonical url for static blog pages.
         <link rel="canonical" href="/">
 - [ ] Compress html content for Static blog pages.
-- [ ] Add url route for search so static page can also search
-Code Quality Tool
+- [x] Add url route for search so static page can also search
 
+### Code Quality Tool
 -[x] Implement [psalm](!https://github.com/vimeo/psalm)
 
 ### Random issue found
