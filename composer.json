@@ -1,119 +1,120 @@
 {
-    "name": "vrkansagara/vrkansagara.in",
-    "description": "Personal blog of Vallabh Kansagara (VRKANSAGARA)",
-    "type": "project",
-    "license": "BSD-3-Clause",
-    "keywords": [
+	"name": "vrkansagara/vrkansagara.in",
+	"description": "Personal blog of Vallabh Kansagara (VRKANSAGARA)",
+	"type": "project",
+	"license": "BSD-3-Clause",
+	"keywords": [
 		"Vallabh",
 		"Kansagara",
 		"Personal",
 		"vrkansagara"
-    ],
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "config": {
-        "platform": {
-            "php": "7.4.1",
-            "ext-mbstring": "7.4",
-            "ext-intl": "7.4"
-        }
-    },
-    "require": {
-        "php": "^7.4",
-        "ext-intl": "^7.4",
-        "laminas/laminas-component-installer": "^1.0 || ^2.1",
-        "laminas/laminas-development-mode": "^3.2",
-        "laminas/laminas-mvc": "^3.1.1",
-        "laminas/laminas-cache": "^2.9",
-        "symfony/console": "^5.1",
-        "laminas/laminas-mail": "^2.12",
-        "laminas/laminas-captcha": "^2.9",
-        "laminas/laminas-recaptcha": "^3.2",
-        "laminas/laminas-form": "^2.15",
-        "laminas/laminas-session": "^2.9",
-        "laminas/laminas-i18n": "^2.10",
-        "laminas/laminas-test": "^3.4",
-        "laminas/laminas-crypt": "^3.3",
-        "symfony/dotenv": "^5.1",
-        "symfony/dom-crawler": "^5.1",
-        "sentry/sdk": "^3.0",
-        "laminas/laminas-dependency-plugin": "^2.1",
-        "laminas/laminas-navigation": "^2.9",
-        "laminas/laminas-mvc-console": "^1.2",
-        "phly/phly-blog": "^2.0",
-        "league/commonmark": "^1.5",
-        "laminas/laminas-db": "^2.11",
-        "nesbot/carbon": "^2.43",
-        "laminas/laminas-diactoros": "^2.5"
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/phly/PhlyBlog"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Application\\": "module/Application/src/",
-            "Blog\\": "module/Blog/src/",
-            "Page\\": "module/Page/src/",
-            "PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
-            "PhlyContact\\": "module/vendor/phly/PhlyContact/src/"
-        },
-        "files": [
-            "module/Application/src/Helpers/app.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ApplicationTest\\": "module/Application/test/",
-            "Blog\\": "module/Blog/test/",
-            "Page\\": "module/Page/test/"
-        }
-    },
-    "scripts": {
-        "cs-check": "./vendor/bin/phpcs",
-        "cs-fix": "./vendor/bin/phpcbf",
-        "development-disable": [
-            "laminas-development-mode disable",
-            "@serve"
-        ],
-        "development-enable": [
-            "laminas-development-mode enable",
-            "@serve"
-        ],
-        "development-status": "laminas-development-mode status",
-        "post-create-project-cmd": [
-            "@development-enable",
-            "php bin/update-gitignore.php",
-            "php -r 'if (file_exists(\"bin/remove-package-artifacts.php\")) include \"bin/remove-package-artifacts.php\";'",
-            "php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'"
-        ],
-        "serve": [
-            "sudo rm -rf data/cache/static-page-data/*",
-            "sudo chgrp -R www-data data",
-            "sudo chmod -R ug+rwx data"
-        ],
-        "test": " ./vendor/bin/phpunit -c phpunit.xml"
-    },
-    "scripts-descriptions": {
-        "cs-check": "Run coding standards checks.",
-        "cs-fix": "Automatically fix coding standard issues.",
-        "development-disable": "Disable development mode.",
-        "development-enable": "Enable development mode.",
-        "development-status": "Detail whether or not the application is in development mode.",
-        "serve": "Start the built-in PHP web server and serve the application.",
-        "test": "Run unit tests."
-    },
-    "require-dev": {
-        "laminas/laminas-developer-tools": "^2.0",
-        "squizlabs/php_codesniffer": "^3.5",
-        "laminas/laminas-code": "^3.4",
-        "laminas/laminas-cli": "^0.1.4",
-        "roave/security-advisories": "dev-latest",
-        "phly/keep-a-changelog": "^2.10",
-        "vimeo/psalm": "^4.1",
-        "phpunit/phpunit": "^9",
-        "laminas/laminas-coding-standard": "^2.1"
-    }
+	],
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"config": {
+		"platform": {
+			"php": "7.4.1",
+			"ext-mbstring": "7.4",
+			"ext-intl": "7.4"
+		}
+	},
+	"require": {
+		"php": "^7.4",
+		"ext-intl": "^7.4",
+		"laminas/laminas-component-installer": "^1.0 || ^2.1",
+		"laminas/laminas-development-mode": "^3.2",
+		"laminas/laminas-mvc": "^3.1.1",
+		"laminas/laminas-cache": "^2.9",
+		"symfony/console": "^5.1",
+		"laminas/laminas-mail": "^2.12",
+		"laminas/laminas-captcha": "^2.9",
+		"laminas/laminas-recaptcha": "^3.2",
+		"laminas/laminas-form": "^2.15",
+		"laminas/laminas-session": "^2.9",
+		"laminas/laminas-i18n": "^2.10",
+		"laminas/laminas-test": "^3.4",
+		"laminas/laminas-crypt": "^3.3",
+		"symfony/dotenv": "^5.1",
+		"symfony/dom-crawler": "^5.1",
+		"sentry/sdk": "^3.0",
+		"laminas/laminas-dependency-plugin": "^2.1",
+		"laminas/laminas-navigation": "^2.9",
+		"laminas/laminas-mvc-console": "^1.2",
+		"phly/phly-blog": "^2.0",
+		"league/commonmark": "^1.5",
+		"laminas/laminas-db": "^2.11",
+		"nesbot/carbon": "^2.43",
+		"laminas/laminas-diactoros": "^2.5"
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/phly/PhlyBlog"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Application\\": "module/Application/src/",
+			"Blog\\": "module/Blog/src/",
+			"Page\\": "module/Page/src/",
+			"PhlySimplePage\\": "module/vendor/phly/PhlySimplePage/src",
+			"PhlyContact\\": "module/vendor/phly/PhlyContact/src/"
+		},
+		"files": [
+			"module/Application/src/Helpers/app.php"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"ApplicationTest\\": "module/Application/test/",
+			"Blog\\": "module/Blog/test/",
+			"Page\\": "module/Page/test/"
+		}
+	},
+	"scripts": {
+		"cs-check": "./vendor/bin/phpcs",
+		"cs-fix": "./vendor/bin/phpcbf",
+		"development-disable": [
+			"laminas-development-mode disable",
+			"@serve"
+		],
+		"development-enable": [
+			"laminas-development-mode enable",
+			"@serve"
+		],
+		"development-status": "laminas-development-mode status",
+		"post-create-project-cmd": [
+			"@development-enable",
+			"php bin/update-gitignore.php",
+			"php -r 'if (file_exists(\"bin/remove-package-artifacts.php\")) include \"bin/remove-package-artifacts.php\";'",
+			"php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'"
+		],
+		"serve": [
+			"sqlite3 data/vrkansagara.sqlite3 < data/vrkansagara.sql",
+			"rm -rf data/cache/static-page-data/*",
+			"chgrp -R www-data data",
+			"chmod -R ug+rwx data"
+		],
+		"test": " ./vendor/bin/phpunit -c phpunit.xml"
+	},
+	"scripts-descriptions": {
+		"cs-check": "Run coding standards checks.",
+		"cs-fix": "Automatically fix coding standard issues.",
+		"development-disable": "Disable development mode.",
+		"development-enable": "Enable development mode.",
+		"development-status": "Detail whether or not the application is in development mode.",
+		"serve": "Start the built-in PHP web server and serve the application.",
+		"test": "Run unit tests."
+	},
+	"require-dev": {
+		"laminas/laminas-developer-tools": "^2.0",
+		"squizlabs/php_codesniffer": "^3.5",
+		"laminas/laminas-code": "^3.4",
+		"laminas/laminas-cli": "^0.1.4",
+		"roave/security-advisories": "dev-latest",
+		"phly/keep-a-changelog": "^2.10",
+		"vimeo/psalm": "^4.1",
+		"phpunit/phpunit": "^9",
+		"laminas/laminas-coding-standard": "^2.1"
+	}
 }
