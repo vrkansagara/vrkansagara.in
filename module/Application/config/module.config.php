@@ -44,10 +44,10 @@ return [
                     ],
                 ],
             ],
-            'api'        => [
+            'api'         => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/api',
+                    'route' => '/api',
 //                    'verb' => 'post',
                     'defaults' => [
                         'controller' => IndexController::class,

@@ -7,7 +7,7 @@
 		"Vallabh",
 		"Kansagara",
 		"Personal",
-        "vrkansagara",
+		"vrkansagara"
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -91,9 +91,6 @@
         ],
         "serve": [
             "sudo rm -rf data/cache/static-page-data/*",
-            "/usr/bin/php7.3 composer.phar install -vv",
-            "/usr/bin/php7.3 composer.phar dump-autoload",
-            "if sudo lsof -t -i:8181; then sudo kill -9 $(sudo lsof -t -i:8181 ); fi",
             "sudo chgrp -R www-data data",
             "sudo chmod -R ug+rwx data"
         ],
