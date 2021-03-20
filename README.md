@@ -19,7 +19,6 @@ This is the code behind vrkansagara.in
 
 
 ### How to setup this project ###
-
 docker run --rm --interactive --tty \
 --volume $PWD:/app \
 --volume ${COMPOSER_HOME:-$HOME/.composer}:/tmp \
