@@ -1,36 +1,34 @@
+<?php /** @var Laminas\View\Renderer\PhpRenderer $this */ ?>
 <div class="container ">
-
-  <h2>Search result...</h2>
-
-    <?php foreach ($search as $row): ?>
-      <p><a href="<?= $this->url('blog') ?>/<?= urlencode($row->url) ?>.html"><?= $row->name ?></a></p>
-    <?php endforeach; ?>
+  <h3>Search result...</h2>
+	<?php foreach ($search as $row): ?>
+	  <p><a href="<?= $this->url('blog') ?><?= urlencode($row->url) ?>.html"><?= $row->name ?></a></p>
+	<?php endforeach; ?>
   <table>
-      <?php foreach ($info as $key => $value): ?>
-        <tr>
-        <td><?= $key ?></td>
-
-          <?php if (!is_array($value)) : ?>
-          <td><?= $value ?></td>
-          <?php else: ?>
-          <td>
-              <?php foreach ($value as $k => $v): ?>
-              <tr>
-                <td><?=$k?></td>
-                  <?php if (!is_array($v)) : ?>
-                    <td><?=$v?></td>
-                  <?php else: ?>
-                    <td>
-                      <pre>
-                        <?=print_r($v)?>
-                      </pre>
-                    </td>
-                  <?php endif;?>
-              </tr>
-              <?php endforeach;?>
-          </td>
-        <?php endif;?>
-      </tr>
-      <?php endforeach;?>
+	  <?php foreach ($info as $key => $value): ?>
+		<tr>
+		<td><?= $key ?></td>
+		  <?php if (!is_array($value)) : ?>
+		  <td><?= $value ?></td>
+		  <?php else: ?>
+		  <td>
+			  <?php foreach ($value as $k => $v): ?>
+			  <tr>
+				<td><?=$k?></td>
+				  <?php if (!is_array($v)) : ?>
+					<td><?=$v?></td>
+				  <?php else: ?>
+					<td>
+					  <pre>
+						<?=print_r($v)?>
+					  </pre>
+					</td>
+				  <?php endif;?>
+			  </tr>
+			  <?php endforeach;?>
+		  </td>
+		<?php endif;?>
+	  </tr>
+	  <?php endforeach;?>
   </table>
 </div>
