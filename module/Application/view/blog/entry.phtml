@@ -13,7 +13,9 @@ $ds    = function ($ts) use ($entry) {
 	$date->setTimestamp($ts);
 	return $date->format('Y-m-d H:i:s');
 };
-
+// @codingStandardsIgnoreEnd
+foreach ($this->headTitle() as $blogTitle) {}
+// @codingStandardsIgnoreEnd
 $this->headLink(array(
 	'href'  => $this->url('blog/feed-atom'),
 	'type'  => 'application/atom+xml',
@@ -31,7 +33,7 @@ $this->headLink(array(
 <div class="container">
   <div class="row mt-5">
 	<div class="col-md-12">
-	  <h2><?php echo ucfirst($title) ?></h2>
+	  <h2><?php echo ucfirst($title) ?></h2
 	  <hr>
 	<div>
 	  <p>Written on <?php echo $ds($entry->getCreated()) ?> </p>
@@ -43,7 +45,6 @@ $this->headLink(array(
 		  <?php endforeach; ?>
 	  </ul>
 	</div>
-	<hr>
 
 	  <article>
 		<?php echo $entry->getBody(); echo $entry->getExtended(); ?>
