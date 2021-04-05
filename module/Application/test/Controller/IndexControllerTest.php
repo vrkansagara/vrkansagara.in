@@ -42,12 +42,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('home');
     }
 
-    public function testIndexActionViewModelTemplateRenderedWithinLayout()
-    {
-        $this->dispatch('/', 'GET');
-        $this->assertQuery('/html/body/header/nav/div/a');
-        $this->assertResponseStatusCode(200);
-    }
 
     public function testInvalidRouteDoesNotCrash()
     {

@@ -95,7 +95,7 @@
 			"chgrp -R www-data data",
 			"chmod -R ug+rwx data"
 		],
-		"test": " ./vendor/bin/phpunit -c phpunit.xml"
+		"test": " ./vendor/bin/phpunit --testdox -c phpunit.xml"
 	},
 	"scripts-descriptions": {
 		"cs-check": "Run coding standards checks.",
