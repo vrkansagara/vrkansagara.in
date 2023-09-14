@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ । निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥
+# अर्थ - घुमावदार सूंड वाले, विशाल शरीर काय, करोड़ सूर्य के समान महान प्रतिभाशाली।
+# मेरे प्रभु, हमेशा मेरे सारे कार्य बिना विघ्न के पूरे करें (करने की कृपा करें)॥
+
 set -ex # This setting is telling the script to exit on a command error.
 if [[ "$1" == "-v" ]]; then
   set -x # You refer to a noisy script.(Used to debugging)
