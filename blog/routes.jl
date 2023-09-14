@@ -4,10 +4,11 @@ using Mustache
 
 route("/") do
     layout = Dict(
-        "path" => joinpath(pwd(), "resource/views")
+        "path" => abspath(joinpath( "resource/views"))
     )
     Mustache.render_from_file(
-        joinpath(layout["path"], "layout/app.tpl"), Dict(
+        joinpath(layout["path"], "layout/app.tpl"),
+        Dict(
         "name" => "Vallabh Kansagara",
         "github" => "vrkansagara",
         "showGitHub" => true)
