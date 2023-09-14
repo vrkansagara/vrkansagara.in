@@ -1,5 +1,21 @@
+using Genie
 using Genie.Router
+using Mustache
 
 route("/") do
-  serve_static_file("welcome.html")
+    layout = Dict(
+        "path" => joinpath(pwd(), "resource/views")
+    )
+    Mustache.render_from_file(
+        joinpath(layout["path"], "layout/app.tpl"), Dict(
+        "name" => "Vallabh Kansagara",
+        "github" => "vrkansagara",
+        "showGitHub" => true)
+        )
 end
+
+# All api routes.
+include(joinpath(pwd(), "routes/api.jl"))
+
+# All web routes
+include(joinpath(pwd(), "routes/web.jl"))
