@@ -4,11 +4,13 @@
 # अर्थ - घुमावदार सूंड वाले, विशाल शरीर काय, करोड़ सूर्य के समान महान प्रतिभाशाली।
 # मेरे प्रभु, हमेशा मेरे सारे कार्य बिना विघ्न के पूरे करें (करने की कृपा करें)॥
 
-set -ex # This setting is telling the script to exit on a command error.
+set -e # This setting is telling the script to exit on a command error.
 if [[ "$1" == "-v" ]]; then
   set -x # You refer to a noisy script.(Used to debugging)
 fi
 shopt -s extglob
+
+source "./functions.sh"
 
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
@@ -24,7 +26,9 @@ export CURRENT_DATE=$(date "+%Y%m%d%H%M%S")
 echo "$GREEN Script started at $CURRENT_DATE $NC"
 
 if [ "$(whoami)" != "root" ]; then
-  SUDO=sudo
+    # Check if sudo is installed
+    command_exists sudo || return 1
+    SUDO=sudo
 fi
 
 # """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,6 +83,11 @@ main() {
   if [[ "$1" == "--runProduction" ]]; then
     runProduction
   fi
+
+  if [[ "$1" == "--node" ]]; then
+    node_latest
+  fi
+
 }
 
 main "$@"
