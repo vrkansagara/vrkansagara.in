@@ -2,12 +2,18 @@ using Genie
 using Genie.Router
 using Mustache
 
+using Blog.TodosController
+route("/todo", TodosController.index)
+
+const viewPath = abspath(joinpath("app/resources/views"))
+
 route("/") do
     layout = Dict(
-        "path" => abspath(joinpath( "resource/views"))
+        "view" => viewPath,
+        "layout" => abspath(joinpath(viewPath, "layout"))
     )
     Mustache.render_from_file(
-        joinpath(layout["path"], "layout/app.tpl"),
+        joinpath(layout["layout"], "app.tpl"),
         Dict(
         "name" => "Vallabh Kansagara",
         "github" => "vrkansagara",

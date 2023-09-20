@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
 <head>
-    {{> resource/views/layout/_partials/head.tpl }}
+    {{> app/resources/views/layout/_partials/head.tpl }}
 </head>
 <body class="d-flex flex-column h-100">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -93,6 +93,9 @@
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sanskrit">Sanskrit</a>
+                        </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -122,8 +125,7 @@
     </main>
 
     <footer class="footer mt-auto py-3 bg-body-tertiary">
-
-        {{> resource/views/layout/_partials/footer.tpl }}
+        {{> app/resources/views/layout/_partials/footer.tpl }}
     </footer>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 

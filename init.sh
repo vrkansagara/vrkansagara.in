@@ -9,14 +9,14 @@ if [[ "$1" == "-v" ]]; then
   set -x # You refer to a noisy script.(Used to debugging)
 fi
 shopt -s extglob
+export PWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
-source "./functions.sh"
+source "$PWD/functions.sh"
 
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
-export PWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 echo "Change current directory to $PWD"
 cd $PWD
 
@@ -86,6 +86,10 @@ main() {
 
   if [[ "$1" == "--node" ]]; then
     node_latest
+  fi
+
+  if [[ "$1" == "--nvm" ]]; then
+    nvm
   fi
 
 }

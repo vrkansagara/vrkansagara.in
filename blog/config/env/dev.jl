@@ -4,7 +4,7 @@ Genie.Configuration.config!(
   server_port                     = 8000,
   server_host                     = "127.0.0.1",
   log_level                       = Logging.Info,
-  log_to_file                     = false,
+  log_to_file                     = true,
   server_handle_static_files      = true,
   path_build                      = "build",
   format_julia_builds             = true,

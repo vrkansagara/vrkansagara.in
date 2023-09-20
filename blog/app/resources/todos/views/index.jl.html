@@ -1,0 +1,12 @@
+<% if isempty(todos) %>
+    <p>Nothing to do!</p>
+<% else %>
+    <ul>
+        <% for_each(todos) do todo %>
+            <li>
+                <input type="checkbox" checked="$(todo.completed ? true	: false)" />
+                <label>$(todo.todo)</label>
+                </li>
+            <% end %>
+    </ul>
+<% end %>
